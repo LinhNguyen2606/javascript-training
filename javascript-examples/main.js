@@ -85,5 +85,4 @@ console.log(PI.toFixed(2));
 
 console.log(Number.isFinite(20 / 5));
 console.log(Number.isInteger(Math.PI));
-
 /*-----------------------Number-----------------------*/
