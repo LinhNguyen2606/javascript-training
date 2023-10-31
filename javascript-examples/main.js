@@ -86,3 +86,29 @@ console.log(PI.toFixed(2));
 console.log(Number.isFinite(20 / 5));
 console.log(Number.isInteger(Math.PI));
 /*-----------------------Number-----------------------*/
+
+/*-----------------------Array-----------------------*/
+const programminglanguages = [
+  "Javascript",
+  "PHP",
+  "Ruby",
+  null,
+  undefined,
+  function () {},
+  {},
+  123,
+];
+
+const programminglanguages2 = ["HTML", "SCSS"];
+
+console.log(programminglanguages.slice(4, 8));
+console.log(programminglanguages);
+console.log(programminglanguages.concat(programminglanguages2));
+console.log(programminglanguages.splice(1, 1, "Dart"));
+console.log(programminglanguages.push("Linh Nguyen"));
+console.log(programminglanguages.pop());
+console.log(typeof programminglanguages.join(", "));
+console.log(typeof programminglanguages.toString());
+console.log(Array.isArray(programminglanguages));
+console.log(programminglanguages[0]);
+/*-----------------------Array-----------------------*/
