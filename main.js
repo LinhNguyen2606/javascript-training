@@ -1,4 +1,4 @@
-// Funtion
+/*-----------------------Function-----------------------*/
 function showDialog() {
   alert("Hello world!");
 }
@@ -30,3 +30,46 @@ function sum(a, b) {
 const result = sum(20, 6);
 
 console.log(result);
+/*-----------------------Function-----------------------*/
+
+/*-----------------------String-----------------------*/
+var myString = "hello world in world of the world!";
+// 1. Length
+console.log(myString.length);
+
+// 2. Find index
+console.log(myString.indexOf("world!", 6));
+console.log(myString.lastIndexOf("world!"));
+console.log(myString.search("world"));
+
+// 3.Cut string
+console.log(myString.slice(6, 11));
+console.log(myString.slice(6));
+console.log(myString.slice(-1));
+
+// 4. Replace
+console.log(myString.replace("world", "best"));
+// Replace all the world text in the string
+console.log(myString.replace(/world/g, "best"));
+
+// 5. Convert to upper case
+console.log(myString.toUpperCase());
+
+// 6.Convert to lower case
+console.log(myString.toLowerCase());
+
+// 7.Trim
+console.log(myString.trim());
+
+// 8.Split
+const languages = "JS, PHP, Ruby";
+
+console.log(languages.split(", "));
+
+// 9. Get a character by index
+const myString2 = "Linh Nguyen";
+// return '' dont have a character
+console.log(myString2.charAt(0));
+// return undefined
+console.log(myString2[0]);
+/*-----------------------String-----------------------*/
