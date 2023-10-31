@@ -73,3 +73,17 @@ console.log(myString2.charAt(0));
 // return undefined
 console.log(myString2[0]);
 /*-----------------------String-----------------------*/
+
+/*-----------------------Number-----------------------*/
+// first way to create number
+const age = 22;
+const PI = 30000.2363454565;
+
+// second way to create number
+// const otherNumber = new Number(9);
+console.log(PI.toFixed(2));
+
+console.log(Number.isFinite(20 / 5));
+console.log(Number.isInteger(Math.PI));
+
+/*-----------------------Number-----------------------*/
