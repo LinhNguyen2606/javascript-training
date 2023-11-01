@@ -86,3 +86,96 @@ console.log(PI.toFixed(2));
 console.log(Number.isFinite(20 / 5));
 console.log(Number.isInteger(Math.PI));
 /*-----------------------Number-----------------------*/
+
+/*-----------------------Object-----------------------*/
+const programminglanguages = [
+  "Javascript",
+  "PHP",
+  "Ruby",
+  null,
+  undefined,
+  function () {},
+  {},
+  123,
+];
+
+const programminglanguages2 = ["HTML", "SCSS"];
+
+console.log(programminglanguages.slice(4, 8));
+console.log(programminglanguages);
+console.log(programminglanguages.concat(programminglanguages2));
+console.log(programminglanguages.splice(1, 1, "Dart"));
+console.log(programminglanguages.push("Linh Nguyen"));
+console.log(programminglanguages.pop());
+console.log(typeof programminglanguages.join(", "));
+console.log(typeof programminglanguages.toString());
+console.log(Array.isArray(programminglanguages));
+console.log(programminglanguages[0]);
+/*-----------------------Array-----------------------*/
+
+/*-----------------------Array-----------------------*/
+const emailKey = "email";
+
+const myInfo = {
+  name: "Linh Nguyen",
+  age: 22,
+  address: "Da Nang, VN",
+  [emailKey]: "linhdt@gmail.com",
+  getName: function () {
+    //this is myInfo
+    return this.name;
+  },
+};
+
+// delete myInfo.address;
+// delete myInfo.age;
+
+console.log(myInfo.getName());
+
+// Object constructor
+
+//Description User
+function User(firstName, lastName, avatar) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.avatar = avatar;
+
+  this.getName = function () {
+    return `${this.firstName} ${this.lastName}`;
+  };
+}
+
+User.prototype.className = "intro__title";
+User.prototype.getClassName = function () {
+  return this.className;
+};
+
+// Create a object
+const user = new User("Linh", "Nguyen", "Avatar");
+const author = new User("Tommy", "Nguyen", "Avatar");
+
+author.title = "Sharing this with everone in the group";
+user.comment =
+  "I really like this. And I really appreciate when you sharing it to everyone";
+
+console.log(user.className);
+console.log(user.getClassName());
+
+// Date object
+const date = new Date();
+const year = date.getFullYear();
+const month = date.getMonth() + 1;
+const day = date.getDate();
+
+console.log(`${day} - ${month} - ${year}`);
+
+// Math object
+const random = Math.floor(Math.random() * 100);
+
+if (random < 50) {
+  console.log("Success enhancement");
+} else {
+  console.log("Failure enhancement");
+}
+
+/*-----------------------Object-----------------------*/
