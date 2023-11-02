@@ -337,4 +337,13 @@ while (i < myArray.length) {
   i++;
 }
 
+// do/while loop
+let i1 = 0;
+let isSuccess = false;
+
+do {
+  i1++;
+  console.log(`Recharge time ${i1}`);
+} while (!isSuccess && i1 <= 3);
+
 /*-----------------------Loop-----------------------*/
