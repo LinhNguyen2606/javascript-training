@@ -354,4 +354,17 @@ for (let i = 0; i < 10; i++) {
   console.log(i);
 }
 
+// Nested loop
+const myArray1 = [
+  [1, 2],
+  [3, 4],
+  [5, 6],
+];
+
+for (let i = 0; i < myArray1.length; i++) {
+  for (let j = 0; j < myArray1[i].length; j++) {
+    console.log(myArray1[i][j]);
+  }
+}
+
 /*-----------------------Loop-----------------------*/
