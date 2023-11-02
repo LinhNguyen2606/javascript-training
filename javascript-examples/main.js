@@ -179,3 +179,27 @@ if (random < 50) {
 }
 
 /*-----------------------Object-----------------------*/
+
+/*-----------------------If/else-----------------------*/
+function run(a) {
+  if (a % 15 === 0) {
+    return 5;
+  } else if (a % 5 === 0) {
+    return 2;
+  } else if (a % 3 === 0) {
+    return 1;
+  }
+}
+
+console.log(run(5));
+
+function isEnoughAge(age) {
+  if (age < 18) {
+    return "Sorry bro, you dont have enough to drink alcohol";
+  } else {
+    return "Lets grab some beer bro";
+  }
+}
+
+console.log(isEnoughAge(22));
+/*-----------------------If/else-----------------------*/
