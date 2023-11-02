@@ -367,4 +367,50 @@ for (let i = 0; i < myArray1.length; i++) {
   }
 }
 
+for (let i = 100; i > 0; i -= 5) {
+  console.log(i);
+}
+
+// Recursive
+function countDown(num) {
+  if (num > 0) {
+    console.log(num);
+    return countDown(num - 1);
+  }
+  return num;
+}
+
+countDown(10);
+
+function loop(start, end, cb) {
+  if (start < end) {
+    cb(start);
+    return loop(start + 1, end, cb);
+  }
+}
+
+const arr = ["Javascript", "PHP", "Ruby"];
+
+loop(0, arr.length, function (index) {
+  console.log(arr[index]);
+});
+
+// function factorial(num) {
+//   let output = 1;
+//   for (let i = num; i > 0; i--) {
+//     output *= i;
+//   }
+//   return output;
+// }
+
+// console.log(factorial(3));
+
+function factorial(num) {
+  if (num > 0) {
+    return num * factorial(num - 1);
+  }
+  return 1;
+}
+
+console.log(factorial(3));
 /*-----------------------Loop-----------------------*/
