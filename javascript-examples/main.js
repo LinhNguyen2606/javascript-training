@@ -285,4 +285,40 @@ function getTotal() {
 }
 
 console.log(getTotal(orders));
+
+// For/in loop
+const myInfo1 = {
+  name: "Linh Nguyen",
+  age: 22,
+  address: "Da Nang, VN",
+};
+
+for (var key in myInfo1) {
+  console.log(key);
+  console.log(myInfo1[key]);
+}
+
+const languages1 = ["JS", "TS", "C#"];
+
+for (var key in languages1) {
+  console.log(key);
+  console.log(languages1[key]);
+}
+
+const myString1 = "JavaScript";
+
+for (var key in myString1) {
+  console.log(myString1[key]);
+}
+
+function run(object) {
+  let results = [];
+  for (var key in object) {
+    console.log(key, object[key]);
+    results.push(`Thuộc tính ${key} có giá trị ${object[key]}`);
+  }
+  return results;
+}
+
+console.log(run({ name: "Nguyen Van A", age: 16 }));
 /*-----------------------Loop-----------------------*/
