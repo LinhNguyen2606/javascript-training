@@ -203,3 +203,28 @@ function isEnoughAge(age) {
 
 console.log(isEnoughAge(22));
 /*-----------------------If/else-----------------------*/
+
+/*-----------------------Switch-----------------------*/
+function run(fruits) {
+  let result;
+
+  switch (fruits) {
+    case "Banana":
+      result = "This is a Banana";
+      break;
+    case "Apple":
+      result = "This is an Apple";
+      break;
+    case "Orange":
+    case "Watermelon":
+    case "grape":
+      result = "This is a Orange, Watermelon, and Grape";
+      break;
+    default:
+      result = "No fruits";
+  }
+
+  return result;
+}
+console.log(run("Orange"));
+/*-----------------------Switch-----------------------*/
