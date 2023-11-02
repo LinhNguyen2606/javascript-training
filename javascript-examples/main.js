@@ -346,4 +346,12 @@ do {
   console.log(`Recharge time ${i1}`);
 } while (!isSuccess && i1 <= 3);
 
+// Continue
+for (let i = 0; i < 10; i++) {
+  if (i % 2 !== 0) {
+    continue;
+  }
+  console.log(i);
+}
+
 /*-----------------------Loop-----------------------*/
