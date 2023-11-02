@@ -321,4 +321,10 @@ function run(object) {
 }
 
 console.log(run({ name: "Nguyen Van A", age: 16 }));
+
+// For/of loop
+for (var value of Object.values(myInfo1)) {
+  console.log(value);
+}
+
 /*-----------------------Loop-----------------------*/
