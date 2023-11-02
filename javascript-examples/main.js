@@ -228,3 +228,14 @@ function run(fruits) {
 }
 console.log(run("Orange"));
 /*-----------------------Switch-----------------------*/
+
+/*-----------------------Ternary operator-----------------------*/
+
+const courses = {
+  course: "Javascript",
+  coin: 200,
+};
+
+result = courses.coin > 0 ? `${courses.coin} coin` : "Free";
+console.log(result);
+/*-----------------------Ternary operator-----------------------*/
