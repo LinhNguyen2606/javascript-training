@@ -239,3 +239,50 @@ const courses = {
 result = courses.coin > 0 ? `${courses.coin} coin` : "Free";
 console.log(result);
 /*-----------------------Ternary operator-----------------------*/
+
+/*-----------------------Loop-----------------------*/
+function getRandNumbers(min, max, length) {
+  let numbers = [];
+  for (let i = 0; i < length; i++) {
+    let randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+    numbers.push(randomNumber);
+  }
+  return numbers;
+}
+console.log(getRandNumbers(1, 10, 5));
+
+function getTotal(numbers) {
+  let totals = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    totals += numbers[i];
+  }
+  return totals;
+}
+console.log(getTotal([1, 10, 5]));
+
+var orders = [
+  {
+    name: "Khóa học HTML - CSS Pro",
+    price: 3000000,
+  },
+  {
+    name: "Khóa học Javascript Pro",
+    price: 2500000,
+  },
+  {
+    name: "Khóa học React Pro",
+    price: 3200000,
+  },
+];
+
+function getTotal() {
+  let total = 0;
+  for (let i = 0; i < orders.length; i++) {
+    console.log(orders[i]);
+    total += orders[i].price;
+  }
+  return total;
+}
+
+console.log(getTotal(orders));
+/*-----------------------Loop-----------------------*/
