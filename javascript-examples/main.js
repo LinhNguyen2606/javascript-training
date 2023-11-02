@@ -327,4 +327,14 @@ for (var value of Object.values(myInfo1)) {
   console.log(value);
 }
 
+// while loop
+const myArray = ["JS", "PHP", "CSS"];
+
+let i = 0;
+
+while (i < myArray.length) {
+  console.log(myArray[i]);
+  i++;
+}
+
 /*-----------------------Loop-----------------------*/
