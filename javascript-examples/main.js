@@ -87,7 +87,7 @@ console.log(Number.isFinite(20 / 5));
 console.log(Number.isInteger(Math.PI));
 /*-----------------------Number-----------------------*/
 
-/*-----------------------Object-----------------------*/
+/*-----------------------Array-----------------------*/
 const programminglanguages = [
   "Javascript",
   "PHP",
@@ -111,9 +111,161 @@ console.log(typeof programminglanguages.join(", "));
 console.log(typeof programminglanguages.toString());
 console.log(Array.isArray(programminglanguages));
 console.log(programminglanguages[0]);
-/*-----------------------Array-----------------------*/
+
+const courses1 = [
+  {
+    id: 1,
+    name: "Javascript",
+    coin: 200,
+  },
+
+  {
+    id: 2,
+    name: "TypeScript",
+    coin: 250,
+  },
+
+  {
+    id: 3,
+    name: "ReactJS",
+    coin: 300,
+  },
+
+  {
+    id: 4,
+    name: "NextJS",
+    coin: 350,
+  },
+
+  {
+    id: 5,
+    name: "HTML/CSS",
+    coin: 0,
+  },
+
+  {
+    id: 6,
+    name: "HTML/CSS",
+    coin: 10,
+  },
+
+  {
+    id: 7,
+    name: "HTML/CSS",
+    coin: 12,
+  },
+];
+
+const dethArray = [1, 2, [3, 4], 5, 6, [7, 8, 9], 10];
+const flatArray = dethArray.reduce(function (flatOutput, item) {
+  return flatOutput.concat(item);
+}, []);
+
+console.log(flatArray);
+
+const topics = [
+  {
+    topic: "Front-end",
+    courses: [
+      {
+        id: 1,
+        title: "HTML/CSS",
+      },
+
+      {
+        id: 2,
+        title: "JavaScript",
+      },
+
+      {
+        id: 3,
+        title: "ReactJS",
+      },
+    ],
+  },
+
+  {
+    topic: "Back-end",
+    courses: [
+      {
+        id: 1,
+        title: "Database",
+      },
+
+      {
+        id: 2,
+        title: "JavaScript",
+      },
+
+      {
+        id: 3,
+        title: "NodeJS",
+      },
+    ],
+  },
+];
+
+const newCourses = topics.reduce((acc, topic) => {
+  return acc.concat(
+    topic.courses.map((course) => {
+      return `
+      <div>
+        <span>ID: ${course.id}</span>
+        <h2>ID: ${course.title}</h2>
+      </div>
+    `;
+    })
+  );
+}, []);
+console.log(newCourses.join(", "));
+//accumulator: storage variable
+//curentValue: courses1
+
+const totalCoin = courses1.reduce(
+  (accumulator, currentValue) => accumulator + currentValue.coin,
+  0
+);
+
+console.log(totalCoin);
+
+const newCourse = courses1.map((course) => {
+  return {
+    id: course.id,
+    name: `Course: ${course.name}`,
+    coin: course.coin,
+    textCoin: `Price: ${course.coin}`,
+  };
+});
+
+console.log(newCourse);
+
+const listCoures = courses1.filter(function (course) {
+  return course.name === "HTML/CSS";
+});
+
+console.log(listCoures);
+
+const isFree1 = courses.some(function (course, index) {
+  console.log(index);
+  return course.coin === 0;
+});
+
+console.log(isFree1);
+
+const isFree = courses.every(function (course, index) {
+  console.log(index);
+  return course.coin === 0;
+});
+
+console.log(isFree);
+
+courses1.forEach(function (course, index) {
+  console.log(course);
+});
 
 /*-----------------------Array-----------------------*/
+
+/*-----------------------Object-----------------------*/
 const emailKey = "email";
 
 const myInfo = {
