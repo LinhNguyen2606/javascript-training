@@ -578,13 +578,11 @@ console.log(factorial(3));
 // 2. Attribute
 // 3. Text
 
-let boxElement = document.querySelector(".box");
+let h1ELement = document.querySelector("h1");
 
-boxElement.classList.add("red");
-
-boxElement.classList.remove("red");
-
-setTimeout(() => {
-  boxElement.classList.toggle("red");
-}, 3000);
+for (let i = 0; i < h1ELement.length; i++) {
+  h1ELement.onclick = function (e) {
+    console.log(e.target);
+  };
+}
 /*-----------------------HTML DOM -----------------------*/
