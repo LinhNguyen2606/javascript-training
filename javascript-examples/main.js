@@ -578,7 +578,7 @@ console.log(factorial(3));
 // 2. Attribute
 // 3. Text
 
-let headingElment = document.querySelector("h1");
-headingElment.class = "heading";
-alert(headingElment.getAttribute("class"));
+let headingElment = document.querySelector(".heading");
+
+console.log(headingElment.innerText);
 /*-----------------------HTML DOM -----------------------*/
