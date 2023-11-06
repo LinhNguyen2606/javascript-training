@@ -1,3 +1,5 @@
+/* document */
+/*eslint-disable no-console*/
 /*-----------------------Function-----------------------*/
 function showDialog() {
   alert("Hello world!");
@@ -566,3 +568,19 @@ function factorial(num) {
 
 console.log(factorial(3));
 /*-----------------------Loop-----------------------*/
+
+/*-----------------------HTML DOM-----------------------*/
+// HTML DOM
+
+// 1. Element: ID, class, tag
+// CSS selector, HTML colection
+
+// 2. Attribute
+// 3. Text
+
+let headingNode = document.querySelector(".heading");
+console.log(headingNode);
+
+let listItemNodes = document.querySelectorAll(".box-1 li");
+console.log(listItemNodes);
+/*-----------------------HTML DOM -----------------------*/
