@@ -580,16 +580,11 @@ console.log(factorial(3));
 
 let boxElement = document.querySelector(".box");
 
-boxElement.innerHTML = "<h1>Heading</h1>";
+boxElement.classList.add("red");
 
-// DOM style
-boxElement.style.width = "100px";
-boxElement.style.height = "200px";
-boxElement.style.backgroundColor = "red";
+boxElement.classList.remove("red");
 
-Object.assign(boxElement.style, {
-  width: "200px",
-  height: "100px",
-  backgroundColor: "green",
-});
+setTimeout(() => {
+  boxElement.classList.toggle("red");
+}, 3000);
 /*-----------------------HTML DOM -----------------------*/
