@@ -578,7 +578,18 @@ console.log(factorial(3));
 // 2. Attribute
 // 3. Text
 
-let headingElment = document.querySelector(".heading");
+let boxElement = document.querySelector(".box");
 
-console.log(headingElment.innerText);
+boxElement.innerHTML = "<h1>Heading</h1>";
+
+// DOM style
+boxElement.style.width = "100px";
+boxElement.style.height = "200px";
+boxElement.style.backgroundColor = "red";
+
+Object.assign(boxElement.style, {
+  width: "200px",
+  height: "100px",
+  backgroundColor: "green",
+});
 /*-----------------------HTML DOM -----------------------*/
