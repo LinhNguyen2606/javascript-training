@@ -599,3 +599,102 @@ console.log(
   })
 );
 /*-----------------------JSON -----------------------*/
+
+/*-----------------------Promise -----------------------*/
+let promise = new Promise((resolve, reject) => {
+  resolve([
+    {
+      id: 1,
+      name: "Javascript",
+    },
+  ]);
+  reject("Error");
+});
+
+promise
+  .then((courses) => {
+    console.log("courses");
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  .finally(() => {
+    console.log("Done");
+  });
+
+const users = [
+  {
+    id: 1,
+    name: "Kien Dang",
+  },
+
+  {
+    id: 2,
+    name: "Linh Nguyen",
+  },
+
+  {
+    id: 3,
+    name: "Tommy",
+  },
+];
+
+const comments = [
+  {
+    id: 1,
+    user_id: 3,
+    comment: "It's really good",
+  },
+
+  {
+    id: 2,
+    user_id: 2,
+    comment: "Fanstastic!",
+  },
+];
+
+const getComments = () => {
+  return new Promise((resolve, reject) => {
+    if (comments) {
+      resolve(comments);
+    } else {
+      reject("Not found comments");
+    }
+  });
+};
+
+const getUsersById = (userId) => {
+  return new Promise((resolve, reject) => {
+    let usersFound = users.find((user) => user.id === userId);
+    if (usersFound) {
+      resolve(usersFound);
+    } else {
+      reject("User not found");
+    }
+  });
+};
+
+getComments()
+  .then((comments) => {
+    const userIds = comments.map((comment) => comment.user_id);
+    const userPromises = userIds.map((userId) => getUsersById(userId));
+    return Promise.all(userPromises).then((users) => {
+      return { comments, users };
+    });
+  })
+  .then(({ comments, users }) => {
+    const list = document.createElement("ul");
+    comments.forEach((comment) => {
+      const user = users.find((user) => user.id === comment.user_id);
+      if (user) {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${user.name}: ${comment.comment}`;
+        list.appendChild(listItem);
+      }
+    });
+    document.body.appendChild(list);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+/*-----------------------Promise -----------------------*/
