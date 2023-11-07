@@ -586,3 +586,16 @@ for (let i = 0; i < h1ELement.length; i++) {
   };
 }
 /*-----------------------HTML DOM -----------------------*/
+
+/*-----------------------JSON -----------------------*/
+// let json = '["JavaScript", "PHP"]';
+// let json = '{"name": "Linh Nguyen", "age": 18}';
+
+console.log(
+  JSON.stringify({
+    name: "Linh Nguyen",
+    age: 22,
+    test: function () {},
+  })
+);
+/*-----------------------JSON -----------------------*/
