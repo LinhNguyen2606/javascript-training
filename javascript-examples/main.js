@@ -698,3 +698,110 @@ getComments()
     console.error(error);
   });
 /*-----------------------Promise -----------------------*/
+
+/*-----------------------Fetch -----------------------*/
+fetch("https://jsonplaceholder.typicode.com/posts")
+  .then((response) => response.json())
+  .then(function (posts) {
+    let htmls = posts.map((post) => {
+      return `
+        <li>
+          <h2>${post.title}</h2>
+          <p>${post.body}</p>
+        </li>
+      `;
+    });
+
+    let html = htmls.join("");
+    document.querySelector("ul").innerHTML = html;
+  });
+
+/* ------------------------------------------- */
+
+const postAPI = "https://jsonplaceholder.typicode.com/posts";
+
+function start() {
+  getPosts(renderPosts);
+  handleCreateForm();
+}
+
+start();
+
+function getPosts(callback) {
+  fetch(postAPI)
+    .then((response) => response.json())
+    .then(callback);
+}
+
+function createPost(data, callback) {
+  let options = {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+    body: JSON.stringify(data),
+  };
+
+  fetch(postAPI, options)
+    .then((response) => response.json())
+    .then(callback);
+}
+
+function handleRemovePost(postId) {
+  let deleteAPI = `${postAPI}/${postId}`;
+
+  let options = {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  };
+
+  fetch(deleteAPI, options)
+    .then(() => {
+      // Remove the post element from the DOM directly
+      let postElement = document.getElementById(`post-${postId}`);
+
+      if (postElement) {
+        postElement.remove();
+      }
+    })
+    .catch((error) => {
+      console.error("Error deleting post:", error);
+    });
+}
+
+function renderPosts(posts) {
+  let ulElement = document.getElementById("list-posts");
+
+  let htmls = posts.map((post) => {
+    return `
+        <li>
+          <h4>${post.title}</h4>
+          <p>${post.body}</p>
+          <button onclick="handleRemovePost(${post.id})">Remove</button>
+        </li>
+    `;
+  });
+
+  ulElement.innerHTML = htmls.join("");
+}
+
+function handleCreateForm() {
+  let createBtn = document.getElementById("create");
+
+  createBtn.onclick = () => {
+    let name = document.querySelector('input[name="name"]').value;
+    let body = document.querySelector('input[name="body"]').value;
+
+    let formData = {
+      name: name,
+      body: body,
+    };
+
+    createPost(formData, function () {
+      getPosts(renderPosts);
+    });
+  };
+}
+/*-----------------------Fetch -----------------------*/
