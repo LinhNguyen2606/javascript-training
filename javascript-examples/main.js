@@ -805,3 +805,14 @@ function handleCreateForm() {
   };
 }
 /*-----------------------Fetch -----------------------*/
+
+/*-----------------------Template String -----------------------*/
+const courseName = "Javascript";
+const description = `Course name: ${courseName}`;
+console.log(description);
+
+const lines = `Line 1
+Line 2
+Line 3`;
+console.log(lines);
+/*-----------------------Template String -----------------------*/
