@@ -1006,3 +1006,29 @@ let course5 = "Javascript";
 let html = hightlight`Learn programming ${course5} at ${branch}!`;
 console.log(html);
 /*----------------------Tagged template literals----------------------*/
+
+/*----------------------Optional chaining----------------------*/
+let object = {
+  cat: {
+    name: "Alice",
+    cat2: {
+      name: "Dinah",
+      cat3: {
+        name: "Dinah 2",
+      },
+    },
+  },
+};
+
+if (obj.cat?.cat2?.cat3) {
+  console.log(obj.cat.cat2.cat3.name);
+}
+
+const obj = {
+  getName(value) {
+    console.log(value);
+  },
+};
+
+obj.getName?.(123);
+/*----------------------Optional chaining----------------------*/
