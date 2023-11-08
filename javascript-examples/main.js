@@ -850,3 +850,34 @@ const getCourse = new Course("Linh", 10000);
 
 console.log(getCourse);
 /*-----------------------Arrow function -----------------------*/
+
+/*-----------------------Classes -----------------------*/
+class Course1 {
+  constructor(name, price) {
+    this.name = name;
+    this.price = price;
+  }
+
+  getName() {
+    return this.name;
+  }
+
+  getPrice() {
+    return this.price;
+  }
+}
+
+const jsCourse = new Course1("Javascript", 10000);
+const tsCourse = new Course1("Typescript", 20000);
+
+console.log(jsCourse);
+console.log(tsCourse);
+/*-----------------------Classes -----------------------*/
+
+/*-----------------------Default parameter value -----------------------*/
+function logger(log = "Default value!") {
+  console.log(log);
+}
+
+logger(undefined);
+/*-----------------------Default parameter value -----------------------*/
