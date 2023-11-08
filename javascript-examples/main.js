@@ -881,3 +881,128 @@ function logger(log = "Default value!") {
 
 logger(undefined);
 /*-----------------------Default parameter value -----------------------*/
+
+/*-----------------------Enhanced object literals -----------------------*/
+let name = "Javascript";
+let price = 1000;
+
+let course2 = {
+  name,
+  price,
+  //Define methor for object
+  getName() {
+    return name;
+  },
+};
+
+console.log(course2.getName());
+
+// Define key for object as variable
+let fieldName = "name";
+let fieldPrice = "price";
+
+let course3 = {
+  [fieldName]: "JavaScript",
+  [fieldPrice]: 1000,
+};
+
+console.log(course3);
+/*-----------------------Enhanced object literals -----------------------*/
+
+/*-----------------------Destructuring, Rest----------------------*/
+// let array = ["Javascript", "Ruby", "PHP"];
+
+// let [a, ...rest] = array;
+
+// console.log(a, rest);
+
+let course4 = {
+  name2: "Typescript",
+  price2: 2000,
+  image: "image - address",
+  children: {
+    name2: "ReactJS",
+  },
+};
+
+let {
+  name2: parentName,
+  children: { name2 },
+  description2 = "default description",
+} = course4;
+
+console.log(parentName);
+console.log(name2);
+console.log(description2);
+
+function logger(...params) {
+  console.log(params);
+}
+
+console.log(logger(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11));
+/*-----------------------Destructuring, Rest----------------------*/
+
+/*----------------------Spread----------------------*/
+let array1 = ["Javascript", "Ruby", "PHP"];
+
+let array2 = ["ReactJS", "Dart"];
+
+let array3 = [...array2, ...array1];
+
+console.log(array3);
+
+let object1 = {
+  name: "NodeJS",
+};
+
+let object2 = {
+  price: 1000,
+};
+
+let object3 = {
+  ...object1,
+  ...object2,
+};
+
+console.log(object3);
+
+let defaultConfig = {
+  api: "https://domain-course-page",
+  apiVersion: "v1",
+  other: "other",
+};
+
+let excerciseConfig = {
+  ...defaultConfig,
+  api: "https://domain-excercise-page",
+};
+
+console.log(excerciseConfig);
+
+let array = ["JS", "PHP", "Ruby"];
+
+function logger(...rest) {
+  for (let i = 0; i < rest.length; i++) {
+    console.log(rest[i]);
+  }
+}
+
+logger(...array);
+/*----------------------Spread----------------------*
+
+/*----------------------Tagged template literals----------------------*/
+function hightlight([first, ...string], ...values) {
+  return values
+    .reduce(
+      (acc, curr) => [...acc, `<span>${curr}</span>`, string.shift()],
+      [first]
+    )
+    .join("");
+}
+
+let branch = "Agigily";
+let course5 = "Javascript";
+
+let html = hightlight`Learn programming ${course5} at ${branch}!`;
+console.log(html);
+/*----------------------Tagged template literals----------------------*/
