@@ -816,3 +816,37 @@ Line 2
 Line 3`;
 console.log(lines);
 /*-----------------------Template String -----------------------*/
+
+/*-----------------------Arrow function -----------------------*/
+const logger = (log) => {
+  console.log(log);
+};
+
+logger("Message...");
+
+const sum = (a, b) => ({
+  a,
+  b,
+});
+console.log(sum(2, 2));
+
+// arrow function isn't context
+const course = {
+  name: "Javascript",
+  getName: () => {
+    return this; //context
+  },
+};
+
+console.log(course.name);
+
+// arrow function can't constructor
+const Course = (name, price) => {
+  this.name = name;
+  this.price = price;
+};
+
+const getCourse = new Course("Linh", 10000);
+
+console.log(getCourse);
+/*-----------------------Arrow function -----------------------*/
