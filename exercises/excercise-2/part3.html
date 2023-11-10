@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Set the background color of a paragraph</title>
+  </head>
+  <body>
+    <input
+      type="button"
+      value="Click to set paragraph background color"
+      onclick="set_background()"
+    />
+    <p>w3resource JavaScript Exercises</p>
+    <p>w3resource PHP Exercises</p>
+    <script>
+      function set_background() {
+        const pElement = document.getElementsByTagName("p");
+
+        const p1Element = pElement[0];
+        const p2Element = pElement[1];
+
+        p1Element.style.backgroundColor = "yellow";
+        p2Element.style.backgroundColor = "red";
+      }
+    </script>
+  </body>
+</html>

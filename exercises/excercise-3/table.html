@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table</title>
+    <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 2rem;
+      }
+
+      td,
+      th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="table-pomodori">
+      <thead class="thead-pomodori">
+        <tr>
+          <th>Task name</th>
+          <th>Status(done / planned)</th>
+          <th>Controls</th>
+        </tr>
+      </thead>
+      <tbody class="tbody-pomodori"></tbody>
+    </table>
+
+    <form class="add-task" action="javascript:void(0)" style="margin-top: 2rem">
+      <input
+        type="text"
+        name="task-name"
+        id="task-name"
+        placeholder="Task Name"
+      />
+      <select name="pomodoro-count" id="pomodoro-count">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <button type="submit" onclick="insertTask()">Submit</button>
+    </form>
+    <script type="module" src="./table.js"></script>
+  </body>
+</html>
