@@ -1071,3 +1071,87 @@ const app = (() => {
   };
 })();
 /*----------------------IIFE----------------------*/
+
+/*----------------------Scope----------------------*/
+// Global variables
+var message = "Learning scope";
+
+function logger() {
+  console.log(message);
+}
+
+logger();
+
+function log() {
+  console.log("Print log");
+}
+
+function logger1() {
+  log();
+}
+
+logger1();
+
+// Code block
+{
+  // var age1 = 18;
+  let age1 = 22;
+}
+
+console.log(age1);
+
+// Local scope
+function logger2() {
+  // var fullName = "Linh Nguyen";
+
+  function logger3() {
+    console.log("Log 3");
+  }
+
+  logger3();
+}
+
+logger2();
+logger3();
+console.log(fullName);
+
+//When calling each function always has 1 new scope is created.
+function testLogger(first, last) {
+  console.log(first, last);
+}
+console.log("Linh", "Nguyen");
+console.log("Anh", "Ngo");
+console.log("Duong", "Nguyen");
+
+// Functions can access variables declared within and outside their scope
+function testLogger() {
+  const age = 18;
+
+  function logger2() {
+    console.log(age);
+  }
+
+  logger2();
+}
+
+testLogger();
+
+// How a variable is accessed
+const age1 = 18;
+
+{
+  const age1 = 16;
+  {
+    const age1 = 14;
+    {
+      console.log(age1);
+      const age1 = 12;
+    }
+  }
+}
+
+{
+  var age2 = 16;
+}
+console.log(age2);
+/*----------------------Scope----------------------*/
