@@ -1,0 +1,48 @@
+.sidebar {
+  display         : inline-block;
+  width           : 210px;
+  height          : 696px;
+  background-color: #4a4e58;
+  border-color    : #4a4e58;
+
+  &__btn {
+    display         : flex;
+    align-items     : center;
+    gap             : 8px;
+    padding         : 3px 61px;
+    margin          : 18px 0 0 20px;
+    border-radius   : 2px;
+    border-color    : $primary-color;
+    background-color: $primary-color;
+    color           : $secondary-color;
+    font-size       : $fs-small;
+    font-weight     : $fw-medium;
+    font-family     : $primary-font;
+
+    &__icon {
+      font-size: $fs-medium;
+    }
+  }
+
+  &__user {
+    display         : flex;
+    align-items     : center;
+    background-color: #3b3e46;
+    color           : $primary-color;
+    border-left     : 3px solid $primary-color;
+    gap             : 10px;
+    margin-top      : 18px;
+    padding-left    : 12px;
+    height          : 44px;
+
+    &__icon {
+      svg {
+        fill: $primary-color;
+      }
+    }
+
+    span {
+      font-size: $fs-x-small;
+    }
+  }
+}
