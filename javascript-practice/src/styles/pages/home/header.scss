@@ -1,0 +1,8 @@
+.header {
+  background-color: $secondary-color;
+
+  &__heading {
+    font-weight: $fw-medium;
+    line-height: $lh-xl-medium;
+  }
+}
