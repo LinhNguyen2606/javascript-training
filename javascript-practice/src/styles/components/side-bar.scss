@@ -1,9 +1,8 @@
-.sidebar {
-  display         : inline-block;
-  width           : 210px;
-  height          : 696px;
+#sidebar {
+  min-width       : 210px;
   background-color: #4a4e58;
   border-color    : #4a4e58;
+  grid-area       : sidebar;
 
   &__btn {
     display         : flex;
@@ -18,6 +17,10 @@
     font-size       : $fs-small;
     font-weight     : $fw-medium;
     font-family     : $primary-font;
+
+    &:hover {
+      background-color: #1992af;
+    }
 
     &__icon {
       font-size: $fs-medium;

@@ -4,49 +4,110 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Webix offers a solution to manage the users list and to administer access rights and permissions"
+    />
+    <link href="./assets/logo/logo.png" rel="shortcut icon" />
     <link rel="stylesheet" href="./styles/index.scss" />
     <title>User Management</title>
   </head>
-  <body>
+  <body id="main__wrapper">
     <!-- Start header -->
     <header class="header">
-      <h1 class="header__heading">User Manager</h1>
+      <h1 class="header__heading primary__text">User Manager</h1>
     </header>
     <!-- End header -->
-    <main>
-      <!-- Start sidebar -->
-      <aside class="sidebar">
-        <button class="sidebar__btn">
-          <span class="sidebar__btn__icon">+</span>
-          <span>New</span>
-        </button>
 
-        <div class="sidebar__user">
-          <div class="sidebar__user__icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="1em"
-              viewBox="0 0 640 512"
-            >
-              <path
-                d="M96 128a128 128 0 1 1 256 0A128 128 
-                0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 
-                304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 
-                29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 
-                512H471.4c5.4-9.4 8.6-20.3 
-                8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 
-                4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 
-                640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 
-                0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 
-                128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 
-                432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"
-              />
-            </svg>
-          </div>
-          <span>Users</span>
+    <!-- Start sidebar -->
+    <aside id="sidebar">
+      <button id="sidebar__btn">
+        <span id="sidebar__btn__icon">+</span>
+        <span>New</span>
+      </button>
+
+      <div id="sidebar__user">
+        <div id="sidebar__user__icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 640 512"
+          >
+            <path
+              d="M96 128a128 128 0 1 1 256 0A128 128 
+                    0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 
+                    304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 
+                    29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 
+                    512H471.4c5.4-9.4 8.6-20.3 
+                    8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 
+                    4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 
+                    640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 
+                    0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 
+                    128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 
+                    432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"
+            />
+          </svg>
         </div>
-      </aside>
-      <!-- End sidebar -->
+        <span>Users</span>
+      </div>
+    </aside>
+    <!-- End sidebar -->
+
+    <main id="main__container">
+      <!-- Start table -->
+      <div class="table__wrapper">
+        <div class="table">
+          <div class="table__search">
+            <span class="primary__text">Users</span>
+            <div class="table__search__icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="1em"
+                viewBox="0 0 512 512"
+              >
+                <path
+                  d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <ul class="table__infor">
+            <li class="table__infor__header primary__text">Full Name</li>
+            <li class="table__infor__header primary__text">Status</li>
+            <li class="table__infor__header primary__text">Email</li>
+          </ul>
+
+          <ul class="table__content">
+            <li class="table__content__item">
+              <div class="table__content__infor">
+                <img src="./assets/images/user1.jpg" alt="user1" />
+                <span class="primary__text">Berni Mayou</span>
+              </div>
+              <div class="table__content__status">
+                <span class="table__content__status active">Active</span>
+              </div>
+              <span class="table__content__email primary__text"
+                >bern.mayour@mail.com</span
+              >
+            </li>
+
+            <li class="table__content__item">
+              <div class="table__content__infor">
+                <img src="./assets/images/user2.jpg" alt="user2" />
+                <span class="primary__text">August Dvorak</span>
+              </div>
+              <div class="table__content__status">
+                <span class="not__active">Not active</span>
+              </div>
+              <span class="table__content__email primary__text"
+                >dvor.august@mail.com</span
+              >
+            </li>
+          </ul>
+        </div>
+        <!-- End table -->
+      </div>
     </main>
     <script type="module" src="../src/js/main.js"></script>
   </body>
