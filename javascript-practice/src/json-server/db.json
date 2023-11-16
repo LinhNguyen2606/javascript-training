@@ -1,5 +1,35 @@
 {
-  "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" }
+  "users": [
+    {
+      "id": 1,
+      "userName": "Elly Soyer",
+      "status": true,
+      "email": "elly.soyer@example",
+      "avatar": "https://docs.webix.com/usermanager-backend/users/98/avatar/909471384.jpg"
+    },
+    {
+      "id": 2,
+      "userName": "Daenerys Stormborn Targaryen",
+      "status": false,
+      "email": "breaker.of.chains@gm.com",
+      "avatar": "https://docs.webix.com/usermanager-backend/users/105/avatar/096793420.jpg"
+    }
+  ],
+
+  "user-details": [
+    {
+      "id": 1,
+      "userId": 2,
+      "registered": "Jun 02, 2020 21:28:22",
+      "lastVisited": "Jun 02, 2020 21:28:22",
+      "detailDescUser": ""
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "registered": "Jun 01, 2020 00:42:34",
+      "lastVisited": "Jun 01, 2020 00:42:34",
+      "detailDescUser": ""
+    }
+  ]
 }
