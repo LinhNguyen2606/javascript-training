@@ -3,8 +3,8 @@ import Model from "./models/index";
 import View from "./views/index";
 
 export default class App {
-  async start() {
-    const controller = new Controller(new Model(), new View());
-    await controller.init();
+  start() {
+    this.controller = new Controller(new Model(), new View());
+    this.controller.init();
   }
 }
