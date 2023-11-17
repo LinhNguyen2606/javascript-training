@@ -1,6 +1,6 @@
 import UserModel from "./userModel";
 
-export default class Service {
+export default class Model {
   constructor() {
     this.userModel = new UserModel();
   }

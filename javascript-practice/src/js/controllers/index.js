@@ -1,7 +1,11 @@
 import UserController from "./userController";
 
 export default class Controller {
-  constructor(service, view) {
-    this.userController = new UserController(service, view);
+  constructor(model, view) {
+    this.userController = new UserController(model, view);
+  }
+
+  init() {
+    this.userController.getUsers();
   }
 }
