@@ -1,7 +1,61 @@
-#header {
+.header {
   background-color: $secondary-color;
+  display         : flex;
+  align-items     : center;
+  justify-content : space-between;
 
   &__heading {
     color: $text-primary;
+  }
+
+  &__wrapper-icon {
+    display: flex;
+  }
+
+  &__loading-icon,
+  &__check {
+    svg {
+      display: block;
+      width  : 20px;
+      height : 20px;
+    }
+  }
+
+  &__loading-icon {
+    display: none;
+
+    svg {
+      border            : 3px solid transparent;
+      border-radius     : 50%;
+      border-right-color: rgba(255, 255, 255, 0.7);
+      animation         : spinner-anim 2s linear infinite;
+    }
+  }
+
+  &__check {
+    display    : flex;
+    align-items: center;
+    gap        : 10px;
+
+    &-icon,
+    span {
+      display: none;
+    }
+
+    &-icon {
+      svg {
+        fill: #008000;
+      }
+    }
+  }
+}
+
+@keyframes spinner-anim {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }
