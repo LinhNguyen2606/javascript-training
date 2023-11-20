@@ -6,6 +6,6 @@ export default class Controller {
   }
 
   init() {
-    this.userController.getUsers();
+    this.userController.init();
   }
 }

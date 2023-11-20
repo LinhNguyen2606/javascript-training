@@ -13,6 +13,13 @@
       "status": false,
       "email": "breaker.of.chains@gm.com",
       "avatar": "https://docs.webix.com/usermanager-backend/users/105/avatar/096793420.jpg"
+    },
+    {
+      "avatar": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAAXNSR0IArs4c6QAAAg9JREFUeF7tlSFKRGEcB7+9hdcxWM3iAUw2k4ewWbTYTDabhg0iKIJRvIFJk7BlRcFm/kaYhXn9Db83w5+32Nva/R49GgOLgmha/A4piKtHQWQ9ClIQmwHZnv4hBZEZkM3pQgoiMyCb04UURGZANqcLKYjMgGxOF1IQmQHZnC6kIDIDsjldSEFkBmRzupCCyAzI5nQhBZEZkM3pQgoiMyCb04UURGZANkd9IQcnh2N7f+ePsuXl7Tg/OpVp5OYUhHOJkAqCaOQgBeFcIqSCIBo5SEE4lwipIIhGDlIQziVCKgiikYMUhHOJkAqCaOQgBeFcIqSCIBo5SEE4lwipIIhGDlIQziVCKgiikYMUhHOJkAqCaOQgBeFcIqSCIBo5SEE4lwipIIhGDlIQziVCKgiikYMUhHOJkAqCaOQgBeFcIqSCIBo5SEE4lwipIIhGDrJxQR6u78fzzdOUga/1erw+voyPt/cpzn+8vHFBCAmrz9W4OD4bd1dLAocyCoLqnIcVZN4hSigIqnMepg4y/3mbRyiIrFlBCiIzIJvThRREZkA2pwspiMyAbE4XUhCZAdmcLqQgMgOyOV1IQWQGZHO6kILIDMjmdCEFkRmQzelCCiIzIJvThRREZkA2pwspiMyAbE4XUhCZAdmcLqQgMgOyOV1IQWQGZHO6kILIDMjmdCEFkRmQzelCCiIzIJvzAzf9m0j8qSa3AAAAAElFTkSuQmCC",
+      "userName": "Linh Nguyen",
+      "status": false,
+      "email": "",
+      "id": 3
     }
   ],
   "user-details": [
@@ -32,4 +39,3 @@
     }
   ]
 }
-

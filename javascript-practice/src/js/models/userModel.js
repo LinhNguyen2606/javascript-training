@@ -6,6 +6,8 @@ class UserModel {
   }
 
   getUsers = () => this.userService.handleFetchUsers();
+
+  addUser = (user) => this.userService.handleCreateUser(user);
 }
 
 export default UserModel;
