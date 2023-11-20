@@ -1,5 +1,4 @@
-import { formReset, qs } from "../helpers/helper";
-import { hideModal } from "../helpers/modalOperation";
+import { hideModal, qs, validateUsername } from "../helpers";
 import ModalView from "./modal";
 
 class UserView {
@@ -35,7 +34,7 @@ class UserView {
    * Initialize functions
    * @param {Function} addUser The function to add a new user
    */
-  initFunctions(addUser) {
+  init(addUser) {
     this.addUser = addUser;
   }
 
@@ -48,7 +47,9 @@ class UserView {
     this.tableContentEl.innerHTML = "";
 
     // Wait for the data to be resolved
-    const users = await data;
+    const usersData = await data;
+
+    const users = usersData.data;
 
     // Iterate over each user in the data and create table rows
     users.map((user) => {
@@ -101,6 +102,9 @@ class UserView {
     });
   }
 
+  /**
+   * Function to add user
+   */
   addUser() {
     const errorEl = document.createElement("span");
     errorEl.classList.add("error-message");
@@ -108,16 +112,18 @@ class UserView {
     errorEl.style.color = "red";
 
     // handle event onSubmit the form
-    this.formEl.addEventListener("submit", (e) => {
+    this.formEl.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // Trim whitespace from the input
       const userName = this.userNameInputEl.value.trim();
 
       // Check if the entered username is empty or contains only whitespace
-      if (userName === "") {
+      const errorMessage = validateUsername(userName);
+
+      if (errorMessage) {
         // Display an error message
-        errorEl.textContent = "Please enter a valid username";
+        errorEl.textContent = errorMessage;
         this.formEl.appendChild(errorEl);
         return;
       }
@@ -131,21 +137,26 @@ class UserView {
       // Generate random color for the avatar
       const randomColor =
         "#" + Math.floor(Math.random() * 16777215).toString(16);
+
       // Create the HTML canvas to draw graphics
       const avatarCanvas = document.createElement("canvas");
+
       // Create the 2D context
       const context = avatarCanvas.getContext("2d");
+
       const avatarSize = 100;
 
       avatarCanvas.width = avatarSize;
       avatarCanvas.height = avatarSize;
       context.fillStyle = randomColor;
+
       // Draws a random color circle with a top-left corner at position 0,0. The circle is 100px with the width and height
       context.fillRect(0, 0, avatarSize, avatarSize);
       context.fillStyle = "#FFF";
       context.font = `${avatarSize / 2}px Arial`;
       context.textAlign = "center";
       context.textBaseline = "middle";
+
       // Draws filled text with the first character on the canvas
       context.fillText(
         userName.charAt(0).toUpperCase(),
@@ -182,9 +193,9 @@ class UserView {
         }, 2000);
       }, 1000);
 
-      this.addUser(user);
+      await this.addUser(user);
 
-      formReset(this.formAddNewUserEl);
+      this.formAddNewUserEl.reset();
     });
   }
 }
