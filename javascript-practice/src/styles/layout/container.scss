@@ -1,3 +1,10 @@
+#content__wrapper {
+  display   : flex;
+  background: #ebedf0;
+}
+
 #main__container {
-  grid-area: main;
+  display      : flex;
+  margin-bottom: 10px;
+  width        : 100%;
 }

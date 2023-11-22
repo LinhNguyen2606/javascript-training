@@ -7,21 +7,29 @@ class UserController {
   /**
    * Get users and display them in the view
    */
-  getUsers = () => this.view.displayUsers(this.model.getUsers());
+  handleGetUsers = () => this.view.displayUsers(this.model.getUsers());
 
   /**
    * Add a user
    * @param {Object} usersData The data of the user to be added
    */
-  addUser = async (usersData) => {
+  handleAddUser = async (usersData) => {
     const res = await this.model.addUser(usersData);
     if (res.errMsg) {
       alert(res.errMsg);
     } else {
       setTimeout(async () => {
-        this.getUsers();
+        this.handleGetUsers();
       }, 1000);
     }
+  };
+
+  /**
+   * Get user details information
+   * @param {Number} userId The user's id
+   */
+  handleGetUserDetailsInfor = async (userId) => {
+    return await this.model.getUserDetails(userId);
   };
 
   /**
@@ -29,9 +37,13 @@ class UserController {
    */
   init = () => {
     // Fetch and display users
-    this.getUsers();
+    this.handleGetUsers();
+
     // Initialize functions in the view, passing the addUser function bound to the current context
-    this.view.init(this.addUser.bind(this));
+    this.view.init(
+      this.handleAddUser.bind(this),
+      this.handleGetUserDetailsInfor.bind(this)
+    );
   };
 }
 
