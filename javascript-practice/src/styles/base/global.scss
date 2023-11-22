@@ -2,9 +2,4 @@
   font-size  : $fs-small;
   word-wrap  : break-word;
   font-family: $primary-font;
-  display    : grid;
-  grid-template-areas:
-    'header header'
-    'sidebar main';
-  height: 100vh;
 }
