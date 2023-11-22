@@ -5,7 +5,7 @@ class UserService {
    * Handle fetching users
    * @returns {Object} An object containing the response data or error message
    */
-  async handleFetchUsers() {
+  async fetchUsers() {
     try {
       const res = await fetch(`${API_BASE_URL}/users`);
       if (res.ok && res.status === 200) {
@@ -28,7 +28,7 @@ class UserService {
    * @param {Object} usersData The data of the user to be created
    * @returns {Object} An object containing the response data or error message
    */
-  async handleCreateUser(usersData) {
+  async createUser(usersData) {
     try {
       const res = await fetch(`${API_BASE_URL}/users`, {
         method: "POST",
@@ -40,6 +40,9 @@ class UserService {
           userName: usersData.userName,
           status: usersData.status,
           email: usersData.email,
+          registered: usersData.registered,
+          lastVisited: usersData.lastVisited,
+          detailDescUser: usersData.detailDescUser,
         }),
       });
 
@@ -53,6 +56,24 @@ class UserService {
         return {
           data: null,
           errMsg: res.statusText,
+        };
+      }
+    } catch (err) {
+      return {
+        data: null,
+        errMsg: err.message,
+      };
+    }
+  }
+
+  async getUserDetails(userId) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/users/${userId}`);
+      if (res.ok && res.status === 200) {
+        const data = await res.json();
+        return {
+          data,
+          errMsg: null,
         };
       }
     } catch (err) {

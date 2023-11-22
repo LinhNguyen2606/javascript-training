@@ -1,5 +1,6 @@
-import { hideModal, qs, validateUsername } from "../helpers";
+import { convertDate, hideModal, qs, validateUsername } from "../helpers";
 import ModalView from "./modal";
+import UserDetailsView from "./userDetailsView";
 
 class UserView {
   constructor() {
@@ -18,6 +19,9 @@ class UserView {
     // Form add new user
     this.formAddNewUserEl = qs("#form-add-user");
 
+    // User details wrapper
+    this.userContainerEl = qs(".user__wrapper");
+
     // Get loading icon, check success icon, and text
     this.loadingIconContainerEl = qs(".header__loading-icon");
     this.checkIconContainerEl = qs(".header__check-icon");
@@ -26,6 +30,12 @@ class UserView {
     // Call the modal view
     this.modal = new ModalView();
 
+    // Call the user details view
+    this.userDetailsView = new UserDetailsView();
+
+    // The container of the user details
+    this.userContainerEl = qs(".user__wrapper");
+
     // Call the add user function
     this.addUser();
   }
@@ -33,9 +43,21 @@ class UserView {
   /**
    * Initialize functions
    * @param {Function} addUser The function to add a new user
+   * @param {Function} handleGetUserDetails The function to get the details information of the user
    */
-  init(addUser) {
+  init(addUser, handleGetUserDetailsInfor) {
     this.addUser = addUser;
+    this.handleGetUserDetailsInfor = handleGetUserDetailsInfor;
+
+    // Initialize user details view
+    this.initUserDetailsView();
+  }
+
+  /**
+   * Initialize user details view
+   */
+  initUserDetailsView() {
+    this.userDetailsView.init(this.handleGetUserDetailsInfor);
   }
 
   /**
@@ -56,6 +78,23 @@ class UserView {
       // Create a new list item for each user
       const row = document.createElement("li");
       row.classList.add("table__content__item");
+
+      // Add click event listener to the row
+      row.addEventListener("click", () => {
+        // Remove active class from all rows
+        const rows = document.querySelectorAll(".table__content__item");
+        rows.forEach((row) => {
+          row.classList.remove("table__item__active");
+        });
+
+        // Add active class to the clicked row
+        row.classList.add("table__item__active");
+      });
+
+      row.addEventListener("click", () => {
+        const userId = user.id;
+        this.userDetailsView.showUserDetails(userId);
+      });
 
       // Create a container for user information
       const userInfor = document.createElement("div");
@@ -130,6 +169,9 @@ class UserView {
 
       const status = false;
       const email = "";
+      const registered = convertDate();
+      const lastVisited = convertDate();
+      const detailDescUser = "";
 
       // Show the loading icon
       this.loadingIconContainerEl.style.display = "block";
@@ -172,6 +214,9 @@ class UserView {
         status: status,
         email: email,
         avatar: avatarBase64,
+        registered: registered,
+        lastVisited: lastVisited,
+        detailDescUser: detailDescUser,
       };
 
       // Clear the error message if it was previously displayed
