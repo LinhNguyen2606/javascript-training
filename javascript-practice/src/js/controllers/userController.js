@@ -40,10 +40,7 @@ class UserController {
     this.handleGetUsers();
 
     // Initialize functions in the view, passing the addUser function bound to the current context
-    this.view.init(
-      this.handleAddUser.bind(this),
-      this.handleGetUserDetailsInfor.bind(this)
-    );
+    this.view.bindAddUser(this.handleAddUser);
   };
 }
 
