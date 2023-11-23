@@ -1,3 +1,25 @@
+export const usersTableTemplate = (usersData) => {
+  const users = usersData?.data.map((user) => {
+    const { id, avatar, userName, status, email } = user;
+
+    return `
+    <li class="table__content__item" data-id=${id}>
+      <div class="table__content__infor">
+        <img src="${avatar}" alt="user avatar" />
+        <span class="primary__text">${userName}</span>
+      </div>
+      <div class="table__content__status ${
+        status === true ? "active" : "not__active"
+      }">
+      <span>${status === true ? "Active" : "Not active"}</span>
+      </div>
+      <span class="table__content__email primary__text">${email}</span>
+  </li>`;
+  });
+
+  return users;
+};
+
 export const userDetailsTemplate = (userDetailsData) => {
   const { status, email, avatar, userName, lastVisited } = userDetailsData.data;
 
