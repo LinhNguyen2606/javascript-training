@@ -1,4 +1,4 @@
-import ModalView from "./modal";
+import ModalView from "./modalView";
 import UserDetailsView from "./userDetailsView";
 import UserView from "./userView";
 

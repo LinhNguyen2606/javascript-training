@@ -62,6 +62,67 @@ class UserView {
     const res = await usersData;
     this.tableContentEl.innerHTML = usersTableTemplate(res);
   }
+
+  /**
+   * Function to add user
+   * @param {Function} handler Function called on synthetic event.
+   */
+  bindAddUser(handler) {
+    // handle event onSubmit the form
+    this.formEl.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Trim whitespace from the input
+      const userName = this.userNameInputEl.value.trim();
+
+      // Check if the entered username is empty or contains only whitespace
+      const errorMessage = validateUsername(userName);
+
+      if (errorMessage) {
+        // Display an error message
+        this.errorEl.textContent = errorMessage;
+        this.formEl.appendChild(this.errorEl);
+        return;
+      }
+
+      const status = false;
+      const email = "";
+      const registered = convertDate();
+      const lastVisited = convertDate();
+      const detailDescUser = "";
+
+      generateAvatar(this.avatarCanvas, userName);
+
+      // Convert the avatar to base64
+      const avatarBase64 = this.avatarCanvas.toDataURL();
+
+      const user = {
+        userName: userName,
+        status: status,
+        email: email,
+        avatar: avatarBase64,
+        registered: registered,
+        lastVisited: lastVisited,
+        detailDescUser: detailDescUser,
+      };
+
+      // Clear the error message if it was previously displayed
+      this.errorEl.textContent = "";
+
+      // Close the modal after click on the save button
+      hideModal(this.modal.overlayEl, this.modal.modalEl);
+
+      handleSpinner(
+        this.loadingIconContainerEl,
+        this.textDoneEl,
+        this.checkIconContainerEl
+      );
+
+      await handler(user);
+
+      this.formAddNewUserEl.reset();
+    });
+  }
 }
 
 export default UserView;
