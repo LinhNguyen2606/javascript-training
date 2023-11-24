@@ -1,13 +1,17 @@
 class UserController {
   constructor(model, view) {
     this.model = model.userModel;
-    this.view = view.userView;
+    this.view = view;
   }
 
   /**
    * Get users and display them in the view
    */
-  handleGetUsers = () => this.view.displayUsers(this.model.getUsers());
+  handleGetUsers = () =>
+    this.view.userView.displayUsers(
+      this.model.getUsers(),
+      this.handleGetUserDetailsInfo
+    );
 
   /**
    * Add a user
@@ -28,9 +32,8 @@ class UserController {
    * Get user details information
    * @param {Number} userId The user's id
    */
-  handleGetUserDetailsInfor = async (userId) => {
-    return await this.model.getUserDetails(userId);
-  };
+  handleGetUserDetailsInfo = async (userId) =>
+    await this.model.getUserDetails(userId);
 
   /**
    * Initialize the application
@@ -39,8 +42,8 @@ class UserController {
     // Fetch and display users
     this.handleGetUsers();
 
-    // Initialize functions in the view, passing the addUser function bound to the current context
-    this.view.bindAddUser(this.handleAddUser);
+    // Initialize functions in the view, passing the bindAddUser function bound to the current context
+    this.view.userView.bindAddUser(this.handleAddUser);
   };
 }
 

@@ -16,30 +16,16 @@ class UserView {
     // The table content contains user's information
     this.tableContentEl = qs(".table__content");
 
-    // The save button
-    this.saveBtnEl = qs("#modal__body-btn");
-
-    // Form
-    this.formEl = qs("#form-add-user");
-
     // user name input
     this.userNameInputEl = qs("#username-input");
 
-    // Form add new user
+    // Modal Form add new user
     this.formAddNewUserEl = qs("#form-add-user");
-
-    // User details wrapper
-    this.userContainerEl = qs(".user__wrapper");
-
-    this.tableContentEl = qs(".table__content");
 
     // Get loading icon, check success icon, and text
     this.loadingIconContainerEl = qs(".header__loading-icon");
     this.checkIconContainerEl = qs(".header__check-icon");
     this.textDoneEl = qs("#text-success");
-
-    // The container of the user details
-    this.userContainerEl = qs(".user__wrapper");
 
     // The error message
     this.errorEl = createElement("span", "error-message");
@@ -50,18 +36,38 @@ class UserView {
     this.modal = new ModalView();
 
     this.userDetailsView = new UserDetailsView();
-
-    this.displayUsers();
   }
 
   /**
    * Display users
    * @param {Array} usersData The data of the user to be rendered
+   * @param {Function} handler Function called on synthetic event.
    */
-  async displayUsers(usersData) {
+  async displayUsers(usersData, handler) {
     const res = await usersData;
     this.tableContentEl.innerHTML = usersTableTemplate(res);
+
+    this.bindUserClickViewDetails(
+      this.tableContentEl.querySelectorAll(".table__content__item"),
+      handler
+    );
   }
+
+  /**
+   * Function to handle user clicks
+   * @param {HTMLElement} tableContentItems Nodelist of li tags
+   * @param {Function} handler Function called on synthetic event.
+   */
+  bindUserClickViewDetails = (tableContentItems, handler) => {
+    tableContentItems.forEach((item) => {
+      // Get the id value of data-id attribute
+      const userId = item.dataset.id;
+      item.addEventListener("click", async () => {
+        const userData = await handler(userId);
+        this.userDetailsView.showUserDetailsInfo(userData);
+      });
+    });
+  };
 
   /**
    * Function to add user
@@ -69,7 +75,7 @@ class UserView {
    */
   bindAddUser(handler) {
     // handle event onSubmit the form
-    this.formEl.addEventListener("submit", async (e) => {
+    this.formAddNewUserEl.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // Trim whitespace from the input

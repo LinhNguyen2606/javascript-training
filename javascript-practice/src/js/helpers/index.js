@@ -16,7 +16,12 @@ export { handleSpinner };
  */
 export const qs = (selector) => document.querySelector(selector);
 
-// Create an element with an optional CSS class
+/**
+ * Create an element with an optional CSS class
+ * @param {string} tag The HTML tag of the element to create
+ * @param {string} className Optional CSS class to add to the element
+ * @returns {HTMLElement} The created element
+ */
 export const createElement = (tag, className) => {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
@@ -24,6 +29,11 @@ export const createElement = (tag, className) => {
   return element;
 };
 
+/**
+ * Generate an avatar image on the provided canvas using a random color and the user's initials.
+ * @param {HTMLCanvasElement} avatarCanvas The canvas element to draw the avatar on.
+ * @param {string} userName The user's name or initials used to generate the avatar.
+ */
 export const generateAvatar = (avatarCanvas, userName) => {
   // Generate random color for the avatar
   const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
@@ -52,6 +62,9 @@ export const generateAvatar = (avatarCanvas, userName) => {
   );
 };
 
+/**
+ * Convert the day such as: May 21, 2020 17:02:06
+ */
 export const convertDate = () =>
   new Date()
     .toLocaleString("en-US", {
