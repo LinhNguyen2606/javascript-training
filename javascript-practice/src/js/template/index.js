@@ -1,3 +1,6 @@
+/**
+ * The template of user table content item
+ */
 export const usersTableTemplate = (usersData) => {
   const users = usersData?.data.map((user) => {
     const { id, avatar, userName, status, email } = user;
@@ -20,8 +23,11 @@ export const usersTableTemplate = (usersData) => {
   return users;
 };
 
-export const userDetailsTemplate = (userDetailsData) => {
-  const { status, email, avatar, userName, lastVisited } = userDetailsData.data;
+/**
+ * The template of user detailed information
+ */
+export const userDetailsTemplate = (userData) => {
+  const { status, email, avatar, userName, lastVisited } = userData.data;
 
   const html = `
   <div class="user__details">
