@@ -1,8 +1,8 @@
 /**
  * The template of user table content item
  */
-export const usersTableTemplate = (usersData) => {
-  const users = usersData?.data.map((user) => {
+export const usersTableTemplate = (data) => {
+  const users = data.map((user) => {
     const { id, avatar, userName, status, email } = user;
 
     return `
@@ -26,8 +26,10 @@ export const usersTableTemplate = (usersData) => {
 /**
  * The template of user detailed information
  */
-export const userDetailsTemplate = (userData) => {
-  const { status, email, avatar, userName, lastVisited } = userData.data;
+export const userDetailsTemplate = async (userData) => {
+  const res = await userData;
+
+  const { status, email, avatar, userName, lastVisited } = res.data;
 
   const html = `
   <div class="user__details">

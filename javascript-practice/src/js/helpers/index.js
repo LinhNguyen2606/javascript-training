@@ -77,3 +77,33 @@ export const convertDate = () =>
       hour12: false,
     })
     .replace("at", "");
+
+/**
+ * addEventListener wrapper
+ * @param {Element|Window} target Target Element
+ * @param {string} type Event name to bind to
+ * @param {Function} callback Event callback
+ * @param {boolean} [capture] Capture the event
+ */
+export function $on(target, type, callback, capture) {
+  target.addEventListener(type, callback, !!capture);
+}
+
+/**
+ * Attach a handler to an event for all elements matching a selector.
+ *
+ * @param {Element} element - The element to attach the event listener to
+ * @param {string} selector - The selector to match for delegated elements
+ * @param {string} eventName - The name of the event to listen for
+ * @param {Function} handler - The function to be called when the event is triggered
+ * @param {boolean} [capture] - A boolean value indicating whether to use event capturing (optional)
+ */
+export const $delegate = (element, selector, eventName, handler) => {
+  element.addEventListener(eventName, (event) => {
+    // event.target.closest(".table__content__item") to find the closest element
+    const targetElement = event.target;
+    if (targetElement) {
+      handler.call(targetElement, event);
+    }
+  });
+};
