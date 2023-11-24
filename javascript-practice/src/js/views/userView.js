@@ -1,4 +1,6 @@
 import {
+  $delegate,
+  $on,
   convertDate,
   createElement,
   generateAvatar,
@@ -7,9 +9,8 @@ import {
   qs,
   validateUsername,
 } from "../helpers";
-import { usersTableTemplate } from "../template";
+import { userDetailsTemplate, usersTableTemplate } from "../template";
 import ModalView from "./modalView";
-import UserDetailsView from "./userDetailsView";
 
 class UserView {
   constructor() {
@@ -27,6 +28,9 @@ class UserView {
     this.checkIconContainerEl = qs(".header__check-icon");
     this.textDoneEl = qs("#text-success");
 
+    // The container of the user details
+    this.userDetailsContainerEl = qs(".user__wrapper");
+
     // The error message
     this.errorEl = createElement("span", "error-message");
 
@@ -34,8 +38,6 @@ class UserView {
     this.avatarCanvas = createElement("canvas");
 
     this.modal = new ModalView();
-
-    this.userDetailsView = new UserDetailsView();
   }
 
   /**
@@ -43,14 +45,10 @@ class UserView {
    * @param {Array} usersData The data of the user to be rendered
    * @param {Function} handler Function called on synthetic event.
    */
-  async displayUsers(usersData, handler) {
-    const res = await usersData;
-    this.tableContentEl.innerHTML = usersTableTemplate(res);
+  displayUsers(usersData, handler) {
+    this.tableContentEl.innerHTML = usersTableTemplate(usersData);
 
-    this.bindUserClickViewDetails(
-      this.tableContentEl.querySelectorAll(".table__content__item"),
-      handler
-    );
+    this.handleUserClickViewDetails(this.tableContentEl, handler);
   }
 
   /**
@@ -58,15 +56,18 @@ class UserView {
    * @param {HTMLElement} tableContentItems Nodelist of li tags
    * @param {Function} handler Function called on synthetic event.
    */
-  bindUserClickViewDetails = (tableContentItems, handler) => {
-    tableContentItems.forEach((item) => {
-      // Get the id value of data-id attribute
-      const userId = item.dataset.id;
-      item.addEventListener("click", async () => {
+  handleUserClickViewDetails = (tableContentEl, handler) => {
+    $delegate(
+      tableContentEl,
+      ".table__content__item",
+      "click",
+      async ({ target }) => {
+        // event.target.closest(".table__content__item") to find the closest element with class .table__content__item.
+        const userId = target.closest(".table__content__item").dataset.id;
         const userData = await handler(userId);
-        this.userDetailsView.showUserDetailsInfo(userData);
-      });
-    });
+        this.displayUserDetailsInfo(userData);
+      }
+    );
   };
 
   /**
@@ -75,7 +76,7 @@ class UserView {
    */
   bindAddUser(handler) {
     // handle event onSubmit the form
-    this.formAddNewUserEl.addEventListener("submit", async (e) => {
+    $on(this.formAddNewUserEl, "submit", async (e) => {
       e.preventDefault();
 
       // Trim whitespace from the input
@@ -128,6 +129,16 @@ class UserView {
 
       this.formAddNewUserEl.reset();
     });
+  }
+
+  /**
+   * Show the user details information such as name, status, email, avatar
+   * @param {Object} userData Corresponding data of that user
+   */
+  async displayUserDetailsInfo(userData) {
+    const userDetailsHTML = await userDetailsTemplate(userData);
+    this.userDetailsContainerEl.innerHTML = userDetailsHTML;
+    this.userDetailsContainerEl.style.display = "block";
   }
 }
 
