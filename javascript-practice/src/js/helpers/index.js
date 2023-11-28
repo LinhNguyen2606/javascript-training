@@ -1,32 +1,31 @@
-import { showModal, hideModal } from "./modal";
+import { $showModal, $hideModal } from "./modal";
 
-import { validateUsername } from "./validation";
+import { $validateUsername, $validateEmail } from "./validation";
 
-import { handleSpinner } from "./spinner";
+import { $handleSpinner } from "./spinner";
 
-export { showModal, hideModal };
+import {
+  $on,
+  $qs,
+  $createElement,
+  $attachEventListener,
+  $handleShowHideItem,
+  $delegate,
+} from "./selectors";
 
-export { validateUsername };
+export { $showModal, $hideModal };
 
-export { handleSpinner };
+export { $validateUsername, $validateEmail };
 
-/**
- * querySelector wrapper
- * @param {string} selector Selector to query
- */
-export const qs = (selector) => document.querySelector(selector);
+export { $handleSpinner };
 
-/**
- * Create an element with an optional CSS class
- * @param {string} tag The HTML tag of the element to create
- * @param {string} className Optional CSS class to add to the element
- * @returns {HTMLElement} The created element
- */
-export const createElement = (tag, className) => {
-  const element = document.createElement(tag);
-  if (className) element.classList.add(className);
-
-  return element;
+export {
+  $on,
+  $qs,
+  $createElement,
+  $attachEventListener,
+  $handleShowHideItem,
+  $delegate,
 };
 
 /**
@@ -34,7 +33,7 @@ export const createElement = (tag, className) => {
  * @param {HTMLCanvasElement} avatarCanvas The canvas element to draw the avatar on.
  * @param {string} userName The user's name or initials used to generate the avatar.
  */
-export const generateAvatar = (avatarCanvas, userName) => {
+export const $generateAvatar = (avatarCanvas, userName) => {
   // Generate random color for the avatar
   const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
@@ -65,7 +64,7 @@ export const generateAvatar = (avatarCanvas, userName) => {
 /**
  * Convert the day such as: May 21, 2020 17:02:06
  */
-export const convertDate = () =>
+export const $convertDate = () =>
   new Date()
     .toLocaleString("en-US", {
       month: "long",
@@ -78,32 +77,13 @@ export const convertDate = () =>
     })
     .replace("at", "");
 
-/**
- * addEventListener wrapper
- * @param {Element|Window} target Target Element
- * @param {string} type Event name to bind to
- * @param {Function} callback Event callback
- * @param {boolean} [capture] Capture the event
- */
-export function $on(target, type, callback, capture) {
-  target.addEventListener(type, callback, !!capture);
-}
+export const $convertFileToBase64 = (file) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    $on(reader, "load", () => {
+      resolve(reader.result);
+    });
 
-/**
- * Attach a handler to an event for all elements matching a selector.
- *
- * @param {Element} element - The element to attach the event listener to
- * @param {string} selector - The selector to match for delegated elements
- * @param {string} eventName - The name of the event to listen for
- * @param {Function} handler - The function to be called when the event is triggered
- * @param {boolean} [capture] - A boolean value indicating whether to use event capturing (optional)
- */
-export const $delegate = (element, selector, eventName, handler) => {
-  element.addEventListener(eventName, (event) => {
-    // event.target.closest(".table__content__item") to find the closest element
-    const targetElement = event.target;
-    if (targetElement) {
-      handler.call(targetElement, event);
-    }
+    if (file) reader.readAsDataURL(file);
   });
 };

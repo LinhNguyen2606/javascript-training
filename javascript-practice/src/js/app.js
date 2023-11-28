@@ -5,6 +5,5 @@ import View from "./views/index";
 export default class App {
   start() {
     this.controller = new Controller(new Model(), new View());
-    this.controller.init();
   }
 }
