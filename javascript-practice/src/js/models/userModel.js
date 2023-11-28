@@ -9,7 +9,7 @@ class UserModel {
    * Get users from the user service
    * @returns {Promise} A promise that resolves to the users data
    */
-  getUsers = () => this.userService.fetchUsers();
+  getUsers = async () => await this.userService.fetchUsers();
 
   /**
    * Add a user using the user service
@@ -18,13 +18,14 @@ class UserModel {
    */
   addUser = (usersData) => this.userService.createUser(usersData);
 
+  editUser = (userId, userData) => this.userService.editUser(userId, userData);
+
   /**
    * Get user details information
    * @param {Number} userId The user's id
    */
-  getUserDetails = (userId) => {
-    return this.userService.getUserDetails(userId);
-  };
+  getUserDetails = async (userId) =>
+    await this.userService.getUserDetails(userId);
 }
 
 export default UserModel;

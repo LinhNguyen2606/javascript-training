@@ -66,6 +66,42 @@ class UserService {
     }
   }
 
+  async editUser(userId, userData) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: userData.userName,
+          email: userData.email,
+          avatar: userData.avatar,
+          isActive: userData.isActive,
+          detailDescUser: userData.detailDescUser,
+        }),
+      });
+
+      if (res.ok & (res.status === 200)) {
+        const data = await res.json();
+        return {
+          data,
+          errMsg: null,
+        };
+      } else {
+        return {
+          data: null,
+          errMsg: res.statusText,
+        };
+      }
+    } catch (err) {
+      return {
+        data: null,
+        errMsg: err.message,
+      };
+    }
+  }
+
   async getUserDetails(userId) {
     try {
       const res = await fetch(`${API_BASE_URL}/users/${userId}`);

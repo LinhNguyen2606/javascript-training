@@ -3,7 +3,8 @@
  */
 export const usersTableTemplate = (data) => {
   const users = data.map((user) => {
-    const { id, avatar, userName, status, email } = user;
+    console.log("user", user);
+    const { id, avatar, userName, isActive, email } = user;
 
     return `
     <li class="table__content__item" data-id=${id}>
@@ -12,9 +13,9 @@ export const usersTableTemplate = (data) => {
         <span class="primary__text">${userName}</span>
       </div>
       <div class="table__content__status ${
-        status === true ? "active" : "not__active"
+        isActive ? "active" : "not__active"
       }">
-      <span>${status === true ? "Active" : "Not active"}</span>
+      <span>${isActive ? "Active" : "Not active"}</span>
       </div>
       <span class="table__content__email primary__text">${email}</span>
   </li>`;
@@ -26,21 +27,17 @@ export const usersTableTemplate = (data) => {
 /**
  * The template of user detailed information
  */
-export const userDetailsTemplate = async (userData) => {
-  const res = await userData;
-
-  const { status, email, avatar, userName, lastVisited } = res.data;
+export const userDetailsTemplate = (data) => {
+  const { isActive, email, avatar, userName, lastVisited, id } = data;
 
   const html = `
   <div class="user__details">
     <section section class="user__details__header">
       <h3 class="primary__text">User information</h3>
-      <div class="user__details__status ${
-        status === true ? "active" : "not__active"
-      }">
-        <span>${status === true ? "Active" : "Not active"}</span>
+      <div class="user__details__status ${isActive ? "active" : "not__active"}">
+        <span>${isActive ? "Active" : "Not active"}</span>
       </div>
-      <div class="user__details__header--icon">
+      <div class="user__details__header--icon" data-id=${id}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="1em"
@@ -92,6 +89,110 @@ export const userDetailsTemplate = async (userData) => {
       >${lastVisited === "" ? "Unknown" : lastVisited}</span
     >
   </div>
+</div>
+  `;
+
+  return html;
+};
+
+export const displaysUserEditInfoTemplate = (data) => {
+  const {
+    isActive = false,
+    email,
+    avatar,
+    userName,
+    lastVisited,
+    registered,
+    detailDescUser,
+  } = data;
+
+  const html = `
+  <div class="edit">
+  <div class="edit__header">
+    <div class="edit__header-icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="1em"
+        viewBox="0 0 448 512"
+      >
+        <path
+          d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+        />
+      </svg>
+    </div>
+    <span class="primary__text">General</span>
+  </div>
+
+  <div class="edit__btn">
+    <button class="btn btn--primary edit__btn-delete">Delete</button>
+    <button class="btn btn--primary edit__btn-save">Save</button>
+  </div>
+
+  <form id="edit-form">
+    <div class="row">
+      <label>Full Name</label>
+      <input type="text" name="fullName" id="username" value="${userName}" />
+    </div>
+
+    <div class="row">
+      <label>Email</label>
+      <input type="email" name="email" id="email" value="${email}" />
+    </div>
+
+    <div class="row">
+      <label>Avatar</label>
+      <div class="avatar">
+        <div class="avatar__img">
+          <img id="avatar-img" src="${avatar}" alt="User Avatar" />
+        </div>
+        <div class="avatar__upload">
+          <label for="file-input" class="primary__text">
+          <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="1em"
+          viewBox="0 0 512 512"
+        >
+          <path
+            d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z"
+          />
+        </svg>
+            Upload new photo
+          </label>
+          <input id="file-input" type="file">
+      </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Status</label>
+      <input type="checkbox" name="status" ${
+        isActive && "checked"
+      }  id="statusCheckbox"/>
+      <div class="status ${
+        isActive ? "active" : "not__active"
+      }" id="statusDisplay">
+        <span>${isActive ? "Active" : "Not active"}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <label>Registered</label>
+      <span>${registered}</span>
+    </div>
+
+    <div class="row">
+      <label>Last visited</label>
+      <span>${lastVisited}</span>
+    </div>
+
+    <div class="row">
+      <label>Details</label>
+      <textarea id="details" name="details" rows="7" cols="40">
+        ${detailDescUser}
+      </textarea>
+    </div>
+  </form>
 </div>
   `;
 

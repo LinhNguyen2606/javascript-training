@@ -1,17 +1,33 @@
+import { $convertFileToBase64 } from "../helpers";
+
 class UserController {
   constructor(model, view) {
     this.model = model.userModel;
     this.view = view.userView;
 
-    this.view.bindAddUser(this.handleAddUser.bind(this));
+    this.handleGetUsers();
+    this.view.bindEventAddUser(this.handleAddUser);
+    this.view.bindEventUserViewDetails(this.handleUserViewDetails);
+    this.view.bindEventShowEditForm(this.handleShowEditForm);
+    this.view.bindEventChangeAvatar(this.handleChangeAvatar);
+    this.view.bindEventChangeStatus(this.handleChangeStatus);
   }
 
   /**
    * Get users and display them in the view
    */
-  getUsers = async () => {
+  handleGetUsers = async () => {
     const { data } = await this.model.getUsers();
-    this.view.displayUsers(data, this.getUserDetailsInfo);
+    this.view.displayUsers(data);
+  };
+
+  handleChangeAvatar = async (file) => {
+    const src = await $convertFileToBase64(file);
+    this.view.displayAvatarImg(src);
+  };
+
+  handleChangeStatus = (checked) => {
+    this.view.displayStatus(checked);
   };
 
   /**
@@ -24,7 +40,7 @@ class UserController {
       alert(res.errMsg);
     } else {
       setTimeout(async () => {
-        this.getUsers();
+        this.handleGetUsers();
       }, 1000);
     }
   };
@@ -33,15 +49,20 @@ class UserController {
    * Get user details information
    * @param {Number} userId The user's id
    */
-  getUserDetailsInfo = async (userId) =>
-    await this.model.getUserDetails(userId);
+  handleUserViewDetails = async (userId) => {
+    const { data } = await this.model.getUserDetails(userId);
+    this.view.displayUserDetailsInfo(data);
+  };
 
-  /**
-   * Initialize the application
-   */
-  init = () => {
-    // Fetch and display users
-    this.getUsers();
+  handleShowEditForm = async (userId) => {
+    const { data } = await this.model.getUserDetails(userId);
+    this.view.displayInfoEditUser(data);
+    this.view.editUser(userId, this.handleEditUser);
+  };
+
+  handleEditUser = async (userId, usersData) => {
+    await this.model.editUser(userId, usersData);
+    this.handleGetUsers();
   };
 }
 

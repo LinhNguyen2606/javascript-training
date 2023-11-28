@@ -1,4 +1,4 @@
-export const handleSpinner = (
+export const $handleSpinner = (
   loadingIconContainerEl,
   textDoneEl,
   checkIconContainerEl
