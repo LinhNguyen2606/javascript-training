@@ -37,6 +37,39 @@
           }
         }
       }
+
+      &__input {
+        display    : none;
+        width      : 97%;
+        height     : 32px;
+        text-indent: 12px;
+        border     : 1px solid #CCD7E6;
+        outline    : none;
+
+        &:focus {
+          border: 1px solid #1CA1C1;
+        }
+      }
+
+      &__close {
+        display : none;
+        position: relative;
+
+        &:hover {
+          &::before {
+            @extend %hover-icon;
+          }
+        }
+
+        svg {
+          @extend %style-icon;
+          font-size: $fs-medium;
+
+          &:hover {
+            fill: $text-primary;
+          }
+        }
+      }
     }
 
     &__infor {

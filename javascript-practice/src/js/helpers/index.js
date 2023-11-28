@@ -77,6 +77,10 @@ export const $convertDate = () =>
     })
     .replace("at", "");
 
+/**
+ * Function to convert the image to type Base64
+ * @param {File} file - The file object representing the selected image file.
+ */
 export const $convertFileToBase64 = (file) => {
   return new Promise((resolve) => {
     const reader = new FileReader();

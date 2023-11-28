@@ -66,6 +66,12 @@ class UserService {
     }
   }
 
+  /**
+   * Function to edit user
+   * @param {Number} userId The user's id
+   * @param {Object} usersData The data of the user to be created
+   * @returns {Object} An object containing the response data or error message
+   */
   async editUser(userId, userData) {
     try {
       const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
@@ -102,6 +108,11 @@ class UserService {
     }
   }
 
+  /**
+   * Function to get the data of user
+   * @param {Number} userId The user's id
+   * @returns {Object} An object containing the response data or error message
+   */
   async getUserDetails(userId) {
     try {
       const res = await fetch(`${API_BASE_URL}/users/${userId}`);

@@ -18,6 +18,11 @@ class UserModel {
    */
   addUser = (usersData) => this.userService.createUser(usersData);
 
+  /**
+   * The function to handle when user click to edit a user
+   * @param {Number} userId The user's id
+   * @param {Object} usersData The data of user after edited a user
+   */
   editUser = (userId, userData) => this.userService.editUser(userId, userData);
 
   /**

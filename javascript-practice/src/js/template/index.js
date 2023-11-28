@@ -1,9 +1,9 @@
 /**
  * The template of user table content item
+ *  @param {Object} data The user's data
  */
 export const usersTableTemplate = (data) => {
   const users = data.map((user) => {
-    console.log("user", user);
     const { id, avatar, userName, isActive, email } = user;
 
     return `
@@ -26,6 +26,7 @@ export const usersTableTemplate = (data) => {
 
 /**
  * The template of user detailed information
+ * @param {Object} data The data of user
  */
 export const userDetailsTemplate = (data) => {
   const { isActive, email, avatar, userName, lastVisited, id } = data;
@@ -95,6 +96,10 @@ export const userDetailsTemplate = (data) => {
   return html;
 };
 
+/**
+ * The template of user detailed information
+ * @param {Object} data The data of user
+ */
 export const displaysUserEditInfoTemplate = (data) => {
   const {
     isActive = false,
