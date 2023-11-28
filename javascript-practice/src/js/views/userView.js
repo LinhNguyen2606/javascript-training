@@ -38,11 +38,25 @@ class UserView {
 
     this.editContainerEl = $qs("#edit__wrapper");
 
+    this.tableSearchEl = $qs(".table__search");
+
+    this.searchIconEl = $qs(".table__search__icon");
+
+    this.tableSearchIconEl = $qs(".table__search__icon");
+
+    this.tableSearchInputEl = $qs(".table__search__input");
+
+    this.tableSearchCloseEl = $qs(".table__search__close");
+
     this.errorEl = $createElement("span", "error-message");
 
     this.avatarCanvas = $createElement("canvas");
 
     this.modal = new ModalView();
+
+    this.displayUserSearch();
+
+    this.closeUserSearchDisplay();
 
     this.isSelected = false;
   }
@@ -52,8 +66,10 @@ class UserView {
    * @param {Array} usersData The data of the user to be rendered
    * @param {Function} handlerUserViewDetails Function called on synthetic event.
    */
-  displayUsers = (usersData) =>
-    (this.tableContentEl.innerHTML = usersTableTemplate(usersData));
+  displayUsers = (usersData) => {
+    this.tableContentEl.innerHTML = usersTableTemplate(usersData);
+    this.searchUser(this.tableContentEl);
+  };
 
   /**
    * Function to handle user clicks
@@ -143,6 +159,10 @@ class UserView {
     this.userDetailsContainerEl.style.display = "block";
   };
 
+  /**
+   * Function show the edit form when click the edit icon
+   * @param {Function} handler Function called on synthetic event.
+   */
   bindEventShowEditForm = (handler) => {
     $attachEventListener(
       this.userDetailsContainerEl,
@@ -174,6 +194,10 @@ class UserView {
     });
   };
 
+  /**
+   * Function change the avatar when upload to choose the new image
+   * @param {Function} handler Function called on synthetic event.
+   */
   bindEventChangeAvatar = async (handler) => {
     $attachEventListener(
       this.editContainerEl,
@@ -187,11 +211,20 @@ class UserView {
     );
   };
 
+  /**
+   * Function display the avatar of the user
+   * @param {String} src A base64 string of the avatar
+   */
   displayAvatarImg = (src) => {
+    console.log(src);
     const avatarImg = this.editContainerEl.querySelector("#avatar-img");
     avatarImg.src = src;
   };
 
+  /**
+   * Function display the avatar of the user
+   * @param {Boolean} checked The status of the user when click on the toggle switch box
+   */
   displayStatus = (checked) => {
     if (checked) {
       // Nếu checkbox được chọn, cập nhật trạng thái và nội dung hiển thị
@@ -210,6 +243,10 @@ class UserView {
     }
   };
 
+  /**
+   * Function change the status when click on the toggle switch box;
+   * @param {Function} handler Function called on synthetic event.
+   */
   bindEventChangeStatus = (handler) => {
     $attachEventListener(
       this.editContainerEl,
@@ -224,7 +261,9 @@ class UserView {
   };
 
   /**
-   * @param {Function} userData Corresponding data of that user
+   * Function to edit a user
+   * @param {Number} userId The user's id
+   * @param {Function} handler Function called on synthetic event.
    */
   editUser = (userId, handler) => {
     $delegate(this.editContainerEl, ".edit__btn-save", "click", async (e) => {
@@ -241,7 +280,7 @@ class UserView {
         .querySelector("#details")
         .value.trim();
 
-      // Validat user name email
+      // Validate username and email
       const userNameMsg = $validateUsername(userName);
       const emailMsg = $validateEmail(email);
 
@@ -264,6 +303,63 @@ class UserView {
       };
 
       handler(userId, user);
+    });
+  };
+
+  /**
+   * Function to show the input search and close icon when click the search icon
+   */
+  displayUserSearch = () => {
+    $on(this.searchIconEl, "click", () => {
+      this.tableSearchInputEl.style.display = "block";
+      this.tableSearchInputEl.focus();
+      this.tableSearchCloseEl.style.display = "block";
+
+      this.tableSearchEl.querySelector(".table__search span").style.display =
+        "none";
+      this.tableSearchIconEl.style.display = "none";
+    });
+  };
+
+  /**
+   * Function to close the search input
+   */
+  closeUserSearchDisplay = () => {
+    $on(this.tableSearchCloseEl, "click", () => {
+      this.tableSearchInputEl.style.display = "none";
+      this.tableSearchInputEl.focus();
+      this.tableSearchCloseEl.style.display = "none";
+
+      this.tableSearchEl.querySelector(".table__search span").style.display =
+        "block";
+      this.tableSearchIconEl.style.display = "block";
+    });
+  };
+
+  /**
+   * Function to search a user with the username and email is matched
+   * @param {HTMLElement} tableContentEl The table content element
+   */
+  searchUser = (tableContentEl) => {
+    const tableContentItemsEl = tableContentEl.querySelectorAll(
+      ".table__content__item"
+    );
+
+    $on(this.tableSearchInputEl, "input", () => {
+      const filter = this.tableSearchInputEl.value.toUpperCase();
+
+      tableContentItemsEl.forEach((item) => {
+        const username = item
+          .querySelector(".table__content__infor span")
+          .textContent.toUpperCase();
+        const email = item
+          .querySelector(".table__content__email")
+          .textContent.toUpperCase();
+
+        username.includes(filter) || email.includes(filter)
+          ? (item.style.display = "")
+          : (item.style.display = "none");
+      });
     });
   };
 }

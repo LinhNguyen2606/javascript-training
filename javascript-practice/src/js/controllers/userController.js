@@ -21,17 +21,25 @@ class UserController {
     this.view.displayUsers(data);
   };
 
+  /**
+   * Function to handle when user change the avatar
+   * @param {File} file - The file object representing the selected image file.
+   */
   handleChangeAvatar = async (file) => {
     const src = await $convertFileToBase64(file);
     this.view.displayAvatarImg(src);
   };
 
+  /**
+   * Function to handle when user click the toggle switch box to change the status of the user
+   * @param {Boolean} checked - The status of user is checked or not
+   */
   handleChangeStatus = (checked) => {
     this.view.displayStatus(checked);
   };
 
   /**
-   * Add a user
+   * The function to handle when add a new user
    * @param {Object} usersData The data of the user to be added
    */
   handleAddUser = async (usersData) => {
@@ -46,7 +54,7 @@ class UserController {
   };
 
   /**
-   * Get user details information
+   * The function to handle when click to view user detailed information
    * @param {Number} userId The user's id
    */
   handleUserViewDetails = async (userId) => {
@@ -54,12 +62,21 @@ class UserController {
     this.view.displayUserDetailsInfo(data);
   };
 
+  /**
+   * The function to handle when user click to show the edit form
+   * @param {Number} userId The user's id
+   */
   handleShowEditForm = async (userId) => {
     const { data } = await this.model.getUserDetails(userId);
     this.view.displayInfoEditUser(data);
     this.view.editUser(userId, this.handleEditUser);
   };
 
+  /**
+   * The function to handle when user click to edit a user
+   * @param {Number} userId The user's id
+   * @param {Object} usersData The data of user after edited a user
+   */
   handleEditUser = async (userId, usersData) => {
     await this.model.editUser(userId, usersData);
     this.handleGetUsers();

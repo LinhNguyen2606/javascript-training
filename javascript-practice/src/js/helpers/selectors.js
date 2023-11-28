@@ -57,6 +57,16 @@ export const $handleShowHideItem = (elementToHide, elementToShow) => {
   elementToShow.style.display = "block";
 };
 
+/**
+ * Attach a handler to an event for all elements matching a selector.
+ *
+ * @param {Element} target Element which the event must bubble to
+ * @param {string} selector Selector to match
+ * @param {string} type Event name
+ * @param {Function} handler Function called when the event bubbles to target
+ *                           from an element matching selector
+ * @param {boolean} [capture] Capture the event
+ */
 export function $delegate(target, selector, type, handler, capture) {
   const dispatchEvent = (event) => {
     const targetElement = event.target;
