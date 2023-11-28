@@ -1,0 +1,72 @@
+#edit__wrapper {
+  display   : none;
+  background: #fff;
+  margin    : 10px 10px 0;
+  padding   : 12px;
+  width     : 50%;
+
+  .edit {
+    &__header {
+      display      : flex;
+      gap          : 16px;
+      border-bottom: 1px solid #edeff0;
+      margin-bottom: 20px;
+
+      &-icon {
+        position: relative;
+
+        &:hover {
+          &::before {
+            @extend %hover-icon;
+          }
+        }
+
+        svg {
+          @extend %style-icon;
+          margin-top: 6px;
+          font-size : $fs-small;
+
+          &:hover {
+            fill: $text-primary;
+          }
+        }
+      }
+
+      span {
+        color        : $primary-color;
+        border-bottom: 3px solid $primary-color;
+        width        : 150px;
+        text-align   : center;
+        height       : 29px;
+      }
+    }
+
+    &__btn {
+      display        : flex;
+      justify-content: flex-end;
+      gap            : 10px;
+      margin-bottom  : 30px;
+
+      &-delete,
+      &-save {
+        padding  : 8px 40px;
+        font-size: $fs-small
+      }
+
+      &-delete {
+        background: #f4f5f9;
+        color     : $primary-color;
+
+        &:hover {
+          background-color: #e7e9f2;
+        }
+      }
+
+      &-save {
+        &:hover {
+          background-color: #1992af;
+        }
+      }
+    }
+  }
+}

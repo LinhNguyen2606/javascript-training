@@ -44,7 +44,7 @@
       margin-bottom: 20px;
 
       &__header {
-        color    : #313131;
+        color    : $tertiary-color;
         font-size: $fs-x-small;
 
         &:first-child {
@@ -133,7 +133,7 @@
 .not__active {
   border-radius: 8px;
   padding      : 4px 12px;
-  font-size    : $fs-x-small;
+  font-size    : $fs-small;
   font-weight  : $fw-medium;
 }
 

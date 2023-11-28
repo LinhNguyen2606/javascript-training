@@ -1,0 +1,129 @@
+#edit-form {
+  display       : flex;
+  flex-direction: column;
+  gap           : 20px;
+
+  .row {
+    display      : flex;
+    align-items  : center;
+    margin-bottom: 10px;
+    flex-wrap    : wrap;
+
+    label {
+      flex        : 0 0 73px;
+      text-align  : right;
+      margin-right: 10px;
+      color       : $tertiary-color;
+      font-size   : $fs-x-small;
+      font-weight : $fw-medium;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="image"] {
+      padding      : 5px;
+      border       : 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input:not([type="checkbox"]) {
+      flex: 1;
+    }
+
+    .avatar {
+      display    : flex;
+      align-items: flex-end;
+
+      &__img {
+        img {
+          width : 95px;
+          height: 95px;
+        }
+      }
+
+
+      &__upload {
+        display : inline-block;
+        position: relative;
+        margin  : 0 10px 10px 20px;
+
+        svg {
+          fill: $primary-color;
+        }
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        label {
+          display    : flex;
+          align-items: center;
+          gap        : 5px;
+          padding    : 8px 12px;
+          cursor     : pointer;
+          font-size  : $fs-small;
+          color      : $primary-color;
+        }
+
+        input[type="file"] {
+          position: absolute;
+          top     : 0;
+          left    : 0;
+          opacity : 0;
+          width   : 100%;
+          height  : 100%;
+          cursor  : pointer;
+        }
+      }
+
+      span {
+        color        : $primary-color;
+        margin-bottom: 10px;
+      }
+    }
+
+    input[type="checkbox"] {
+      position          : relative;
+      width             : 60px;
+      height            : 28px;
+      -webkit-appearance: none;
+      appearance        : none;
+      background        : $bg-secondary-color;
+      outline           : none;
+      border-radius     : 2rem;
+      cursor            : pointer;
+    }
+
+    input[type="checkbox"]::before {
+      content      : "";
+      width        : 28px;
+      height       : 28px;
+      border-radius: 50%;
+      background   : #fff;
+      position     : absolute;
+      top          : 0;
+      left         : 3px;
+      transition   : 0.5s;
+    }
+
+    input[type="checkbox"]:checked::before {
+      transform : translateX(100%);
+      background: #fff;
+    }
+
+    input[type="checkbox"]:checked {
+      background: $bg-primary-color;
+    }
+
+    .status {
+      margin-left: 30px;
+    }
+  }
+}
+
+.error-message {
+  display  : block;
+  color    : red;
+  margin   : 11px 11px 0 11px;
+  font-size: $fs-x-small;
+}
