@@ -8,7 +8,6 @@ import {
   $on,
   $qs,
   $createElement,
-  $attachEventListener,
   $handleShowHideItem,
   $delegate,
 } from "./selectors";
@@ -19,14 +18,7 @@ export { $validateUsername, $validateEmail };
 
 export { $handleSpinner };
 
-export {
-  $on,
-  $qs,
-  $createElement,
-  $attachEventListener,
-  $handleShowHideItem,
-  $delegate,
-};
+export { $on, $qs, $createElement, $handleShowHideItem, $delegate };
 
 /**
  * Generate an avatar image on the provided canvas using a random color and the user's initials.

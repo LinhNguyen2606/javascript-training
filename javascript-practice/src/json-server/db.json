@@ -3,7 +3,7 @@
     {
       "id": 1,
       "userName": "Elly Soyer",
-      "status": true,
+      "isActive": true,
       "email": "elly.soyer@example",
       "avatar": "https://docs.webix.com/usermanager-backend/users/98/avatar/909471384.jpg",
       "registered": "Jun 01, 2020 00:42:34",
@@ -13,7 +13,7 @@
     {
       "id": 2,
       "userName": "Daenerys Stormborn Targaryen",
-      "status": false,
+      "isActive": false,
       "email": "breaker.of.chains@gm.com",
       "avatar": "https://docs.webix.com/usermanager-backend/users/105/avatar/096793420.jpg",
       "registered": "Jun 02, 2020 21:28:22",
@@ -30,3 +30,4 @@
     }
   ]
 }
+
