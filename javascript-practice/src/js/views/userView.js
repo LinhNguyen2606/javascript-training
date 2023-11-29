@@ -77,14 +77,15 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventUserViewDetails = (handler) => {
-    $attachEventListener(
+    $delegate(
       this.tableContentEl,
-      ".table__content__item",
+      ".table__content .table__content__item",
       "click",
       ({ target }) => {
-        // event.target.closest(".table__content__item") to find the closest element with class .table__content__item.
-        const userId = target.closest(".table__content__item").dataset.id;
-        if (!this.isSelected) handler(userId);
+        const userId = target.dataset.id;
+        if (userId) {
+          if (!this.isSelected) handler(userId);
+        }
       }
     );
   };
@@ -164,16 +165,21 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventShowEditForm = (handler) => {
-    $attachEventListener(
+    $delegate(
       this.userDetailsContainerEl,
-      ".user__details__header--icon",
+      ".user__details__header--icon svg",
       "click",
       ({ target }) => {
         const userId = target.closest(".user__details__header--icon").dataset
           .id;
-        this.isSelected = true;
-        $handleShowHideItem(this.userDetailsContainerEl, this.editContainerEl);
-        handler(userId);
+        if (userId) {
+          $handleShowHideItem(
+            this.userDetailsContainerEl,
+            this.editContainerEl
+          );
+          handler(userId);
+          this.isSelected = true;
+        }
       }
     );
   };
@@ -182,7 +188,7 @@ class UserView {
    * Function to display the edit form
    * @param {Function} userData Corresponding data of that user
    */
-  displayInfoEditUser = async (data) => {
+  displayInfoEditUser = (data) => {
     this.editContainerEl.innerHTML = displaysUserEditInfoTemplate(data);
 
     const arrowBackIconEl =
@@ -216,7 +222,6 @@ class UserView {
    * @param {String} src A base64 string of the avatar
    */
   displayAvatarImg = (src) => {
-    console.log(src);
     const avatarImg = this.editContainerEl.querySelector("#avatar-img");
     avatarImg.src = src;
   };
@@ -227,14 +232,14 @@ class UserView {
    */
   displayStatus = (checked) => {
     if (checked) {
-      // Nếu checkbox được chọn, cập nhật trạng thái và nội dung hiển thị
+      // If checkbox is checked, update the status and display content
       this.editContainerEl.querySelector("#statusDisplay").className =
         "status active";
       this.editContainerEl
         .querySelector("#statusDisplay")
         .querySelector("span").textContent = "Active";
     } else {
-      // Nếu checkbox không được chọn, cập nhật trạng thái và nội dung hiển thị
+      // If checkbox is not checked, update the status and display content
       this.editContainerEl.querySelector("#statusDisplay").className =
         "status not__active";
       this.editContainerEl
@@ -248,7 +253,7 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventChangeStatus = (handler) => {
-    $attachEventListener(
+    $delegate(
       this.editContainerEl,
       "#statusCheckbox",
       "change",
@@ -301,6 +306,12 @@ class UserView {
         isActive,
         detailDescUser,
       };
+
+      $handleSpinner(
+        this.loadingIconContainerEl,
+        this.textDoneEl,
+        this.checkIconContainerEl
+      );
 
       handler(userId, user);
     });
