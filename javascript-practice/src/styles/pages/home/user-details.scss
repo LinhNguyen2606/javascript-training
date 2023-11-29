@@ -1,6 +1,6 @@
 .user__wrapper {
   display   : none;
-  width     : 460px;
+  min-width : 370px;
   padding   : 0 12px;
   background: $secondary-color;
   margin    : 10px 10px 0 10px;
@@ -38,8 +38,31 @@
       }
     }
 
-    &__status {
+
+    &__status.active,
+    &__status.not__active {
       margin-right: 50px;
+
+      span {
+        border-radius: 8px;
+        padding      : 4px 12px;
+        font-size    : $fs-small;
+        font-weight  : $fw-medium;
+      }
+    }
+
+    &__status.active {
+      span {
+        background-color: $bg-primary-color;
+        color           : $text-secondary;
+      }
+    }
+
+    &__status.not__active {
+      span {
+        background-color: $bg-secondary-color;
+        color           : $text-tertiary;
+      }
     }
 
     &__avatar {
