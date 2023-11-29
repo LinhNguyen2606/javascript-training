@@ -3,25 +3,30 @@
  *  @param {Object} data The user's data
  */
 export const usersTableTemplate = (data) => {
-  const users = data.map((user) => {
-    const { id, avatar, userName, isActive, email } = user;
+  const users = data.reduce((prevVal, currVal, index) => {
+    if (index === 1) {
+      return userTemplate(currVal);
+    }
 
-    return `
-    <li class="table__content__item" data-id=${id}>
-      <div class="table__content__infor">
-        <img src="${avatar}" alt="user avatar" />
-        <span class="primary__text">${userName}</span>
-      </div>
-      <div class="table__content__status ${
-        isActive ? "active" : "not__active"
-      }">
-      <span>${isActive ? "Active" : "Not active"}</span>
-      </div>
-      <span class="table__content__email primary__text">${email}</span>
-  </li>`;
+    return prevVal + userTemplate(currVal);
   });
 
   return users;
+};
+
+const userTemplate = (data) => {
+  const { id, avatar, userName, isActive, email } = data;
+
+  return `<li class="table__content__item" data-id=${id}>
+  <div class="table__content__infor">
+    <img src="${avatar}" alt="user avatar" />
+    <span class="primary__text">${userName}</span>
+  </div>
+  <div class="table__content__status ${isActive ? "active" : "not__active"}">
+  <span>${isActive ? "Active" : "Not active"}</span>  
+  </div>
+  <span class="table__content__email primary__text">${email}</span>
+</li>`;
 };
 
 /**
@@ -193,7 +198,7 @@ export const displaysUserEditInfoTemplate = (data) => {
 
     <div class="row">
       <label>Details</label>
-      <textarea id="details" name="details" rows="7" cols="40">
+      <textarea id="details" name="details" rows="7" cols="35">
         ${detailDescUser}
       </textarea>
     </div>

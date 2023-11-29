@@ -7,7 +7,10 @@
     display      : flex;
     align-items  : center;
     margin-bottom: 10px;
-    flex-wrap    : wrap;
+
+    &:first-child {
+      flex-wrap: wrap;
+    }
 
     label {
       flex        : 0 0 73px;
@@ -43,9 +46,9 @@
 
 
       &__upload {
-        display : inline-block;
-        position: relative;
-        margin  : 0 10px 10px 20px;
+        display      : inline-block;
+        position     : relative;
+        margin-bottom: 10px;
 
         svg {
           fill: $primary-color;
@@ -115,8 +118,30 @@
       background: $bg-primary-color;
     }
 
-    .status {
+    .status.active,
+    .status.not__active {
       margin-left: 30px;
+
+      span {
+        border-radius: 8px;
+        padding      : 4px 12px;
+        font-size    : $fs-small;
+        font-weight  : $fw-medium;
+      }
+    }
+
+    .status.active {
+      span {
+        background-color: $bg-primary-color;
+        color           : $text-secondary;
+      }
+    }
+
+    .status.not__active {
+      span {
+        background-color: $bg-secondary-color;
+        color           : $text-tertiary;
+      }
     }
   }
 }

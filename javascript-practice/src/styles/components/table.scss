@@ -82,7 +82,7 @@
 
         &:first-child {
           margin-left: 80px;
-          min-width  : 532px;
+          min-width  : 480px;
         }
 
         &:nth-child(2) {
@@ -101,6 +101,32 @@
       max-height      : 565px;
       overflow        : hidden;
       position        : relative;
+
+      &__status.active,
+      &__status.not__active {
+        min-width: 156px;
+
+        span {
+          border-radius: 8px;
+          padding      : 4px 12px;
+          font-size    : $fs-small;
+          font-weight  : $fw-medium;
+        }
+      }
+
+      &__status.active {
+        span {
+          background-color: $bg-primary-color;
+          color           : $text-secondary;
+        }
+      }
+
+      &__status.not__active {
+        span {
+          background-color: $bg-secondary-color;
+          color           : $text-tertiary;
+        }
+      }
 
       &:hover {
         overflow-y: auto;
@@ -136,7 +162,7 @@
         align-items: center;
         gap        : 20px;
         margin-left: 6px;
-        min-width  : 48%;
+        min-width  : 550px;
 
         img {
           width        : 41px;
@@ -150,10 +176,6 @@
         }
       }
 
-      &__status {
-        min-width: 152px;
-      }
-
       &__email {
         font-size  : $fs-x-small;
         font-weight: $fw-normal;
@@ -162,23 +184,6 @@
   }
 }
 
-.active,
-.not__active {
-  border-radius: 8px;
-  padding      : 4px 12px;
-  font-size    : $fs-small;
-  font-weight  : $fw-medium;
-}
-
-.active {
-  color           : $text-secondary;
-  background-color: $bg-primary-color;
-}
-
-.not__active {
-  color           : $text-tertiary;
-  background-color: $bg-secondary-color;
-}
 
 .table__item__active {
   box-shadow: inset 2px 0 #1CA1C1;

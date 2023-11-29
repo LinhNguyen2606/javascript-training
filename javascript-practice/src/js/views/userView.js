@@ -63,8 +63,6 @@ class UserView {
     this.closeUserSearchDisplay();
 
     this.showDeleteModal();
-
-    this.isSelected = false;
   }
 
   /**
@@ -85,12 +83,13 @@ class UserView {
   bindEventUserViewDetails = (handler) => {
     $delegate(
       this.tableContentEl,
-      ".table__content .table__content__item",
+      ".table__content__item",
       "click",
       ({ target }) => {
-        const userId = target.dataset.id;
+        const userId = target.closest(".table__content__item").dataset.id;
+        $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
         if (userId) {
-          if (!this.isSelected) handler(userId);
+          handler(userId);
         }
       }
     );
@@ -173,7 +172,7 @@ class UserView {
   bindEventShowEditForm = (handler) => {
     $delegate(
       this.userDetailsContainerEl,
-      ".user__details__header--icon svg",
+      ".user__details__header--icon",
       "click",
       ({ target }) => {
         const userId = target.closest(".user__details__header--icon").dataset
@@ -184,7 +183,6 @@ class UserView {
             this.editContainerEl
           );
           handler(userId);
-          this.isSelected = true;
         }
       }
     );
@@ -201,7 +199,6 @@ class UserView {
       this.editContainerEl.querySelector(".edit__header-icon");
 
     $on(arrowBackIconEl, "click", () => {
-      this.isSelected = false;
       $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
     });
   };
