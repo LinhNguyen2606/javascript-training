@@ -130,6 +130,39 @@ class UserService {
       };
     }
   }
+
+  /**
+   * Function to get the data of user
+   * @param {Number} userId The user's id
+   * @returns {Object} An object containing the response data or error message
+   */
+  async deleteUser(userId) {
+    try {
+      const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (res.ok) {
+        return {
+          data: "",
+          errMsg: null,
+        };
+      } else {
+        return {
+          data: "",
+          errMsg: res.statusText,
+        };
+      }
+    } catch (err) {
+      return {
+        data: null,
+        errMsg: err.message,
+      };
+    }
+  }
 }
 
 export default UserService;

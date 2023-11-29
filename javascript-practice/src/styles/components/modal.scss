@@ -61,3 +61,62 @@
     }
   }
 }
+
+.modal__delete {
+  display         : none;
+  position        : fixed;
+  top             : 50%;
+  left            : 50%;
+  transform       : translate(-50%, -50%);
+  background-color: $secondary-color;
+  min-width       : 330px;
+  min-height      : 108px;
+  box-shadow      : 0 3px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.1);
+  z-index         : 10000;
+  border-top      : 5px solid $primary-color;
+
+  &__header {
+    text-align: center;
+    transition: all 1s ease;
+  }
+
+
+  &__heading {
+    font-size : $fs-medium;
+    margin-top: 14px;
+  }
+
+  &__body {
+    display   : block;
+    text-align: center;
+    padding   : 20px 0;
+  }
+
+  &__btn {
+    display        : flex;
+    justify-content: center;
+    gap            : 10px;
+    margin-bottom  : 14px;
+  }
+
+  .cancel__btn,
+  .delete__btn {
+    padding  : 8px 40px;
+    font-size: $fs-small
+  }
+
+  .cancel__btn {
+    background: #f4f5f9;
+    color     : $primary-color;
+
+    &:hover {
+      background-color: #e7e9f2;
+    }
+  }
+
+  .delete__btn {
+    &:hover {
+      background-color: #1992af;
+    }
+  }
+}

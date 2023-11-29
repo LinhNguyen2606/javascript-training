@@ -31,6 +31,12 @@ class UserModel {
    */
   getUserDetails = async (userId) =>
     await this.userService.getUserDetails(userId);
+
+  /**
+   * The function to handle when user click to delete a user
+   * @param {Number} userId The user's id
+   */
+  deleteUser = async (userId) => await this.userService.deleteUser(userId);
 }
 
 export default UserModel;

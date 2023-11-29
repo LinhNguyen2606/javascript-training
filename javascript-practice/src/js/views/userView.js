@@ -9,9 +9,9 @@ import {
   $qs,
   $validateUsername,
   $handleShowHideItem,
-  $attachEventListener,
   $convertFileToBase64,
   $validateEmail,
+  $showModal,
 } from "../helpers";
 import {
   displaysUserEditInfoTemplate,
@@ -48,6 +48,10 @@ class UserView {
 
     this.tableSearchCloseEl = $qs(".table__search__close");
 
+    this.deleteBtn = $qs(".delete__btn");
+
+    this.modalDeleteEl = $qs(".modal__delete");
+
     this.errorEl = $createElement("span", "error-message");
 
     this.avatarCanvas = $createElement("canvas");
@@ -57,6 +61,8 @@ class UserView {
     this.displayUserSearch();
 
     this.closeUserSearchDisplay();
+
+    this.showDeleteModal();
 
     this.isSelected = false;
   }
@@ -205,16 +211,11 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventChangeAvatar = async (handler) => {
-    $attachEventListener(
-      this.editContainerEl,
-      "#file-input",
-      "change",
-      ({ target }) => {
-        if (target.closest("#file-input")) {
-          handler(target.files[0]);
-        }
+    $delegate(this.editContainerEl, "#file-input", "change", ({ target }) => {
+      if (target.closest("#file-input")) {
+        handler(target.files[0]);
       }
-    );
+    });
   };
 
   /**
@@ -307,6 +308,9 @@ class UserView {
         detailDescUser,
       };
 
+      // Clear the error message if it was previously displayed
+      this.errorEl.textContent = "";
+
       $handleSpinner(
         this.loadingIconContainerEl,
         this.textDoneEl,
@@ -371,6 +375,28 @@ class UserView {
           ? (item.style.display = "")
           : (item.style.display = "none");
       });
+    });
+  };
+
+  showDeleteModal = () => {
+    $delegate(this.editContainerEl, ".edit__btn-delete", "click", () => {
+      console.log(this.editContainerEl);
+      $showModal(this.modal.overlayEl, this.modalDeleteEl);
+    });
+  };
+
+  deleteUser = (userId, handler) => {
+    $on(this.deleteBtn, "click", (e) => {
+      e.preventDefault();
+      $handleSpinner(
+        this.loadingIconContainerEl,
+        this.textDoneEl,
+        this.checkIconContainerEl
+      );
+
+      $hideModal(this.modal.overlayEl, this.modalDeleteEl);
+
+      handler(userId);
     });
   };
 }

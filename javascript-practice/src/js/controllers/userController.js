@@ -70,6 +70,7 @@ class UserController {
     const { data } = await this.model.getUserDetails(userId);
     this.view.displayInfoEditUser(data);
     this.view.editUser(userId, this.handleEditUser);
+    this.view.deleteUser(userId, this.handleDeleteUser);
   };
 
   /**
@@ -79,6 +80,21 @@ class UserController {
    */
   handleEditUser = async (userId, usersData) => {
     const res = await this.model.editUser(userId, usersData);
+    if (res.errMsg) {
+      alert(res.errMsg);
+    } else {
+      setTimeout(() => {
+        this.handleGetUsers();
+      }, 1000);
+    }
+  };
+
+  /**
+   * The function to handle when user click to delete a user
+   * @param {Number} userId The user's id
+   */
+  handleDeleteUser = async (userId) => {
+    const res = await this.model.deleteUser(userId);
     if (res.errMsg) {
       alert(res.errMsg);
     } else {
