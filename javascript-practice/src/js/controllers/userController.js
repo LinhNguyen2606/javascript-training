@@ -47,7 +47,7 @@ class UserController {
     if (res.errMsg) {
       alert(res.errMsg);
     } else {
-      setTimeout(async () => {
+      setTimeout(() => {
         this.handleGetUsers();
       }, 1000);
     }
@@ -78,8 +78,14 @@ class UserController {
    * @param {Object} usersData The data of user after edited a user
    */
   handleEditUser = async (userId, usersData) => {
-    await this.model.editUser(userId, usersData);
-    this.handleGetUsers();
+    const res = await this.model.editUser(userId, usersData);
+    if (res.errMsg) {
+      alert(res.errMsg);
+    } else {
+      setTimeout(() => {
+        this.handleGetUsers();
+      }, 1000);
+    }
   };
 }
 

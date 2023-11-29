@@ -29,35 +29,6 @@ export function $on(target, type, callback, capture) {
 }
 
 /**
- * Attach an event listener to an element and handle the specified event.
- *
- * @param {HTMLElement} element - The element to attach the event listener to
- * @param {string} selector - The selector for the target elements within the element
- * @param {string} eventName - The name of the event to listen for
- * @param {function} handler - The event handler function
- */
-export const $attachEventListener = (element, selector, eventName, handler) => {
-  element.addEventListener(eventName, (event) => {
-    // event.target.closest(".table__content__item") to find the closest element
-    const targetElement = event.target;
-    if (targetElement) {
-      handler.call(targetElement, event);
-    }
-  });
-};
-
-/**
- * Handle the click event to show and hide the item
- *
- * @param {HTMLElement} elementToHide - The element want to hide
- * @param {HTMLElement} elementToShow - The element want to show
- */
-export const $handleShowHideItem = (elementToHide, elementToShow) => {
-  elementToHide.style.display = "none";
-  elementToShow.style.display = "block";
-};
-
-/**
  * Attach a handler to an event for all elements matching a selector.
  *
  * @param {Element} target Element which the event must bubble to
@@ -83,3 +54,14 @@ export function $delegate(target, selector, type, handler, capture) {
 
   $on(target, type, dispatchEvent, !!capture);
 }
+
+/**
+ * Handle the click event to show and hide the item
+ *
+ * @param {HTMLElement} elementToHide - The element want to hide
+ * @param {HTMLElement} elementToShow - The element want to show
+ */
+export const $handleShowHideItem = (elementToHide, elementToShow) => {
+  elementToHide.style.display = "none";
+  elementToShow.style.display = "block";
+};
