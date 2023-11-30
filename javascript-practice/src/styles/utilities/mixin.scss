@@ -32,3 +32,16 @@
   z-index  : 1;
   cursor   : pointer;
 }
+
+%modal {
+  display         : none;
+  position        : fixed;
+  top             : 50%;
+  left            : 50%;
+  transform       : translate(-50%, -50%);
+  background-color: $secondary-color;
+  min-width       : 351px;
+  min-height      : 108px;
+  box-shadow      : 0 3px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.1);
+  z-index         : 10000;
+}

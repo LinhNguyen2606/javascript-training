@@ -1,10 +1,30 @@
-#content--wrapper {
+.content__wrapper {
   display   : flex;
   background: #ebedf0;
 }
 
-#main__container {
+.main__container {
   display      : flex;
   margin-bottom: 10px;
   width        : 100%;
+}
+
+.table__wrapper {
+  width      : 99%;
+  height     : 100%;
+  padding-top: 10px;
+}
+
+.user__wrapper {
+  display  : none;
+  min-width: 370px;
+  padding  : 0 12px;
+  margin   : 10px 10px 0 10px;
+}
+
+.edit__wrapper {
+  display: none;
+  margin : 10px 10px 0;
+  padding: 12px;
+  width  : 50%;
 }

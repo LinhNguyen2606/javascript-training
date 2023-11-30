@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="./styles/index.scss" />
     <title>User Management</title>
   </head>
-  <body id="main--wrapper">
+  <body class="main--wrapper">
     <!-- Start header -->
     <header class="header">
       <h1 class="header__heading primary__text">User Manager</h1>
-      <div class="header__wrapper-icon">
-        <div class="header__loading-icon">
+      <div class="header__icon">
+        <div class="header__icon--loading">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="1em"
@@ -30,8 +30,8 @@
         </div>
 
         <div class="header__check">
-          <span class="primary__text" id="text-success">Done</span>
-          <div class="header__check-icon">
+          <span class="primary__text header__check--text">Done</span>
+          <div class="header__check--icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="1em"
@@ -47,16 +47,16 @@
     </header>
     <!-- End header -->
 
-    <div id="content--wrapper">
+    <div class="content__wrapper">
       <!-- Start sidebar -->
-      <aside id="sidebar">
-        <button id="sidebar__btn">
-          <span id="sidebar__btn__icon">+</span>
+      <aside class="sidebar">
+        <button class="btn__sidebar">
+          <span class="btn__sidebar--icon">+</span>
           <span>New</span>
         </button>
 
-        <div id="sidebar__user">
-          <div id="sidebar__user__icon">
+        <div class="sidebar__user">
+          <div class="sidebar__user--icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="1em"
@@ -82,13 +82,13 @@
       </aside>
       <!-- End sidebar -->
 
-      <main id="main__container">
+      <main class="main__container">
         <!-- Start table -->
         <div class="table__wrapper">
           <div class="table">
             <div class="table__search">
               <span class="primary__text">Users</span>
-              <div class="table__search__icon">
+              <div class="table__search--icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
@@ -101,10 +101,10 @@
               </div>
               <input
                 type="text"
-                class="table__search__input"
+                class="table__search--input"
                 placeholder="Search"
               />
-              <div class="table__search__close">
+              <div class="table__search--close">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   height="1em"
@@ -118,9 +118,9 @@
             </div>
 
             <ul class="table__infor">
-              <li class="table__infor__header primary__text">Full Name</li>
-              <li class="table__infor__header primary__text">Status</li>
-              <li class="table__infor__header primary__text">Email</li>
+              <li class="table__infor-header primary__text">Full Name</li>
+              <li class="table__infor-header primary__text">Status</li>
+              <li class="table__infor-header primary__text">Email</li>
             </ul>
 
             <ul class="table__content"></ul>
@@ -130,15 +130,15 @@
 
         <div class="user__wrapper"></div>
 
-        <div id="edit__wrapper"></div>
+        <div class="edit__wrapper"></div>
       </main>
     </div>
 
     <!-- Start modal -->
     <form class="modal" id="form-add-user">
       <section class="modal__header">
-        <h2 class="modal__heading primary__text">Enter user name</h2>
-        <span class="modal__close-icon"
+        <h2 class="modal__header-text primary__text">Enter user name</h2>
+        <span class="modal__header--icon"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             height="1em"
@@ -150,19 +150,19 @@
         ></span>
       </section>
       <div class="modal__body">
-        <input type="text" id="username-input" name="user-name" value="" />
+        <input type="text" id="username-input" name="user-name" />
         <button type="submit" class="btn btn--primary">Save</button>
       </div>
     </form>
 
-    <form class="modal__delete" id="form-delete-user">
-      <section class="modal__delete__header">
-        <h2 class="modal__delete__heading primary__text">Delete</h2>
+    <form class="modal-delete" id="form-delete-user">
+      <section class="modal-delete__header">
+        <h2 class="modal-delete__header-text primary__text">Delete</h2>
       </section>
-      <span class="modal__delete__body">Are you sure to delete this user</span>
-      <div class="modal__delete__btn">
-        <button class="btn btn--primary cancel__btn">Cancel</button>
-        <button class="btn btn--primary delete__btn">Delete</button>
+      <span class="modal-delete__body">Are you sure to delete this user</span>
+      <div class="modal-btn__delete">
+        <button class="btn btn--primary btn__cancel">Cancel</button>
+        <button class="btn btn--primary btn__delete">Delete</button>
       </div>
     </form>
     <!-- End modal -->

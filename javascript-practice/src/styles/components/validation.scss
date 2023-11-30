@@ -1,4 +1,6 @@
 .error-message {
-  margin-left: 22px;
-  color      : red;
+  display  : block;
+  color    : red;
+  margin   : 11px 11px 0 11px;
+  font-size: $fs-x-small;
 }

@@ -1,10 +1,10 @@
-#sidebar {
+.sidebar {
   min-width       : 210px;
   background-color: #4a4e58;
   border-color    : #4a4e58;
   grid-area       : sidebar;
 
-  &__btn {
+  .btn__sidebar {
     display         : flex;
     align-items     : center;
     gap             : 8px;
@@ -22,7 +22,7 @@
       background-color: #1992af;
     }
 
-    &__icon {
+    &--icon {
       font-size: $fs-medium;
     }
   }
@@ -38,7 +38,7 @@
     padding-left    : 12px;
     height          : 44px;
 
-    &__icon {
+    &--icon {
       svg {
         fill: $primary-color;
       }
