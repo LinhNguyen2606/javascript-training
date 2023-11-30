@@ -3,7 +3,7 @@ import { API_BASE_URL } from "../constants/config";
 class UserService {
   /**
    * Handle fetching users
-   * @returns {Object} An object containing the response data or error message
+   * @returns {object} An object containing the response data or error message
    */
   fetchUsers = async () => {
     try {
@@ -25,8 +25,8 @@ class UserService {
 
   /**
    * Function to add users
-   * @param {Object} usersData The data of the user to be created
-   * @returns {Object} An object containing the response data or error message
+   * @param {object} usersData The data of the user to be created
+   * @returns {object} An object containing the response data or error message
    */
   createUser = async (usersData) => {
     try {
@@ -69,8 +69,8 @@ class UserService {
   /**
    * Function to edit user
    * @param {Number} userId The user's id
-   * @param {Object} usersData The data of the user to be created
-   * @returns {Object} An object containing the response data or error message
+   * @param {object} usersData The data of the user to be created
+   * @returns {object} An object containing the response data or error message
    */
   editUser = async (userId, userData) => {
     try {
@@ -111,7 +111,7 @@ class UserService {
   /**
    * Function to get the data of user
    * @param {Number} userId The user's id
-   * @returns {Object} An object containing the response data or error message
+   * @returns {object} An object containing the response data or error message
    */
   getUserDetails = async (userId) => {
     try {
@@ -134,7 +134,7 @@ class UserService {
   /**
    * Function to get the data of user
    * @param {Number} userId The user's id
-   * @returns {Object} An object containing the response data or error message
+   * @returns {object} An object containing the response data or error message
    */
   deleteUser = async (userId) => {
     try {

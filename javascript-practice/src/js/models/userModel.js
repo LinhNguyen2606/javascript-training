@@ -17,7 +17,7 @@ class UserModel {
 
   /**
    * Add a user using the user service
-   * @param {Object} usersData The data of the user to be added
+   * @param {object} usersData The data of the user to be added
    * @returns {Promise} A promise that resolves to the response data or error message
    */
   addUser = (usersData) => this.userService.createUser(usersData);
@@ -25,7 +25,7 @@ class UserModel {
   /**
    * The function to handle when user click to edit a user
    * @param {Number} userId The user's id
-   * @param {Object} usersData The data of user after edited a user
+   * @param {object} usersData The data of user after edited a user
    * @returns {Promise} A promise that resolves to the response data or error message
    */
   editUser = (userId, userData) => this.userService.editUser(userId, userData);
@@ -50,13 +50,10 @@ class UserModel {
    * @param {String} query The value search in input
    */
   filterUsers = (query) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const userArray = Object.values(this.users);
 
-      if (query === "") {
-        resolve(this.users);
-        return;
-      }
+      if (query === "") resolve(this.users);
 
       const filteredUsers = userArray[0].filter((user) => {
         const username = user.userName.toUpperCase();

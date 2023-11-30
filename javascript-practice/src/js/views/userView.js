@@ -11,7 +11,6 @@ import {
   $handleShowHideItem,
   $convertFileToBase64,
   $validateEmail,
-  $showModal,
 } from "../helpers";
 import {
   displaysUserEditInfoTemplate,
@@ -59,23 +58,14 @@ class UserView {
 
     // Call the displayUserSearch function
     this.bindEventShowUserSearch();
-
-    // Call the closeUserSearchDisplay function
-    this.bindEventCloseUserSearch();
-
-    // Call the showDeleteModal function
-    this.showDeleteModal();
-
-    this.displayUsersMatchKeyword();
   }
 
   /**
    * Display users
    * @param {Array} usersData The data of the user to be rendered
    */
-  displayUsers = (usersData) => {
-    this.tableContentEl.innerHTML = usersTableTemplate(usersData);
-  };
+  displayUsers = (usersData) =>
+    (this.tableContentEl.innerHTML = usersTableTemplate(usersData));
 
   /**
    * Function to handle user clicks view details
@@ -98,9 +88,7 @@ class UserView {
 
         const userId = clickedItem.dataset.id;
         $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
-        if (userId) {
-          handler(userId);
-        }
+        if (userId) handler(userId);
       }
     );
   };
@@ -168,12 +156,10 @@ class UserView {
 
   /**
    * Show the user details information such as name, status, email, avatar
-   * @param {Object} userData Corresponding data of that user
+   * @param {object} userData Corresponding data of that user
    */
-  displayUserDetailsInfo = (userData) => {
-    this.userDetailsContainerEl.innerHTML = userDetailsTemplate(userData);
-    this.userDetailsContainerEl.style.display = "block";
-  };
+  displayUserDetailsInfo = (userData) =>
+    (this.userDetailsContainerEl.innerHTML = userDetailsTemplate(userData));
 
   /**
    * Function show the edit form when click the edit icon
@@ -346,7 +332,7 @@ class UserView {
   /**
    * Function to close the search input
    */
-  bindEventCloseUserSearch = () => {
+  bindEventCloseUserSearch = (data) => {
     $on(this.tableSearchCloseEl, "click", () => {
       this.tableSearchInputEl.style.display = "none";
       this.tableSearchInputEl.focus();
@@ -355,32 +341,28 @@ class UserView {
       this.tableSearchEl.querySelector(".table__search span").style.display =
         "block";
       this.searchIconEl.style.display = "block";
+
+      this.tableSearchInputEl.value = "";
+      this.displayUsers(data);
     });
   };
 
+  /**
+   * Function to search user with the keyword
+   * @param {Function} handler Function called on synthetic event.
+   */
   bindEventSearchUser = (handler) => {
-    $on(this.tableSearchInputEl, "input", (event) => {
-      const query = event.target.value;
+    $on(this.tableSearchInputEl, "input", ({ target }) => {
+      const query = target.value;
       handler(query);
     });
   };
 
   /**
-   * Function to search a user with the username and email is matched
-   * @param {HTMLElement} tableContentEl The table content element
+   * Function to display users with the username and email is matched with the keyword
+   * @param {object} users Displays filtered users after searching
    */
-  displayUsersMatchKeyword = (users) => {
-    this.displayUsers(users);
-  };
-
-  /**
-   * Function to show the delete modal
-   */
-  showDeleteModal = () => {
-    $delegate(this.editContainerEl, ".btn__edit--delete", "click", () => {
-      $showModal(this.modal.overlayEl, this.modalDeleteEl);
-    });
-  };
+  displayUsersMatchKeyword = (users) => this.displayUsers(users);
 
   /**
    * Function to delete a user
@@ -396,8 +378,8 @@ class UserView {
         this.checkIconContainerEl
       );
 
-      $hideModal(this.modal.overlayEl, this.modalDeleteEl);
-
+      $hideModal(this.modal.overlayEl, this.modal.modalDeleteEl);
+      this.editContainerEl.style.display = "none";
       handler(userId);
     });
   };
