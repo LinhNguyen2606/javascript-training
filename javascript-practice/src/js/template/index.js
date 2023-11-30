@@ -1,26 +1,21 @@
 /**
  * The template of user table content item
- *  @param {Object} data The user's data
+ *  @param {object} data The user's data
  */
 export const usersTableTemplate = (data) => {
   let users = "";
   if (data && data.length) {
-    // users = data.reduce((prevVal, currVal, index) => {
-    //   if (index === 1) {
-    //     return userTemplate(currVal);
-    //   }
-
-    //   return prevVal + userTemplate(currVal);
-    // });
-
     data.forEach((user) => {
       users += userTemplate(user);
     });
   }
-
   return users;
 };
 
+/**
+ * The template of user table content item
+ *  @param {object} data The user's data
+ */
 const userTemplate = (data) => {
   const { id, avatar, userName, isActive, email } = data;
 
@@ -38,7 +33,7 @@ const userTemplate = (data) => {
 
 /**
  * The template of user detailed information
- * @param {Object} data The data of user
+ * @param {object} data The data of user
  */
 export const userDetailsTemplate = (data) => {
   const { isActive, email, avatar, userName, lastVisited, id } = data;
@@ -82,7 +77,7 @@ export const userDetailsTemplate = (data) => {
       <span class="primary__text">Email:</span>
     </div>
     <span class="user__email-text primary__text"
-      >${email === "" ? "Unknown" : email}</span
+      >${email ? email : "Unknown"}</span
     >
   </div>
   <div>
@@ -99,18 +94,17 @@ export const userDetailsTemplate = (data) => {
       <span class="primary__text">Last visited:</span>
     </div>
     <span class="user__time-text primary__text"
-      >${lastVisited === "" ? "Unknown" : lastVisited}</span
+      >${lastVisited ? lastVisited : "Unknown"}</span
     >
   </div>
 </div>
   `;
-
   return html;
 };
 
 /**
  * The template of user detailed information
- * @param {Object} data The data of user
+ * @param {object} data The data of user
  */
 export const displaysUserEditInfoTemplate = (data) => {
   const {
@@ -195,23 +189,22 @@ export const displaysUserEditInfoTemplate = (data) => {
 
     <div class="row">
       <label>Registered</label>
-      <span>${registered}</span>
+      <span>${registered ? registered : "Unknown"}</span>
     </div>
 
     <div class="row">
       <label>Last visited</label>
-      <span>${lastVisited}</span>
+      <span>${lastVisited ? lastVisited : "Unknown"}</span>
     </div>
 
     <div class="row">
       <label>Details</label>
-      <textarea id="details" name="details" rows="7" cols="35">
+      <textarea id="details" name="details" rows="7" cols="40">
         ${detailDescUser}
       </textarea>
     </div>
   </form>
 </div>
   `;
-
   return html;
 };

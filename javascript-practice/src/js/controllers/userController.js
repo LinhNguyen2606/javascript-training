@@ -20,6 +20,7 @@ class UserController {
   handleGetUsers = async () => {
     const { data } = await this.model.getUsers();
     this.view.displayUsers(data);
+    this.view.bindEventCloseUserSearch(data);
   };
 
   /**
@@ -41,7 +42,7 @@ class UserController {
 
   /**
    * The function to handle when add a new user
-   * @param {Object} usersData The data of the user to be added
+   * @param {object} usersData The data of the user to be added
    */
   handleAddUser = async (usersData) => {
     const res = await this.model.addUser(usersData);
@@ -77,7 +78,7 @@ class UserController {
   /**
    * The function to handle when user click to edit a user
    * @param {Number} userId The user's id
-   * @param {Object} usersData The data of user after edited a user
+   * @param {object} usersData The data of user after edited a user
    */
   handleEditUser = async (userId, usersData) => {
     const res = await this.model.editUser(userId, usersData);
@@ -113,10 +114,10 @@ class UserController {
     let users;
     if (query) {
       users = await this.model.filterUsers(query);
+      this.view.displayUsersMatchKeyword(users);
     } else {
       this.handleGetUsers();
     }
-    this.view.displayUsersMatchKeyword(users);
   };
 }
 

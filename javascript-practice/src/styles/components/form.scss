@@ -44,9 +44,9 @@
 
 
       &__upload {
-        display      : inline-block;
-        position     : relative;
-        margin-bottom: 10px;
+        display : inline-block;
+        position: relative;
+        margin  : 0 0 10px 12px;
 
         svg {
           fill: $primary-color;
@@ -60,7 +60,7 @@
           display    : flex;
           align-items: center;
           gap        : 5px;
-          padding    : 8px 12px;
+          padding    : 12px;
           cursor     : pointer;
           font-size  : $fs-small;
           color      : $primary-color;
