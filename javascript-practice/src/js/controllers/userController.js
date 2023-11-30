@@ -11,6 +11,7 @@ class UserController {
     this.view.bindEventShowEditForm(this.handleShowEditForm);
     this.view.bindEventChangeAvatar(this.handleChangeAvatar);
     this.view.bindEventChangeStatus(this.handleChangeStatus);
+    this.view.bindEventSearchUser(this.handleSearchUser);
   }
 
   /**
@@ -69,8 +70,8 @@ class UserController {
   handleShowEditForm = async (userId) => {
     const { data } = await this.model.getUserDetails(userId);
     this.view.displayInfoEditUser(data);
-    this.view.editUser(userId, this.handleEditUser);
-    this.view.deleteUser(userId, this.handleDeleteUser);
+    this.view.bindEventEditUser(userId, this.handleEditUser);
+    this.view.bindEventDeleteUser(userId, this.handleDeleteUser);
   };
 
   /**
@@ -102,6 +103,20 @@ class UserController {
         this.handleGetUsers();
       }, 1000);
     }
+  };
+
+  /**
+   * The function to search a user
+   * @param {String} query The value search in input
+   */
+  handleSearchUser = async (query) => {
+    let users;
+    if (query) {
+      users = await this.model.filterUsers(query);
+    } else {
+      this.handleGetUsers();
+    }
+    this.view.displayUsersMatchKeyword(users);
   };
 }
 
