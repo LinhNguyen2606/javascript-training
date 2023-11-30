@@ -37,11 +37,9 @@
       display    : flex;
       align-items: flex-end;
 
-      &__img {
-        img {
-          width : 95px;
-          height: 95px;
-        }
+      img {
+        width : 95px;
+        height: 95px;
       }
 
 
@@ -118,8 +116,8 @@
       background: $bg-primary-color;
     }
 
-    .status.active,
-    .status.not__active {
+    .row__status.active,
+    .row__status.not__active {
       margin-left: 30px;
 
       span {
@@ -130,25 +128,18 @@
       }
     }
 
-    .status.active {
+    .row__status.active {
       span {
         background-color: $bg-primary-color;
         color           : $text-secondary;
       }
     }
 
-    .status.not__active {
+    .row__status.not__active {
       span {
         background-color: $bg-secondary-color;
         color           : $text-tertiary;
       }
     }
   }
-}
-
-.error-message {
-  display  : block;
-  color    : red;
-  margin   : 11px 11px 0 11px;
-  font-size: $fs-x-small;
 }

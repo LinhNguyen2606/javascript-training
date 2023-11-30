@@ -3,13 +3,20 @@
  *  @param {Object} data The user's data
  */
 export const usersTableTemplate = (data) => {
-  const users = data.reduce((prevVal, currVal, index) => {
-    if (index === 1) {
-      return userTemplate(currVal);
-    }
+  let users = "";
+  if (data && data.length) {
+    // users = data.reduce((prevVal, currVal, index) => {
+    //   if (index === 1) {
+    //     return userTemplate(currVal);
+    //   }
 
-    return prevVal + userTemplate(currVal);
-  });
+    //   return prevVal + userTemplate(currVal);
+    // });
+
+    data.forEach((user) => {
+      users += userTemplate(user);
+    });
+  }
 
   return users;
 };
@@ -17,12 +24,12 @@ export const usersTableTemplate = (data) => {
 const userTemplate = (data) => {
   const { id, avatar, userName, isActive, email } = data;
 
-  return `<li class="table__content__item" data-id=${id}>
-  <div class="table__content__infor">
+  return `<li class="table__content-item" data-id=${id}>
+  <div class="table__content-info">
     <img src="${avatar}" alt="user avatar" />
     <span class="primary__text">${userName}</span>
   </div>
-  <div class="table__content__status ${isActive ? "active" : "not__active"}">
+  <div class="table__content--status ${isActive ? "active" : "not__active"}">
   <span>${isActive ? "Active" : "Not active"}</span>  
   </div>
   <span class="table__content__email primary__text">${email}</span>
@@ -37,13 +44,13 @@ export const userDetailsTemplate = (data) => {
   const { isActive, email, avatar, userName, lastVisited, id } = data;
 
   const html = `
-  <div class="user__details">
-    <section section class="user__details__header">
+  <div class="user">
+    <section section class="user__header">
       <h3 class="primary__text">User information</h3>
-      <div class="user__details__status ${isActive ? "active" : "not__active"}">
+      <div class="user__header--status ${isActive ? "active" : "not__active"}">
         <span>${isActive ? "Active" : "Not active"}</span>
       </div>
-      <div class="user__details__header--icon" data-id=${id}>
+      <div class="user__header--icon" data-id=${id}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="1em"
@@ -55,14 +62,14 @@ export const userDetailsTemplate = (data) => {
         </svg>
       </div>
     </section>
-  <div class="user__details__avatar">
+  <div class="user__avatar">
     <img src="${avatar}" alt="user" />
   </div>
-  <span class="user__details__username primary__text"
+  <span class="user__username primary__text"
     >${userName}</span
   >
   <div>
-    <div class="user__details__mail--icon">
+    <div class="user__mail--icon">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="1em"
@@ -74,12 +81,12 @@ export const userDetailsTemplate = (data) => {
       </svg>
       <span class="primary__text">Email:</span>
     </div>
-    <span class="user__details__email primary__text"
+    <span class="user__email-text primary__text"
       >${email === "" ? "Unknown" : email}</span
     >
   </div>
   <div>
-    <div class="user__details__visited--icon">
+    <div class="user__visited--icon">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="1em"
@@ -91,7 +98,7 @@ export const userDetailsTemplate = (data) => {
       </svg>
       <span class="primary__text">Last visited:</span>
     </div>
-    <span class="user__details__time primary__text"
+    <span class="user__time-text primary__text"
       >${lastVisited === "" ? "Unknown" : lastVisited}</span
     >
   </div>
@@ -119,7 +126,7 @@ export const displaysUserEditInfoTemplate = (data) => {
   const html = `
   <div class="edit">
   <div class="edit__header">
-    <div class="edit__header-icon">
+    <div class="edit__header--icon">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         height="1em"
@@ -133,9 +140,9 @@ export const displaysUserEditInfoTemplate = (data) => {
     <span class="primary__text">General</span>
   </div>
 
-  <div class="edit__btn">
-    <button class="btn btn--primary edit__btn-delete">Delete</button>
-    <button class="btn btn--primary edit__btn-save">Save</button>
+  <div class="btn__edit">
+    <button class="btn btn--primary btn__edit--delete">Delete</button>
+    <button class="btn btn--primary btn__edit--save">Save</button>
   </div>
 
   <form id="edit-form">
@@ -152,8 +159,8 @@ export const displaysUserEditInfoTemplate = (data) => {
     <div class="row">
       <label>Avatar</label>
       <div class="avatar">
-        <div class="avatar__img">
-          <img id="avatar-img" src="${avatar}" alt="User Avatar" />
+        <div>
+          <img class="avatar-img" src="${avatar}" alt="User Avatar" />
         </div>
         <div class="avatar__upload">
           <label for="file-input" class="primary__text">
@@ -179,7 +186,7 @@ export const displaysUserEditInfoTemplate = (data) => {
       <input type="checkbox" name="status" ${
         isActive && "checked"
       }  id="statusCheckbox"/>
-      <div class="status ${
+      <div class="row__status ${
         isActive ? "active" : "not__active"
       }" id="statusDisplay">
         <span>${isActive ? "Active" : "Not active"}</span>

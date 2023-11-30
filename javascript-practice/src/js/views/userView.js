@@ -22,71 +22,81 @@ import ModalView from "./modalView";
 
 class UserView {
   constructor() {
+    // The table content contains user's information
     this.tableContentEl = $qs(".table__content");
 
+    // Modal form to add user and username input
     this.userNameInputEl = $qs("#username-input");
-
     this.formAddNewUserEl = $qs("#form-add-user");
 
-    this.loadingIconContainerEl = $qs(".header__loading-icon");
+    // Loading icon, check success icon, and text
+    this.loadingIconContainerEl = $qs(".header__icon--loading");
+    this.checkIconContainerEl = $qs(".header__check--icon");
+    this.textDoneEl = $qs(".header__check--text");
 
-    this.checkIconContainerEl = $qs(".header__check-icon");
-
-    this.textDoneEl = $qs("#text-success");
-
+    // Container to wrap the user details form and edit form
     this.userDetailsContainerEl = $qs(".user__wrapper");
+    this.editContainerEl = $qs(".edit__wrapper");
 
-    this.editContainerEl = $qs("#edit__wrapper");
-
+    // Table search, magnifying glass icon, the search input and close icon
     this.tableSearchEl = $qs(".table__search");
+    this.searchIconEl = $qs(".table__search--icon");
+    this.tableSearchInputEl = $qs(".table__search--input");
+    this.tableSearchCloseEl = $qs(".table__search--close");
 
-    this.searchIconEl = $qs(".table__search__icon");
+    // The modal to delete a user and delete button
+    this.modalDeleteEl = $qs(".modal-delete");
+    this.deleteBtn = $qs(".btn__delete");
 
-    this.tableSearchIconEl = $qs(".table__search__icon");
-
-    this.tableSearchInputEl = $qs(".table__search__input");
-
-    this.tableSearchCloseEl = $qs(".table__search__close");
-
-    this.deleteBtn = $qs(".delete__btn");
-
-    this.modalDeleteEl = $qs(".modal__delete");
-
+    // Create span tag with an error message to validate the input field
     this.errorEl = $createElement("span", "error-message");
 
+    // Create the HTML canvas to draw graphics
     this.avatarCanvas = $createElement("canvas");
 
+    // Call the modal from modalView
     this.modal = new ModalView();
 
-    this.displayUserSearch();
+    // Call the displayUserSearch function
+    this.bindEventShowUserSearch();
 
-    this.closeUserSearchDisplay();
+    // Call the closeUserSearchDisplay function
+    this.bindEventCloseUserSearch();
 
+    // Call the showDeleteModal function
     this.showDeleteModal();
+
+    this.displayUsersMatchKeyword();
   }
 
   /**
    * Display users
    * @param {Array} usersData The data of the user to be rendered
-   * @param {Function} handlerUserViewDetails Function called on synthetic event.
    */
   displayUsers = (usersData) => {
     this.tableContentEl.innerHTML = usersTableTemplate(usersData);
-    this.searchUser(this.tableContentEl);
   };
 
   /**
-   * Function to handle user clicks
-   * @param {HTMLElement} tableContentItems Nodelist of li tags
+   * Function to handle user clicks view details
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventUserViewDetails = (handler) => {
     $delegate(
       this.tableContentEl,
-      ".table__content__item",
+      ".table__content-item",
       "click",
       ({ target }) => {
-        const userId = target.closest(".table__content__item").dataset.id;
+        const activeItemEl = this.tableContentEl.querySelector(
+          ".table__item--active"
+        );
+        if (activeItemEl) activeItemEl.classList.remove("table__item--active");
+
+        const clickedItem = target.closest(".table__content-item");
+
+        clickedItem.classList.add("table__item--active");
+
+        const userId = clickedItem.dataset.id;
         $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
         if (userId) {
           handler(userId);
@@ -172,11 +182,10 @@ class UserView {
   bindEventShowEditForm = (handler) => {
     $delegate(
       this.userDetailsContainerEl,
-      ".user__details__header--icon",
+      ".user__header--icon",
       "click",
       ({ target }) => {
-        const userId = target.closest(".user__details__header--icon").dataset
-          .id;
+        const userId = target.closest(".user__header--icon").dataset.id;
         if (userId) {
           $handleShowHideItem(
             this.userDetailsContainerEl,
@@ -190,13 +199,14 @@ class UserView {
 
   /**
    * Function to display the edit form
-   * @param {Function} userData Corresponding data of that user
+   * @param {Function} data Corresponding data of that user
    */
   displayInfoEditUser = (data) => {
     this.editContainerEl.innerHTML = displaysUserEditInfoTemplate(data);
 
-    const arrowBackIconEl =
-      this.editContainerEl.querySelector(".edit__header-icon");
+    const arrowBackIconEl = this.editContainerEl.querySelector(
+      ".edit__header--icon"
+    );
 
     $on(arrowBackIconEl, "click", () => {
       $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
@@ -207,7 +217,7 @@ class UserView {
    * Function change the avatar when upload to choose the new image
    * @param {Function} handler Function called on synthetic event.
    */
-  bindEventChangeAvatar = async (handler) => {
+  bindEventChangeAvatar = (handler) => {
     $delegate(this.editContainerEl, "#file-input", "change", ({ target }) => {
       if (target.closest("#file-input")) {
         handler(target.files[0]);
@@ -220,7 +230,7 @@ class UserView {
    * @param {String} src A base64 string of the avatar
    */
   displayAvatarImg = (src) => {
-    const avatarImg = this.editContainerEl.querySelector("#avatar-img");
+    const avatarImg = this.editContainerEl.querySelector(".avatar-img");
     avatarImg.src = src;
   };
 
@@ -232,14 +242,14 @@ class UserView {
     if (checked) {
       // If checkbox is checked, update the status and display content
       this.editContainerEl.querySelector("#statusDisplay").className =
-        "status active";
+        "row__status active";
       this.editContainerEl
         .querySelector("#statusDisplay")
         .querySelector("span").textContent = "Active";
     } else {
       // If checkbox is not checked, update the status and display content
       this.editContainerEl.querySelector("#statusDisplay").className =
-        "status not__active";
+        "row__status not__active";
       this.editContainerEl
         .querySelector("#statusDisplay")
         .querySelector("span").textContent = "Not active";
@@ -268,8 +278,8 @@ class UserView {
    * @param {Number} userId The user's id
    * @param {Function} handler Function called on synthetic event.
    */
-  editUser = (userId, handler) => {
-    $delegate(this.editContainerEl, ".edit__btn-save", "click", async (e) => {
+  bindEventEditUser = (userId, handler) => {
+    $delegate(this.editContainerEl, ".btn__edit--save", "click", async (e) => {
       e.preventDefault();
 
       const fileInput = this.editContainerEl.querySelector("#file-input");
@@ -321,7 +331,7 @@ class UserView {
   /**
    * Function to show the input search and close icon when click the search icon
    */
-  displayUserSearch = () => {
+  bindEventShowUserSearch = () => {
     $on(this.searchIconEl, "click", () => {
       this.tableSearchInputEl.style.display = "block";
       this.tableSearchInputEl.focus();
@@ -329,14 +339,14 @@ class UserView {
 
       this.tableSearchEl.querySelector(".table__search span").style.display =
         "none";
-      this.tableSearchIconEl.style.display = "none";
+      this.searchIconEl.style.display = "none";
     });
   };
 
   /**
    * Function to close the search input
    */
-  closeUserSearchDisplay = () => {
+  bindEventCloseUserSearch = () => {
     $on(this.tableSearchCloseEl, "click", () => {
       this.tableSearchInputEl.style.display = "none";
       this.tableSearchInputEl.focus();
@@ -344,7 +354,14 @@ class UserView {
 
       this.tableSearchEl.querySelector(".table__search span").style.display =
         "block";
-      this.tableSearchIconEl.style.display = "block";
+      this.searchIconEl.style.display = "block";
+    });
+  };
+
+  bindEventSearchUser = (handler) => {
+    $on(this.tableSearchInputEl, "input", (event) => {
+      const query = event.target.value;
+      handler(query);
     });
   };
 
@@ -352,37 +369,25 @@ class UserView {
    * Function to search a user with the username and email is matched
    * @param {HTMLElement} tableContentEl The table content element
    */
-  searchUser = (tableContentEl) => {
-    const tableContentItemsEl = tableContentEl.querySelectorAll(
-      ".table__content__item"
-    );
-
-    $on(this.tableSearchInputEl, "input", () => {
-      const filter = this.tableSearchInputEl.value.toUpperCase();
-
-      tableContentItemsEl.forEach((item) => {
-        const username = item
-          .querySelector(".table__content__infor span")
-          .textContent.toUpperCase();
-        const email = item
-          .querySelector(".table__content__email")
-          .textContent.toUpperCase();
-
-        username.includes(filter) || email.includes(filter)
-          ? (item.style.display = "")
-          : (item.style.display = "none");
-      });
-    });
+  displayUsersMatchKeyword = (users) => {
+    this.displayUsers(users);
   };
 
+  /**
+   * Function to show the delete modal
+   */
   showDeleteModal = () => {
-    $delegate(this.editContainerEl, ".edit__btn-delete", "click", () => {
-      console.log(this.editContainerEl);
+    $delegate(this.editContainerEl, ".btn__edit--delete", "click", () => {
       $showModal(this.modal.overlayEl, this.modalDeleteEl);
     });
   };
 
-  deleteUser = (userId, handler) => {
+  /**
+   * Function to delete a user
+   * @param {Number} userId The user's id
+   * @param {Function} handler Function called on synthetic event.
+   */
+  bindEventDeleteUser = (userId, handler) => {
     $on(this.deleteBtn, "click", (e) => {
       e.preventDefault();
       $handleSpinner(

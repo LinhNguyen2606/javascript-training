@@ -5,7 +5,7 @@ class UserService {
    * Handle fetching users
    * @returns {Object} An object containing the response data or error message
    */
-  async fetchUsers() {
+  fetchUsers = async () => {
     try {
       const res = await fetch(`${API_BASE_URL}/users`);
       if (res.ok && res.status === 200) {
@@ -21,14 +21,14 @@ class UserService {
         errMsg: err.message,
       };
     }
-  }
+  };
 
   /**
    * Function to add users
    * @param {Object} usersData The data of the user to be created
    * @returns {Object} An object containing the response data or error message
    */
-  async createUser(usersData) {
+  createUser = async (usersData) => {
     try {
       const res = await fetch(`${API_BASE_URL}/users`, {
         method: "POST",
@@ -64,7 +64,7 @@ class UserService {
         errMsg: err.message,
       };
     }
-  }
+  };
 
   /**
    * Function to edit user
@@ -72,7 +72,7 @@ class UserService {
    * @param {Object} usersData The data of the user to be created
    * @returns {Object} An object containing the response data or error message
    */
-  async editUser(userId, userData) {
+  editUser = async (userId, userData) => {
     try {
       const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
         method: "PUT",
@@ -106,14 +106,14 @@ class UserService {
         errMsg: err.message,
       };
     }
-  }
+  };
 
   /**
    * Function to get the data of user
    * @param {Number} userId The user's id
    * @returns {Object} An object containing the response data or error message
    */
-  async getUserDetails(userId) {
+  getUserDetails = async (userId) => {
     try {
       const res = await fetch(`${API_BASE_URL}/users/${userId}`);
       if (res.ok && res.status === 200) {
@@ -129,14 +129,14 @@ class UserService {
         errMsg: err.message,
       };
     }
-  }
+  };
 
   /**
    * Function to get the data of user
    * @param {Number} userId The user's id
    * @returns {Object} An object containing the response data or error message
    */
-  async deleteUser(userId) {
+  deleteUser = async (userId) => {
     try {
       const res = await fetch(`${API_BASE_URL}/users/${userId}`, {
         method: "DELETE",
@@ -145,7 +145,7 @@ class UserService {
         },
       });
 
-      if (res.ok) {
+      if (res.ok && res.status === 200) {
         return {
           data: "",
           errMsg: null,
@@ -162,7 +162,7 @@ class UserService {
         errMsg: err.message,
       };
     }
-  }
+  };
 }
 
 export default UserService;

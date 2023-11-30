@@ -8,11 +8,22 @@
     color: $text-primary;
   }
 
-  &__wrapper-icon {
+  &__icon {
     display: flex;
+
+    &--loading {
+      display: none;
+
+      svg {
+        border            : 3px solid transparent;
+        border-radius     : 50%;
+        border-right-color: rgba(255, 255, 255, 0.7);
+        animation         : spinner-anim 2s linear infinite;
+      }
+    }
   }
 
-  &__loading-icon,
+  &__icon--loading,
   &__check {
     svg {
       display: block;
@@ -21,28 +32,17 @@
     }
   }
 
-  &__loading-icon {
-    display: none;
-
-    svg {
-      border            : 3px solid transparent;
-      border-radius     : 50%;
-      border-right-color: rgba(255, 255, 255, 0.7);
-      animation         : spinner-anim 2s linear infinite;
-    }
-  }
-
   &__check {
     display    : flex;
     align-items: center;
     gap        : 10px;
 
-    &-icon,
-    span {
+    &--icon,
+    &--text {
       display: none;
     }
 
-    &-icon {
+    &--icon {
       svg {
         fill: #008000;
       }

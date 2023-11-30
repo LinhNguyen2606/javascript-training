@@ -1,11 +1,4 @@
-import {
-  $createElement,
-  $delegate,
-  $hideModal,
-  $on,
-  $qs,
-  $showModal,
-} from "../helpers";
+import { $createElement, $hideModal, $qs, $showModal } from "../helpers";
 
 class ModalView {
   constructor() {
@@ -19,58 +12,57 @@ class ModalView {
     this.modalEl = $qs(".modal");
 
     // The modal to delete user
-    this.modalDeleteEl = $qs(".modal__delete");
+    this.modalDeleteEl = $qs(".modal-delete");
 
     // user name input
     this.modalInputEl = $qs("#username-input");
 
     // Add new button in the sidebar
-    this.sidebarBtnEl = $qs("#sidebar__btn");
+    this.sidebarBtnEl = $qs(".btn__sidebar");
 
     // Close icon to close the modal
-    this.cancelIconEl = $qs(".modal__close-icon");
+    this.cancelIconEl = $qs(".modal__header--icon");
 
     // Cancel icon to close the delete modal
-    this.cancelBtnModalDeleteEl = $qs(".cancel__btn");
+    this.cancelBtnModalDeleteEl = $qs(".btn__cancel");
+
+    // Container to wrap  edit form
+    this.editContainerEl = $qs(".edit__wrapper");
 
     // Function to show the modal
-    this.handleShowModal();
+    this.bindEventShowModalAddUser();
 
     // Function to close the modal
-    this.handleHideModal();
+    this.bindEventHideModalAddUser();
 
     // Function to close the delete modal
-    this.handleHideDeleteModal();
+    this.bindEventHideModalDelete();
   }
 
   /**
    * Handle showing the modal
    */
-  handleShowModal = () => {
-    //Event listener for sidebar button click
-    $on(this.sidebarBtnEl, "click", () =>
-      $showModal(this.overlayEl, this.modalEl, this.modalInputEl)
+  bindEventShowModalAddUser = () => {
+    $showModal(
+      this.sidebarBtnEl,
+      this.overlayEl,
+      this.modalEl,
+      this.modalInputEl
     );
   };
 
   /**
    * Handle closing the modal
    */
-  handleHideModal = () => {
-    // Event listener for cancel button click
-    $on(this.cancelIconEl, "click", () =>
-      $hideModal(this.overlayEl, this.modalEl)
-    );
+  bindEventHideModalAddUser = () => {
+    $hideModal(this.cancelIconEl, this.overlayEl, this.modalEl);
   };
 
   /**
    * Handle closing the modal
    */
-  handleHideDeleteModal = () => {
-    $on(this.cancelBtnModalDeleteEl, "click", (e) => {
-      e.preventDefault();
-      $hideModal(this.overlayEl, this.modalDeleteEl);
-    });
+  bindEventHideModalDelete = () => {
+    $hideModal(this.cancelBtnModalDeleteEl, this.overlayEl, this.modalEl);
   };
 }
 

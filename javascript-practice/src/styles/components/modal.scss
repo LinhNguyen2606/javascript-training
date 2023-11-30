@@ -1,14 +1,5 @@
 .modal {
-  position        : fixed;
-  top             : 50%;
-  left            : 50%;
-  transform       : translate(-50%, -50%);
-  background-color: $secondary-color;
-  min-width       : 351px;
-  min-height      : 108px;
-  box-shadow      : 0 3px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.1);
-  z-index         : 10000;
-  display         : none;
+  @extend %modal;
 
   &__header {
     display        : flex;
@@ -16,28 +7,27 @@
     justify-content: space-between;
     padding        : 10px 20px;
     transition     : all 1s ease;
-  }
 
-
-  &__heading {
-    font-size: $fs-x-small;
-  }
-
-  &__close-icon {
-    position: relative;
-    cursor  : pointer;
-
-    &:hover {
-      &::before {
-        @extend %hover-icon;
-      }
+    &-text {
+      font-size: $fs-x-small;
     }
 
-    svg {
-      @extend %style-icon;
+    &--icon {
+      position: relative;
+      cursor  : pointer;
 
       &:hover {
-        fill: $text-primary;
+        &::before {
+          @extend %hover-icon;
+        }
+      }
+
+      svg {
+        @extend %style-icon;
+
+        &:hover {
+          fill: $text-primary;
+        }
       }
     }
   }
@@ -62,28 +52,19 @@
   }
 }
 
-.modal__delete {
-  display         : none;
-  position        : fixed;
-  top             : 50%;
-  left            : 50%;
-  transform       : translate(-50%, -50%);
-  background-color: $secondary-color;
-  min-width       : 330px;
-  min-height      : 108px;
-  box-shadow      : 0 3px 10px 0 rgba(0, 0, 0, 0.1), 0 1px 7px 0 rgba(0, 0, 0, 0.1);
-  z-index         : 10000;
-  border-top      : 5px solid $primary-color;
+.modal-delete {
+  @extend %modal;
+  min-width : 330px;
+  border-top: 5px solid $primary-color;
 
   &__header {
     text-align: center;
     transition: all 1s ease;
-  }
 
-
-  &__heading {
-    font-size : $fs-medium;
-    margin-top: 14px;
+    &-text {
+      font-size : $fs-medium;
+      margin-top: 14px;
+    }
   }
 
   &__body {
@@ -92,20 +73,20 @@
     padding   : 20px 0;
   }
 
-  &__btn {
+  .modal-btn__delete {
     display        : flex;
     justify-content: center;
     gap            : 10px;
     margin-bottom  : 14px;
   }
 
-  .cancel__btn,
-  .delete__btn {
+  .btn__cancel,
+  .btn__delete {
     padding  : 8px 40px;
     font-size: $fs-small
   }
 
-  .cancel__btn {
+  .btn__cancel {
     background: #f4f5f9;
     color     : $primary-color;
 
@@ -114,7 +95,7 @@
     }
   }
 
-  .delete__btn {
+  .btn__delete {
     &:hover {
       background-color: #1992af;
     }

@@ -3,13 +3,17 @@ import UserService from "../services/userService";
 class UserModel {
   constructor() {
     this.userService = new UserService();
+    this.users = [];
   }
 
   /**
    * Get users from the user service
    * @returns {Promise} A promise that resolves to the users data
    */
-  getUsers = async () => await this.userService.fetchUsers();
+  getUsers = async () => {
+    this.users = await this.userService.fetchUsers();
+    return this.users;
+  };
 
   /**
    * Add a user using the user service
@@ -22,12 +26,14 @@ class UserModel {
    * The function to handle when user click to edit a user
    * @param {Number} userId The user's id
    * @param {Object} usersData The data of user after edited a user
+   * @returns {Promise} A promise that resolves to the response data or error message
    */
   editUser = (userId, userData) => this.userService.editUser(userId, userData);
 
   /**
    * Get user details information
    * @param {Number} userId The user's id
+   * @returns {Promise} A promise that resolves to the response data or error message
    */
   getUserDetails = async (userId) =>
     await this.userService.getUserDetails(userId);
@@ -35,8 +41,35 @@ class UserModel {
   /**
    * The function to handle when user click to delete a user
    * @param {Number} userId The user's id
+   * @returns {Promise} A promise that resolves to the response data or error message
    */
   deleteUser = async (userId) => await this.userService.deleteUser(userId);
+
+  /**
+   * The function to filter the user when user click
+   * @param {String} query The value search in input
+   */
+  filterUsers = (query) => {
+    return new Promise((resolve, reject) => {
+      const userArray = Object.values(this.users);
+
+      if (query === "") {
+        resolve(this.users);
+        return;
+      }
+
+      const filteredUsers = userArray[0].filter((user) => {
+        const username = user.userName.toUpperCase();
+        const email = user.email.toUpperCase();
+        return (
+          username.includes(query.toUpperCase()) ||
+          email.includes(query.toUpperCase())
+        );
+      });
+
+      resolve(filteredUsers);
+    });
+  };
 }
 
 export default UserModel;

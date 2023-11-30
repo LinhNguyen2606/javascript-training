@@ -1,11 +1,7 @@
 .user__wrapper {
-  display   : none;
-  min-width : 370px;
-  padding   : 0 12px;
   background: $secondary-color;
-  margin    : 10px 10px 0 10px;
 
-  .user__details {
+  .user {
     display       : flex;
     flex-direction: column;
     gap           : 20px;
@@ -36,32 +32,31 @@
           }
         }
       }
-    }
 
+      &--status.active,
+      &--status.not__active {
+        margin-right: 50px;
 
-    &__status.active,
-    &__status.not__active {
-      margin-right: 50px;
-
-      span {
-        border-radius: 8px;
-        padding      : 4px 12px;
-        font-size    : $fs-small;
-        font-weight  : $fw-medium;
+        span {
+          border-radius: 8px;
+          padding      : 4px 12px;
+          font-size    : $fs-small;
+          font-weight  : $fw-medium;
+        }
       }
-    }
 
-    &__status.active {
-      span {
-        background-color: $bg-primary-color;
-        color           : $text-secondary;
+      &--status.active {
+        span {
+          background-color: $bg-primary-color;
+          color           : $text-secondary;
+        }
       }
-    }
 
-    &__status.not__active {
-      span {
-        background-color: $bg-secondary-color;
-        color           : $text-tertiary;
+      &--status.not__active {
+        span {
+          background-color: $bg-secondary-color;
+          color           : $text-tertiary;
+        }
       }
     }
 
@@ -93,8 +88,8 @@
       }
     }
 
-    &__time,
-    &__email {
+    &__time-text,
+    &__email-text {
       font-size  : $fs-x-small;
       font-weight: $fw-normal;
       margin-left: 26px;
