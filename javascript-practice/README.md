@@ -1,9 +1,9 @@
-
 # User Management
 
 ## Overview
 
 - This document is for plain training for Javascript
+
 ## Demo
 
 - This is the demo of the site : [link](https://webix.com/demos/user-manager/)
@@ -15,9 +15,9 @@
 ***Start date:*** 13/11/2023
 
 
-***Timeline:*** 10 days (13/10/2023 - 24/10/2023)
+***Timeline:*** 10 days (13/11/2023 - 26/11/2023)
 
-***Actual:*** 13 days
+***Actual:*** 14 days
 
 ***Target:***
 
@@ -27,8 +27,13 @@
 - [Plan Training HTML/CSS](https://docs.google.com/document/d/16Wv5Snmz77B7VQh16i1PqQSkB-bY8KmtAXYW4GTYvP4/edit?usp=sharing)
 - [Estimate](https://docs.google.com/document/d/13MyW6R9-Obczd3Wn46hjCHVOqPfv1ic6sj33fF_vwJw/edit?usp=sharing)
 ​
+## Diagrams
+![Diagram](https://github.com/LinhNguyen2606/javascript-training/assets/91473355/d980d53a-55f4-4580-84f6-13abbd8ca8b4)
+
+![MVC_Diagram](https://github.com/LinhNguyen2606/javascript-training/assets/91473355/1cffef6f-e52b-4cea-83f1-55693add8f2e)
+
 ## Deploy:
-[Here](Not yet)
+[Here](https://javascript-training-psi.vercel.app/)
 
 ## Folder structure ##
 javascript-practice
@@ -138,13 +143,16 @@ npm install
 npm start
 ~~~
 
-## Run the server
+## Run the server in local
 - Step 01:  Open the folder javascript-practice
 ~~~
 cd javascript-practice
 ~~~
 
-- Step 02:  Run the server
+- Step 02: Change the config.js file in constants folder -
+           Change API_BASE_URL to http://localhost:3000
+
+- Step 03:  Run the server
 ~~~
 npm run server
 ~~~
