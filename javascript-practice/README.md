@@ -49,7 +49,7 @@ javascript-practice
         |-- logo
             |-- ...
      |-- js
-        |-- concstants
+        |-- constants
             |-- config.js
         |-- controllers
             |-- index.js
@@ -58,6 +58,7 @@ javascript-practice
             |-- index.js
             |-- modal.js
             |-- selectors.js
+            |-- spinner.js
             |-- validation.js
         |-- models
             |-- index.js
