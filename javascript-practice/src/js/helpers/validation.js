@@ -12,10 +12,6 @@ export const $validateUsername = (username) =>
  * @returns {string|null} An error message if the username is invalid, or null if the username is valid.
  */
 export const $validateEmail = (email) => {
-  if (email === "") {
-    return "Please enter an email address.";
-  }
-
   if (!isValidEmail(email)) {
     return "Please enter a valid email address.";
   }
@@ -25,12 +21,11 @@ export const $validateEmail = (email) => {
 
 /**
  * Checks if the provided email is in a valid format.
- *
  * @param {string} email - The email to be validated.
  * @returns {boolean} - `true` if the email is valid, `false` otherwise.
  */
 const isValidEmail = (email) => {
   // Use a regular expression to validate email format
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^$|^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };

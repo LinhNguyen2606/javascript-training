@@ -50,22 +50,17 @@ class UserModel {
    * @param {String} query The value search in input
    */
   filterUsers = (query) => {
-    return new Promise((resolve) => {
-      const userArray = Object.values(this.users);
+    if (query === "") return this.users;
 
-      if (query === "") resolve(this.users);
-
-      const filteredUsers = userArray[0].filter((user) => {
-        const username = user.userName.toUpperCase();
-        const email = user.email.toUpperCase();
-        return (
-          username.includes(query.toUpperCase()) ||
-          email.includes(query.toUpperCase())
-        );
-      });
-
-      resolve(filteredUsers);
+    const filteredUsers = this.users.data.filter((user) => {
+      const username = user.userName.toUpperCase();
+      const email = user.email.toUpperCase();
+      return (
+        username.includes(query.toUpperCase()) ||
+        email.includes(query.toUpperCase())
+      );
     });
+    return filteredUsers;
   };
 }
 

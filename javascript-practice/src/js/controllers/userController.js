@@ -12,6 +12,8 @@ class UserController {
     this.view.bindEventChangeAvatar(this.handleChangeAvatar);
     this.view.bindEventChangeStatus(this.handleChangeStatus);
     this.view.bindEventSearchUser(this.handleSearchUser);
+    this.view.bindEventEditUser(this.handleEditUser);
+    this.view.bindEventDeleteUser(this.handleDeleteUser);
   }
 
   /**
@@ -36,10 +38,7 @@ class UserController {
    * Function to handle when user click the toggle switch box to change the status of the user
    * @param {Boolean} checked - The status of user is checked or not
    */
-  handleChangeStatus = (checked) => {
-    this.view.displayStatus(checked);
-  };
-
+  handleChangeStatus = (checked) => this.view.displayStatus(checked);
   /**
    * The function to handle when add a new user
    * @param {object} usersData The data of the user to be added
@@ -61,6 +60,7 @@ class UserController {
    */
   handleUserViewDetails = async (userId) => {
     const { data } = await this.model.getUserDetails(userId);
+    this.idEdit = userId;
     this.view.displayUserDetailsInfo(data);
   };
 
@@ -71,8 +71,6 @@ class UserController {
   handleShowEditForm = async (userId) => {
     const { data } = await this.model.getUserDetails(userId);
     this.view.displayInfoEditUser(data);
-    this.view.bindEventEditUser(userId, this.handleEditUser);
-    this.view.bindEventDeleteUser(userId, this.handleDeleteUser);
   };
 
   /**
@@ -80,8 +78,8 @@ class UserController {
    * @param {Number} userId The user's id
    * @param {object} usersData The data of user after edited a user
    */
-  handleEditUser = async (userId, usersData) => {
-    const res = await this.model.editUser(userId, usersData);
+  handleEditUser = async (usersData) => {
+    const res = await this.model.editUser(this.idEdit, usersData);
     if (res.errMsg) {
       alert(res.errMsg);
     } else {
@@ -95,15 +93,11 @@ class UserController {
    * The function to handle when user click to delete a user
    * @param {Number} userId The user's id
    */
-  handleDeleteUser = async (userId) => {
-    const res = await this.model.deleteUser(userId);
-    if (res.errMsg) {
-      alert(res.errMsg);
-    } else {
-      setTimeout(() => {
-        this.handleGetUsers();
-      }, 1000);
-    }
+  handleDeleteUser = async () => {
+    await this.model.deleteUser(this.idEdit);
+    setTimeout(() => {
+      this.handleGetUsers();
+    }, 1000);
   };
 
   /**
