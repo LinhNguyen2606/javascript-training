@@ -39,6 +39,7 @@ class UserController {
    * @param {Boolean} checked - The status of user is checked or not
    */
   handleChangeStatus = (checked) => this.view.displayStatus(checked);
+
   /**
    * The function to handle when add a new user
    * @param {object} usersData The data of the user to be added

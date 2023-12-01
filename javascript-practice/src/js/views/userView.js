@@ -197,6 +197,9 @@ class UserView {
     $on(arrowBackIconEl, "click", () => {
       $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
     });
+
+    this.registered = data.registered;
+    this.lastVisited = data.lastVisited;
   };
 
   /**
@@ -305,6 +308,8 @@ class UserView {
           ? await $convertFileToBase64(fileInput.files[0])
           : avatarImg.src,
         isActive,
+        registered: this.registered,
+        lastVisited: this.lastVisited,
         detailDescUser,
       };
 

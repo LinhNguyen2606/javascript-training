@@ -84,6 +84,8 @@ class UserService {
           email: userData.email,
           avatar: userData.avatar,
           isActive: userData.isActive,
+          registered: userData.registered,
+          lastVisited: userData.lastVisited,
           detailDescUser: userData.detailDescUser,
         }),
       });
