@@ -264,17 +264,22 @@ class UserView {
    * @param {Number} userId The user's id
    * @param {Function} handler Function called on synthetic event.
    */
-  bindEventEditUser = (userId, handler) => {
+  bindEventEditUser = (handler) => {
     $delegate(this.editContainerEl, ".btn__edit--save", "click", async (e) => {
       e.preventDefault();
 
       const fileInput = this.editContainerEl.querySelector("#file-input");
+      const avatarImg = this.editContainerEl.querySelector(".avatar-img");
+
       const isActive =
         this.editContainerEl.querySelector("#statusCheckbox").checked;
+
       const userName = this.editContainerEl
         .querySelector("#username")
         .value.trim();
-      const email = this.editContainerEl.querySelector("#email").value.trim();
+
+      const email = this.editContainerEl.querySelector("#email").value;
+
       const detailDescUser = this.editContainerEl
         .querySelector("#details")
         .value.trim();
@@ -296,7 +301,9 @@ class UserView {
       const user = {
         userName,
         email,
-        avatar: await $convertFileToBase64(fileInput.files[0]),
+        avatar: fileInput.files[0]
+          ? await $convertFileToBase64(fileInput.files[0])
+          : avatarImg.src,
         isActive,
         detailDescUser,
       };
@@ -310,7 +317,7 @@ class UserView {
         this.checkIconContainerEl
       );
 
-      handler(userId, user);
+      handler(user);
     });
   };
 
@@ -369,8 +376,8 @@ class UserView {
    * @param {Number} userId The user's id
    * @param {Function} handler Function called on synthetic event.
    */
-  bindEventDeleteUser = (userId, handler) => {
-    $on(this.deleteBtn, "click", (e) => {
+  bindEventDeleteUser = (handler) => {
+    $delegate(this.modalDeleteEl, ".btn__delete", "click", (e) => {
       e.preventDefault();
       $handleSpinner(
         this.loadingIconContainerEl,
@@ -380,7 +387,7 @@ class UserView {
 
       $hideModal(this.modal.overlayEl, this.modal.modalDeleteEl);
       this.editContainerEl.style.display = "none";
-      handler(userId);
+      handler();
     });
   };
 }
