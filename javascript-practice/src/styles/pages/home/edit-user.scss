@@ -65,4 +65,10 @@
       }
     }
   }
+
+  @include tablet {
+    & {
+      width: 100%;
+    }
+  }
 }

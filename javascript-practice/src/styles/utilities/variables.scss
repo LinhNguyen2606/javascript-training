@@ -34,3 +34,9 @@ $fw-bold   : 700;
 /* Font family begin*/
 $primary-font: "Roboto";
 /* Font family end*/
+
+/* Device screen */
+$max-width-large-desktop  : 1400px;
+$max-width-tablet         : 992px;
+$max-width-landscape-phone: 768px;
+$max-width-portrait-phone : 576px;

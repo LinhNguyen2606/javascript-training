@@ -1,3 +1,27 @@
+@mixin largeDesktop {
+  @media (max-width: $max-width-large-desktop) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $max-width-tablet) {
+    @content;
+  }
+}
+
+@mixin landscapePhone {
+  @media (max-width: $max-width-landscape-phone) {
+    @content;
+  }
+}
+
+@mixin portraitPhone {
+  @media (max-width: $max-width-portrait-phone) {
+    @content;
+  }
+}
+
 %common-text {
   color      : $text-primary;
   font-size  : $fs-small;

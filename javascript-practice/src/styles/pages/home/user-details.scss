@@ -99,4 +99,10 @@
       fill: #94A1B3;
     }
   }
+
+  @include tablet {
+    & {
+      width: 100%;
+    }
+  }
 }
