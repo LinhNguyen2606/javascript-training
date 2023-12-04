@@ -4,6 +4,8 @@ import { $validateUsername, $validateEmail } from "./validation";
 
 import { $handleSpinner } from "./spinner";
 
+import { toggleSidebar } from "./toggle-menu";
+
 import {
   $on,
   $qs,
@@ -19,6 +21,8 @@ export { $validateUsername, $validateEmail };
 export { $handleSpinner };
 
 export { $on, $qs, $createElement, $handleShowHideItem, $delegate };
+
+export { toggleSidebar };
 
 /**
  * Generate an avatar image on the provided canvas using a random color and the user's initials.

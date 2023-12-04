@@ -1,3 +1,5 @@
+import { $convertDate } from "../helpers";
+
 /**
  * The template of user table content item
  *  @param {object} data The user's data
@@ -36,7 +38,8 @@ const userTemplate = (data) => {
  * @param {object} data The data of user
  */
 export const userDetailsTemplate = (data) => {
-  const { isActive, email, avatar, userName, lastVisited, id } = data;
+  let { isActive, email, avatar, userName, lastVisited, id } = data;
+  lastVisited = $convertDate();
 
   const html = `
   <div class="user">
