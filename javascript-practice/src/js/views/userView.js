@@ -23,6 +23,7 @@ class UserView {
   constructor() {
     // The table content contains user's information
     this.tableContentEl = $qs(".table__content");
+    this.tableWrapper = $qs(".table__wrapper");
 
     // Modal form to add user and username input
     this.userNameInputEl = $qs("#username-input");
@@ -52,6 +53,8 @@ class UserView {
 
     // Create the HTML canvas to draw graphics
     this.avatarCanvas = $createElement("canvas");
+
+    this.screenWidth = window.innerWidth;
 
     // Call the modal from modalView
     this.modal = new ModalView();
@@ -89,6 +92,8 @@ class UserView {
         const userId = clickedItem.dataset.id;
         $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
         if (userId) handler(userId);
+
+        if (this.screenWidth <= 992) this.tableWrapper.style.display = "none";
       }
     );
   };
@@ -195,11 +200,15 @@ class UserView {
     );
 
     $on(arrowBackIconEl, "click", () => {
-      $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
+      this.screenWidth <= 992
+        ? $handleShowHideItem(this.editContainerEl, this.tableWrapper)
+        : $handleShowHideItem(
+            this.editContainerEl,
+            this.userDetailsContainerEl
+          );
     });
 
     this.registered = data.registered;
-    this.lastVisited = data.lastVisited;
   };
 
   /**
@@ -255,9 +264,7 @@ class UserView {
       "#statusCheckbox",
       "change",
       ({ target }) => {
-        if (target.closest("#statusCheckbox")) {
-          handler(target.checked);
-        }
+        if (target.closest("#statusCheckbox")) handler(target.checked);
       }
     );
   };
@@ -286,6 +293,7 @@ class UserView {
       const detailDescUser = this.editContainerEl
         .querySelector("#details")
         .value.trim();
+      const lastVisited = $convertDate();
 
       // Validate username and email
       const userNameMsg = $validateUsername(userName);
@@ -309,7 +317,7 @@ class UserView {
           : avatarImg.src,
         isActive,
         registered: this.registered,
-        lastVisited: this.lastVisited,
+        lastVisited: lastVisited,
         detailDescUser,
       };
 
@@ -364,10 +372,9 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventSearchUser = (handler) => {
-    $on(this.tableSearchInputEl, "input", ({ target }) => {
-      const query = target.value;
-      handler(query);
-    });
+    $on(this.tableSearchInputEl, "input", ({ target }) =>
+      handler(target.value)
+    );
   };
 
   /**

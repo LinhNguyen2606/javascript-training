@@ -1,51 +1,74 @@
-.header {
-  background-color: $secondary-color;
-  display         : flex;
-  align-items     : center;
-  justify-content : space-between;
+.header__loading {
+  display    : flex;
+  align-items: center;
 
-  &__heading {
-    color: $text-primary;
-  }
+  .header {
+    background-color: $secondary-color;
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
 
-  &__icon {
-    display: flex;
+    &__heading {
+      color: $text-primary;
+    }
 
-    &--loading {
-      display: none;
+    &__icon {
+      display: flex;
 
+      &--loading {
+        display: none;
+
+        svg {
+          border            : 3px solid transparent;
+          border-radius     : 50%;
+          border-right-color: rgba(255, 255, 255, 0.7);
+          animation         : spinner-anim 2s linear infinite;
+        }
+      }
+    }
+
+    &__icon--loading,
+    &__check {
       svg {
-        border            : 3px solid transparent;
-        border-radius     : 50%;
-        border-right-color: rgba(255, 255, 255, 0.7);
-        animation         : spinner-anim 2s linear infinite;
+        display: block;
+        width  : 20px;
+        height : 20px;
+      }
+    }
+
+    &__check {
+      display     : flex;
+      align-items : center;
+      gap         : 10px;
+      margin-right: 20px;
+
+      &--icon,
+      &--text {
+        display: none;
+      }
+
+      &--icon {
+        svg {
+          fill: #008000;
+        }
       }
     }
   }
+}
 
-  &__icon--loading,
-  &__check {
-    svg {
+
+
+.menu__toggle {
+  display: none;
+  cursor : pointer;
+
+  svg {
+    fill: #94A1B3;
+  }
+
+  @include tablet {
+    & {
       display: block;
-      width  : 20px;
-      height : 20px;
-    }
-  }
-
-  &__check {
-    display    : flex;
-    align-items: center;
-    gap        : 10px;
-
-    &--icon,
-    &--text {
-      display: none;
-    }
-
-    &--icon {
-      svg {
-        fill: #008000;
-      }
     }
   }
 }

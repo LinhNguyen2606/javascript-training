@@ -106,9 +106,8 @@ class UserController {
    * @param {String} query The value search in input
    */
   handleSearchUser = async (query) => {
-    let users;
     if (query) {
-      users = await this.model.filterUsers(query);
+      const users = await this.model.filterUsers(query);
       this.view.displayUsersMatchKeyword(users);
     } else {
       this.handleGetUsers();

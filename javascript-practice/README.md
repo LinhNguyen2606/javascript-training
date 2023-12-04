@@ -28,7 +28,7 @@
 - [Estimate](https://docs.google.com/document/d/13MyW6R9-Obczd3Wn46hjCHVOqPfv1ic6sj33fF_vwJw/edit?usp=sharing)
 ​
 ## Diagrams
-![Diagram](https://github.com/LinhNguyen2606/javascript-training/assets/91473355/d980d53a-55f4-4580-84f6-13abbd8ca8b4)
+![Diagram](https://github.com/LinhNguyen2606/javascript-training/assets/91473355/14139d2f-6fd5-4199-8289-f4830f8f6d20)
 
 ![MVC_Diagram](https://github.com/LinhNguyen2606/javascript-training/assets/91473355/1cffef6f-e52b-4cea-83f1-55693add8f2e)
 
