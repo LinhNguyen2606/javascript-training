@@ -142,4 +142,16 @@
       }
     }
   }
+
+  @include desktop {
+    & {
+      svg {
+        width: 30px;
+      }
+
+      #details {
+        width: 20em;
+      }
+    }
+  }
 }

@@ -76,7 +76,6 @@ class UserController {
 
   /**
    * The function to handle when user click to edit a user
-   * @param {Number} userId The user's id
    * @param {object} usersData The data of user after edited a user
    */
   handleEditUser = async (usersData) => {
@@ -92,7 +91,6 @@ class UserController {
 
   /**
    * The function to handle when user click to delete a user
-   * @param {Number} userId The user's id
    */
   handleDeleteUser = async () => {
     await this.model.deleteUser(this.idEdit);

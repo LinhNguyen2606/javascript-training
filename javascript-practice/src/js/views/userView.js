@@ -48,6 +48,9 @@ class UserView {
     this.modalDeleteEl = $qs(".modal-delete");
     this.deleteBtn = $qs(".btn__delete");
 
+    // The sidebar
+    this.sidebar = $qs(".sidebar");
+
     // Create span tag with an error message to validate the input field
     this.errorEl = $createElement("span", "error-message");
 
@@ -93,7 +96,10 @@ class UserView {
         $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
         if (userId) handler(userId);
 
-        if (this.screenWidth <= 992) this.tableWrapper.style.display = "none";
+        if (this.screenWidth <= 992) {
+          this.sidebar.classList.add("sidebar--hidden");
+          this.tableWrapper.style.display = "none";
+        }
       }
     );
   };
@@ -183,6 +189,9 @@ class UserView {
             this.editContainerEl
           );
           handler(userId);
+
+          if (this.screenWidth > 992 && this.screenWidth < 1280)
+            this.tableWrapper.style.width = "49%";
         }
       }
     );
@@ -195,18 +204,18 @@ class UserView {
   displayInfoEditUser = (data) => {
     this.editContainerEl.innerHTML = displaysUserEditInfoTemplate(data);
 
-    const arrowBackIconEl = this.editContainerEl.querySelector(
-      ".edit__header--icon"
+    $on(
+      this.editContainerEl.querySelector(".edit__header--icon"),
+      "click",
+      () => {
+        this.screenWidth <= 992
+          ? $handleShowHideItem(this.editContainerEl, this.tableWrapper)
+          : $handleShowHideItem(
+              this.editContainerEl,
+              this.userDetailsContainerEl
+            );
+      }
     );
-
-    $on(arrowBackIconEl, "click", () => {
-      this.screenWidth <= 992
-        ? $handleShowHideItem(this.editContainerEl, this.tableWrapper)
-        : $handleShowHideItem(
-            this.editContainerEl,
-            this.userDetailsContainerEl
-          );
-    });
 
     this.registered = data.registered;
   };

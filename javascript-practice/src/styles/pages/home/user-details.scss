@@ -100,6 +100,16 @@
     }
   }
 
+  @include largeDesktop {
+    & {
+      width: 100%;
+    }
+  }
+
+  @include desktop {
+    min-width: 250px;
+  }
+
   @include tablet {
     & {
       width: 100%;
