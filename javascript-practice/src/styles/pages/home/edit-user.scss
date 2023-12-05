@@ -66,6 +66,13 @@
     }
   }
 
+  @include desktop {
+    & {
+      width     : 100%;
+      overflow-y: auto;
+    }
+  }
+
   @include tablet {
     & {
       width: 100%;

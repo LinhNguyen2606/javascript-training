@@ -59,11 +59,23 @@
 
 
 .menu__toggle {
-  display: none;
-  cursor : pointer;
+  display : none;
+  cursor  : pointer;
+  position: relative;
+
+  &:hover {
+    &::before {
+      @extend %hover-icon;
+    }
+  }
 
   svg {
+    @extend %style-icon;
     fill: #94A1B3;
+
+    &:hover {
+      fill: $text-primary;
+    }
   }
 
   @include tablet {
