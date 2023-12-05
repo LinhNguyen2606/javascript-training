@@ -138,13 +138,13 @@ class UserView {
       const avatarBase64 = this.avatarCanvas.toDataURL();
 
       const user = {
-        userName: userName,
-        isActive: isActive,
-        email: email,
+        userName,
+        isActive,
+        email,
         avatar: avatarBase64,
-        registered: registered,
-        lastVisited: lastVisited,
-        detailDescUser: detailDescUser,
+        registered,
+        lastVisited,
+        detailDescUser,
       };
 
       // Clear the error message if it was previously displayed
@@ -217,6 +217,7 @@ class UserView {
       }
     );
 
+    this.currentUserName = data.userName;
     this.registered = data.registered;
   };
 
@@ -318,12 +319,23 @@ class UserView {
         return;
       }
 
+      let avatar;
+      if (fileInput.files[0]) {
+        // User has uploaded a new avatar
+        avatar = await $convertFileToBase64(fileInput.files[0]);
+      } else if (userName !== this.currentUserName) {
+        // User has changed the username
+        $generateAvatar(this.avatarCanvas, userName);
+        avatar = this.avatarCanvas.toDataURL();
+      } else {
+        // User has not changed the avatar or the username
+        avatar = avatarImg.src;
+      }
+
       const user = {
         userName,
         email,
-        avatar: fileInput.files[0]
-          ? await $convertFileToBase64(fileInput.files[0])
-          : avatarImg.src,
+        avatar,
         isActive,
         registered: this.registered,
         lastVisited: lastVisited,
