@@ -1,10 +1,12 @@
+import { ERROR_MESSAGE, REGEX } from "../constants/messages";
+
 /**
  * Validates a username.
  * @param {string} username - The username to be validated.
  * @returns {string|null} An error message if the username is invalid, or null if the username is valid.
  */
 export const validateUsername = (username) =>
-  username.trim() === "" ? "Please enter a valid username" : null;
+  username.trim() === "" ? ERROR_MESSAGE.USER_NAME : null;
 
 /**
  * Validates a email.
@@ -13,7 +15,7 @@ export const validateUsername = (username) =>
  */
 export const validateEmail = (email) => {
   if (!isValidEmail(email)) {
-    return "Please enter a valid email address.";
+    return ERROR_MESSAGE.EMAIL;
   }
 
   return "";
@@ -26,6 +28,6 @@ export const validateEmail = (email) => {
  */
 const isValidEmail = (email) => {
   // Use a regular expression to validate email format
-  const emailRegex = /^|^[^\s@]+@[^\s@]+\.[^\s@]+/;
+  const emailRegex = REGEX.EMAIL;
   return emailRegex.test(email);
 };

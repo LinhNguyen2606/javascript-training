@@ -3,7 +3,6 @@ import UserService from "../services/userService";
 class UserModel {
   constructor() {
     this.userService = new UserService();
-    this.users = [];
   }
 
   /**
@@ -29,14 +28,6 @@ class UserModel {
    * @returns {Promise} A promise that resolves to the response data or error message
    */
   editUser = (userId, userData) => this.userService.editUser(userId, userData);
-
-  /**
-   * Get user details information
-   * @param {Number} userId The user's id
-   * @returns {Promise} A promise that resolves to the response data or error message
-   */
-  getUserDetails = async (userId) =>
-    await this.userService.getUserDetails(userId);
 
   /**
    * The function to handle when user click to delete a user

@@ -26,6 +26,19 @@ class UserController {
   };
 
   /**
+   * The function to handle when add a new user
+   * @param {object} usersData The data of the user to be added
+   */
+  handleAddUser = async (usersData) => {
+    const res = await this.model.addUser(JSON.stringify(usersData));
+    if (res.errMsg) {
+      alert(res.errMsg);
+    } else {
+      this.handleGetUsers();
+    }
+  };
+
+  /**
    * Function to handle when user change the avatar
    * @param {File} file - The file object representing the selected image file.
    */
@@ -41,37 +54,20 @@ class UserController {
   handleChangeStatus = (checked) => this.view.displayStatus(checked);
 
   /**
-   * The function to handle when add a new user
-   * @param {object} usersData The data of the user to be added
-   */
-  handleAddUser = async (usersData) => {
-    const res = await this.model.addUser(usersData);
-    if (res.errMsg) {
-      alert(res.errMsg);
-    } else {
-      setTimeout(() => {
-        this.handleGetUsers();
-      }, 1000);
-    }
-  };
-
-  /**
    * The function to handle when click to view user detailed information
    * @param {Number} userId The user's id
    */
-  handleUserViewDetails = async (userId) => {
-    const { data } = await this.model.getUserDetails(userId);
-    this.idEdit = userId;
-    this.view.displayUserDetailsInfo(data);
+  handleUserViewDetails = async (user) => {
+    this.idEdit = user.id;
+    this.view.displayUserDetailsInfo(user);
   };
 
   /**
    * The function to handle when user click to show the edit form
    * @param {Number} userId The user's id
    */
-  handleShowEditForm = async (userId) => {
-    const { data } = await this.model.getUserDetails(userId);
-    this.view.displayInfoEditUser(data);
+  handleShowEditForm = async (user) => {
+    this.view.displayInfoEditUser(user);
   };
 
   /**
@@ -79,13 +75,14 @@ class UserController {
    * @param {object} usersData The data of user after edited a user
    */
   handleEditUser = async (usersData) => {
-    const res = await this.model.editUser(this.idEdit, usersData);
+    const res = await this.model.editUser(
+      this.idEdit,
+      JSON.stringify(usersData)
+    );
     if (res.errMsg) {
       alert(res.errMsg);
     } else {
-      setTimeout(() => {
-        this.handleGetUsers();
-      }, 1000);
+      this.handleGetUsers();
     }
   };
 
@@ -94,9 +91,7 @@ class UserController {
    */
   handleDeleteUser = async () => {
     await this.model.deleteUser(this.idEdit);
-    setTimeout(() => {
-      this.handleGetUsers();
-    }, 1000);
+    this.handleGetUsers();
   };
 
   /**
