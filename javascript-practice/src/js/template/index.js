@@ -117,7 +117,7 @@ export const displaysUserEditInfoTemplate = (data) => {
     userName,
     lastVisited,
     registered,
-    detailDescUser,
+    details,
   } = data;
 
   const html = `
@@ -203,7 +203,7 @@ export const displaysUserEditInfoTemplate = (data) => {
     <div class="row">
       <label>Details</label>
       <textarea id="details" name="details" rows="7" cols="40">
-        ${detailDescUser}
+        ${details}
       </textarea>
     </div>
   </form>

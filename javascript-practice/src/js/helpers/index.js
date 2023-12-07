@@ -7,11 +7,11 @@ import { handleSpinner } from "./spinner";
 import { toggleSidebar } from "./toggle-menu";
 
 import {
-  on,
-  qs,
+  $on,
+  $qs,
   createElement,
   handleShowHideItem,
-  delegate,
+  $delegate,
 } from "./selectors";
 
 export { showModal, hideModal };
@@ -20,7 +20,7 @@ export { validateUsername, validateEmail };
 
 export { handleSpinner };
 
-export { on, qs, createElement, handleShowHideItem, delegate };
+export { $on, $qs, createElement, handleShowHideItem, $delegate };
 
 export { toggleSidebar };
 
@@ -45,7 +45,7 @@ export const generateAvatar = (avatarCanvas, userName) => {
   // Draws a random color circle with a top-left corner at position 0,0. The circle is 100px with the width and height
   context.fillRect(0, 0, avatarSize, avatarSize);
   context.fillStyle = "#FFF";
-  context.font = `{avatarSize / 2}px Arial`;
+  context.font = `${avatarSize / 2}px Arial`;
   context.textAlign = "center";
   context.textBaseline = "middle";
 
@@ -80,7 +80,7 @@ export const convertDate = () =>
 export const convertFileToBase64 = (file) => {
   return new Promise((resolve) => {
     const reader = new FileReader();
-    on(reader, "load", () => {
+    $on(reader, "load", () => {
       resolve(reader.result);
     });
 
