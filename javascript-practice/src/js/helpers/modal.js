@@ -4,7 +4,7 @@
  * @param {HTMLElement} modalEl The modal element
  * @param {HTMLElement} modalInputEl The modal input element
  */
-export const $showModal = (overlayEl, modalEl, modalInputEl) => {
+export const showModal = (overlayEl, modalEl, modalInputEl) => {
   overlayEl.style.display = "block";
   modalEl.style.display = "block";
   if (modalInputEl) modalInputEl.focus();
@@ -16,7 +16,7 @@ export const $showModal = (overlayEl, modalEl, modalInputEl) => {
  * @param {HTMLElement} overlayEl The overlay element
  * @param {HTMLElement} modalEl The modal element
  */
-export const $hideModal = (overlayEl, modalEl) => {
+export const hideModal = (overlayEl, modalEl) => {
   overlayEl.style.display = "none";
   modalEl.style.display = "none";
 };

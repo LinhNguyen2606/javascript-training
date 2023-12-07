@@ -1,4 +1,4 @@
-import { $convertFileToBase64 } from "../helpers";
+import { convertFileToBase64 } from "../helpers";
 
 class UserController {
   constructor(model, view) {
@@ -30,7 +30,7 @@ class UserController {
    * @param {File} file - The file object representing the selected image file.
    */
   handleChangeAvatar = async (file) => {
-    const src = await $convertFileToBase64(file);
+    const src = await convertFileToBase64(file);
     this.view.displayAvatarImg(src);
   };
 
