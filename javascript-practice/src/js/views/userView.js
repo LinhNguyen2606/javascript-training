@@ -1,16 +1,16 @@
 import {
-  $delegate,
-  $on,
-  $convertDate,
-  $createElement,
-  $generateAvatar,
-  $handleSpinner,
-  $hideModal,
-  $qs,
-  $validateUsername,
-  $handleShowHideItem,
-  $convertFileToBase64,
-  $validateEmail,
+  delegate,
+  on,
+  convertDate,
+  createElement,
+  generateAvatar,
+  handleSpinner,
+  hideModal,
+  qs,
+  validateUsername,
+  handleShowHideItem,
+  convertFileToBase64,
+  validateEmail,
 } from "../helpers";
 import {
   displaysUserEditInfoTemplate,
@@ -22,40 +22,40 @@ import ModalView from "./modalView";
 class UserView {
   constructor() {
     // The table content contains user's information
-    this.tableContentEl = $qs(".table__content");
-    this.tableWrapper = $qs(".table__wrapper");
+    this.tableContentEl = qs(".table__content");
+    this.tableWrapper = qs(".table__wrapper");
 
     // Modal form to add user and username input
-    this.userNameInputEl = $qs("#username-input");
-    this.formAddNewUserEl = $qs("#form-add-user");
+    this.userNameInputEl = qs("#username-input");
+    this.formAddNewUserEl = qs("#form-add-user");
 
     // Loading icon, check success icon, and text
-    this.loadingIconContainerEl = $qs(".header__icon--loading");
-    this.checkIconContainerEl = $qs(".header__check--icon");
-    this.textDoneEl = $qs(".header__check--text");
+    this.loadingIconContainerEl = qs(".header__icon--loading");
+    this.checkIconContainerEl = qs(".header__check--icon");
+    this.textDoneEl = qs(".header__check--text");
 
     // Container to wrap the user details form and edit form
-    this.userDetailsContainerEl = $qs(".user__wrapper");
-    this.editContainerEl = $qs(".edit__wrapper");
+    this.userDetailsContainerEl = qs(".user__wrapper");
+    this.editContainerEl = qs(".edit__wrapper");
 
     // Table search, magnifying glass icon, the search input and close icon
-    this.tableSearchEl = $qs(".table__search");
-    this.searchIconEl = $qs(".table__search--icon");
-    this.tableSearchInputEl = $qs(".table__search--input");
-    this.tableSearchCloseEl = $qs(".table__search--close");
+    this.tableSearchEl = qs(".table__search");
+    this.searchIconEl = qs(".table__search--icon");
+    this.tableSearchInputEl = qs(".table__search--input");
+    this.tableSearchCloseEl = qs(".table__search--close");
 
     // The modal to delete a user and delete button
-    this.modalDeleteEl = $qs(".modal-delete");
-    this.deleteBtn = $qs(".btn__delete");
+    this.modalDeleteEl = qs(".modal-delete");
+    this.deleteBtn = qs(".btn__delete");
 
     // The sidebar
-    this.sidebar = $qs(".sidebar");
+    this.sidebar = qs(".sidebar");
 
     // Create span tag with an error message to validate the input field
-    this.errorEl = $createElement("span", "error-message");
+    this.errorEl = createElement("span", "error-message");
 
     // Create the HTML canvas to draw graphics
-    this.avatarCanvas = $createElement("canvas");
+    this.avatarCanvas = createElement("canvas");
 
     this.screenWidth = window.innerWidth;
 
@@ -78,7 +78,7 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventUserViewDetails = (handler) => {
-    $delegate(
+    delegate(
       this.tableContentEl,
       ".table__content-item",
       "click",
@@ -93,7 +93,7 @@ class UserView {
         clickedItem.classList.add("table__item--active");
 
         const userId = clickedItem.dataset.id;
-        $handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
+        handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
         if (userId) handler(userId);
 
         if (this.screenWidth <= 992) {
@@ -110,14 +110,14 @@ class UserView {
    */
   bindEventAddUser = (handler) => {
     // handle event onSubmit the form
-    $on(this.formAddNewUserEl, "submit", (e) => {
+    on(this.formAddNewUserEl, "submit", (e) => {
       e.preventDefault();
 
       // Trim whitespace from the input
       const userName = this.userNameInputEl.value.trim();
 
       // Check if the entered username is empty or contains only whitespace
-      const errorMessage = $validateUsername(userName);
+      const errorMessage = validateUsername(userName);
 
       if (errorMessage) {
         // Display an error message
@@ -128,11 +128,11 @@ class UserView {
 
       const isActive = false;
       const email = "";
-      const registered = $convertDate();
-      const lastVisited = $convertDate();
+      const registered = convertDate();
+      const lastVisited = convertDate();
       const detailDescUser = "";
 
-      $generateAvatar(this.avatarCanvas, userName);
+      generateAvatar(this.avatarCanvas, userName);
 
       // Convert the avatar to base64
       const avatarBase64 = this.avatarCanvas.toDataURL();
@@ -151,9 +151,9 @@ class UserView {
       this.errorEl.textContent = "";
 
       // Close the modal after click on the save button
-      $hideModal(this.modal.overlayEl, this.modal.modalEl);
+      hideModal(this.modal.overlayEl, this.modal.modalEl);
 
-      $handleSpinner(
+      handleSpinner(
         this.loadingIconContainerEl,
         this.textDoneEl,
         this.checkIconContainerEl
@@ -177,17 +177,14 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventShowEditForm = (handler) => {
-    $delegate(
+    delegate(
       this.userDetailsContainerEl,
       ".user__header--icon",
       "click",
       ({ target }) => {
         const userId = target.closest(".user__header--icon").dataset.id;
         if (userId) {
-          $handleShowHideItem(
-            this.userDetailsContainerEl,
-            this.editContainerEl
-          );
+          handleShowHideItem(this.userDetailsContainerEl, this.editContainerEl);
           handler(userId);
 
           if (this.screenWidth > 992 && this.screenWidth < 1280)
@@ -204,13 +201,13 @@ class UserView {
   displayInfoEditUser = (data) => {
     this.editContainerEl.innerHTML = displaysUserEditInfoTemplate(data);
 
-    $on(
+    on(
       this.editContainerEl.querySelector(".edit__header--icon"),
       "click",
       () => {
         this.screenWidth <= 992
-          ? $handleShowHideItem(this.editContainerEl, this.tableWrapper)
-          : $handleShowHideItem(
+          ? handleShowHideItem(this.editContainerEl, this.tableWrapper)
+          : handleShowHideItem(
               this.editContainerEl,
               this.userDetailsContainerEl
             );
@@ -226,7 +223,7 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventChangeAvatar = (handler) => {
-    $delegate(this.editContainerEl, "#file-input", "change", ({ target }) => {
+    delegate(this.editContainerEl, "#file-input", "change", ({ target }) => {
       if (target.closest("#file-input")) {
         handler(target.files[0]);
       }
@@ -269,7 +266,7 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventChangeStatus = (handler) => {
-    $delegate(
+    delegate(
       this.editContainerEl,
       "#statusCheckbox",
       "change",
@@ -285,7 +282,7 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventEditUser = (handler) => {
-    $delegate(this.editContainerEl, ".btn__edit--save", "click", async (e) => {
+    delegate(this.editContainerEl, ".btn__edit--save", "click", async (e) => {
       e.preventDefault();
 
       const fileInput = this.editContainerEl.querySelector("#file-input");
@@ -303,11 +300,11 @@ class UserView {
       const detailDescUser = this.editContainerEl
         .querySelector("#details")
         .value.trim();
-      const lastVisited = $convertDate();
+      const lastVisited = convertDate();
 
       // Validate username and email
-      const userNameMsg = $validateUsername(userName);
-      const emailMsg = $validateEmail(email);
+      const userNameMsg = validateUsername(userName);
+      const emailMsg = validateEmail(email);
 
       if (userNameMsg) {
         this.errorEl.textContent = userNameMsg;
@@ -322,10 +319,10 @@ class UserView {
       let avatar;
       if (fileInput.files[0]) {
         // User has uploaded a new avatar
-        avatar = await $convertFileToBase64(fileInput.files[0]);
+        avatar = await convertFileToBase64(fileInput.files[0]);
       } else if (userName !== this.currentUserName) {
         // User has changed the username
-        $generateAvatar(this.avatarCanvas, userName);
+        generateAvatar(this.avatarCanvas, userName);
         avatar = this.avatarCanvas.toDataURL();
       } else {
         // User has not changed the avatar or the username
@@ -345,7 +342,7 @@ class UserView {
       // Clear the error message if it was previously displayed
       this.errorEl.textContent = "";
 
-      $handleSpinner(
+      handleSpinner(
         this.loadingIconContainerEl,
         this.textDoneEl,
         this.checkIconContainerEl
@@ -359,7 +356,7 @@ class UserView {
    * Function to show the input search and close icon when click the search icon
    */
   bindEventShowUserSearch = () => {
-    $on(this.searchIconEl, "click", () => {
+    on(this.searchIconEl, "click", () => {
       this.tableSearchInputEl.style.display = "block";
       this.tableSearchInputEl.focus();
       this.tableSearchCloseEl.style.display = "block";
@@ -374,7 +371,7 @@ class UserView {
    * Function to close the search input
    */
   bindEventCloseUserSearch = (data) => {
-    $on(this.tableSearchCloseEl, "click", () => {
+    on(this.tableSearchCloseEl, "click", () => {
       this.tableSearchInputEl.style.display = "none";
       this.tableSearchInputEl.focus();
       this.tableSearchCloseEl.style.display = "none";
@@ -393,9 +390,7 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventSearchUser = (handler) => {
-    $on(this.tableSearchInputEl, "input", ({ target }) =>
-      handler(target.value)
-    );
+    on(this.tableSearchInputEl, "input", ({ target }) => handler(target.value));
   };
 
   /**
@@ -410,15 +405,15 @@ class UserView {
    * @param {Function} handler Function called on synthetic event.
    */
   bindEventDeleteUser = (handler) => {
-    $delegate(this.modalDeleteEl, ".btn__delete", "click", (e) => {
+    delegate(this.modalDeleteEl, ".btn__delete", "click", (e) => {
       e.preventDefault();
-      $handleSpinner(
+      handleSpinner(
         this.loadingIconContainerEl,
         this.textDoneEl,
         this.checkIconContainerEl
       );
 
-      $hideModal(this.modal.overlayEl, this.modal.modalDeleteEl);
+      hideModal(this.modal.overlayEl, this.modal.modalDeleteEl);
       this.editContainerEl.style.display = "none";
       handler();
     });

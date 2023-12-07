@@ -5,7 +5,7 @@
  * @param {HTMLElement} textDoneEl - The text success when loading finished
  * @param {HTMLElement} checkIconContainerEl - The check successfull icon
  */
-export const $handleSpinner = (
+export const handleSpinner = (
   loadingIconContainerEl,
   textDoneEl,
   checkIconContainerEl

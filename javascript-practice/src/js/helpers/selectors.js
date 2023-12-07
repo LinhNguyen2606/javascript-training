@@ -2,7 +2,7 @@
  * querySelector wrapper
  * @param {string} selector Selector to query
  */
-export const $qs = (selector) => document.querySelector(selector);
+export const qs = (selector) => document.querySelector(selector);
 
 /**
  * Create an element with an optional CSS class
@@ -10,7 +10,7 @@ export const $qs = (selector) => document.querySelector(selector);
  * @param {string} className Optional CSS class to add to the element
  * @returns {HTMLElement} The created element
  */
-export const $createElement = (tag, className) => {
+export const createElement = (tag, className) => {
   const element = document.createElement(tag);
   if (className) element.classList.add(className);
 
@@ -24,7 +24,7 @@ export const $createElement = (tag, className) => {
  * @param {Function} callback Event callback
  * @param {boolean} [capture] Capture the event
  */
-export function $on(target, type, callback, capture) {
+export function on(target, type, callback, capture) {
   target.addEventListener(type, callback, !!capture);
 }
 
@@ -38,7 +38,7 @@ export function $on(target, type, callback, capture) {
  *                           from an element matching selector
  * @param {boolean} [capture] Capture the event
  */
-export function $delegate(target, selector, type, handler, capture) {
+export function delegate(target, selector, type, handler, capture) {
   const dispatchEvent = (event) => {
     const targetElement = event.target.closest(selector);
     const potentialElements = target.querySelectorAll(selector);
@@ -53,7 +53,7 @@ export function $delegate(target, selector, type, handler, capture) {
     }
   };
 
-  $on(target, type, dispatchEvent, !!capture);
+  on(target, type, dispatchEvent, !!capture);
 }
 
 /**
@@ -62,7 +62,7 @@ export function $delegate(target, selector, type, handler, capture) {
  * @param {HTMLElement} elementToHide - The element want to hide
  * @param {HTMLElement} elementToShow - The element want to show
  */
-export const $handleShowHideItem = (elementToHide, elementToShow) => {
+export const handleShowHideItem = (elementToHide, elementToShow) => {
   elementToHide.style.display = "none";
   elementToShow.style.display = "block";
 };

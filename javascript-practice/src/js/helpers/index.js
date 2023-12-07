@@ -1,26 +1,26 @@
-import { $showModal, $hideModal } from "./modal";
+import { showModal, hideModal } from "./modal";
 
-import { $validateUsername, $validateEmail } from "./validation";
+import { validateUsername, validateEmail } from "./validation";
 
-import { $handleSpinner } from "./spinner";
+import { handleSpinner } from "./spinner";
 
 import { toggleSidebar } from "./toggle-menu";
 
 import {
-  $on,
-  $qs,
-  $createElement,
-  $handleShowHideItem,
-  $delegate,
+  on,
+  qs,
+  createElement,
+  handleShowHideItem,
+  delegate,
 } from "./selectors";
 
-export { $showModal, $hideModal };
+export { showModal, hideModal };
 
-export { $validateUsername, $validateEmail };
+export { validateUsername, validateEmail };
 
-export { $handleSpinner };
+export { handleSpinner };
 
-export { $on, $qs, $createElement, $handleShowHideItem, $delegate };
+export { on, qs, createElement, handleShowHideItem, delegate };
 
 export { toggleSidebar };
 
@@ -29,7 +29,7 @@ export { toggleSidebar };
  * @param {HTMLCanvasElement} avatarCanvas The canvas element to draw the avatar on.
  * @param {string} userName The user's name or initials used to generate the avatar.
  */
-export const $generateAvatar = (avatarCanvas, userName) => {
+export const generateAvatar = (avatarCanvas, userName) => {
   // Generate random color for the avatar
   const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 
@@ -45,7 +45,7 @@ export const $generateAvatar = (avatarCanvas, userName) => {
   // Draws a random color circle with a top-left corner at position 0,0. The circle is 100px with the width and height
   context.fillRect(0, 0, avatarSize, avatarSize);
   context.fillStyle = "#FFF";
-  context.font = `${avatarSize / 2}px Arial`;
+  context.font = `{avatarSize / 2}px Arial`;
   context.textAlign = "center";
   context.textBaseline = "middle";
 
@@ -60,7 +60,7 @@ export const $generateAvatar = (avatarCanvas, userName) => {
 /**
  * Convert the day such as: May 21, 2020 17:02:06
  */
-export const $convertDate = () =>
+export const convertDate = () =>
   new Date()
     .toLocaleString("en-US", {
       month: "long",
@@ -77,10 +77,10 @@ export const $convertDate = () =>
  * Function to convert the image to type Base64
  * @param {File} file - The file object representing the selected image file.
  */
-export const $convertFileToBase64 = (file) => {
+export const convertFileToBase64 = (file) => {
   return new Promise((resolve) => {
     const reader = new FileReader();
-    $on(reader, "load", () => {
+    on(reader, "load", () => {
       resolve(reader.result);
     });
 
