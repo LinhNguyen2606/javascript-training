@@ -335,7 +335,6 @@ class UserView {
           this.editContainerEl.querySelector(".row").appendChild(this.errorEl);
           return;
         }
-
         // User has uploaded a new avatar
         avatar = await convertFileToBase64(fileInput.files[0]);
       } else if (userName !== this.currentUserName) {
@@ -367,6 +366,9 @@ class UserView {
       );
 
       handler(user);
+
+      this.displayInfoEditUser(user);
+      this.displayUserDetailsInfo(user);
 
       this.displayInfoEditUser(user);
       this.displayUserDetailsInfo(user);
