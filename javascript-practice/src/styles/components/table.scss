@@ -77,8 +77,6 @@
       &:first-child {
         margin-left: 80px;
         min-width  : 400px;
-
-
       }
 
       &:nth-child(2) {
@@ -182,51 +180,11 @@
 
   @include largeDesktop {
     &__infor-header:first-child {
-      min-width: 268px;
+      min-width: 30%;
     }
 
     &__content-info {
-      min-width: 340px;
-    }
-  }
-
-  @include desktop {
-    &__infor-header:first-child {
-      min-width: 155px;
-    }
-
-    &__content-info {
-      min-width: 225px;
-    }
-  }
-
-  @include tablet {
-    &__search--input {
-      width: 94%;
-    }
-  }
-
-  @include landscapePhone {
-    &__infor-header:first-child {
-      min-width: 200px;
-    }
-
-    &__content-info {
-      min-width: 270px;
-    }
-  }
-
-  @include portraitPhone {
-    &__infor-header:first-child {
-      min-width: 100px;
-    }
-
-    &__content-info {
-      min-width: 172px;
-    }
-
-    &__search--input {
-      width: 92%;
+      min-width: 42%;
     }
   }
 }

@@ -66,16 +66,9 @@
     }
   }
 
-  @include desktop {
+  @include largeDesktop {
     & {
-      width     : 100%;
-      overflow-y: auto;
-    }
-  }
-
-  @include tablet {
-    & {
-      width: 100%;
+      padding: 9px;
     }
   }
 }
