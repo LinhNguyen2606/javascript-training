@@ -58,13 +58,15 @@ class UserView {
     // Create the HTML canvas to draw graphics
     this.avatarCanvas = createElement("canvas");
 
-    this.screenWidth = window.innerWidth;
-
     // Call the modal from modalView
     this.modal = new ModalView();
 
     // Call the displayUserSearch function
     this.bindEventShowUserSearch();
+
+    this.bindEventScreenResize();
+
+    this.bindEventTableItem();
   }
 
   /**
@@ -213,7 +215,11 @@ class UserView {
       this.editContainerEl.querySelector(".edit__header--icon"),
       "click",
       () => {
-        handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
+        if (window.innerWidth <= 996) {
+          handleShowHideItem(this.editContainerEl, this.tableWrapper);
+        } else {
+          handleShowHideItem(this.editContainerEl, this.userDetailsContainerEl);
+        }
       }
     );
 
@@ -434,6 +440,28 @@ class UserView {
       this.editContainerEl.style.display = "none";
       handler();
     });
+  };
+
+  bindEventScreenResize = () => {
+    $on(window, "resize", () => {
+      if (window.innerWidth < 996) {
+        if (
+          window.getComputedStyle(this.userDetailsContainerEl).display !==
+            "none" ||
+          window.getComputedStyle(this.editContainerEl).display !== "none"
+        ) {
+          this.tableWrapper.style.display = "none";
+        }
+      }
+    });
+  };
+
+  bindEventTableItem = () => {
+    if (window.innerWidth < 996) {
+      $delegate(this.tableContentEl, ".table__content-item", "click", () => {
+        handleShowHideItem(this.tableWrapper, this.userDetailsContainerEl);
+      });
+    }
   };
 }
 

@@ -143,14 +143,60 @@
     }
   }
 
-  @include desktop {
+  @include largeDesktop {
     & {
-      svg {
-        width: 30px;
-      }
+      .row {
+        .avatar {
+          &__upload {
+            label {
+              padding  : 0 0 12px 0;
+              font-size: $fs-x-small;
+            }
+          }
 
-      #details {
-        width: 20em;
+          .avatar-img {
+            width : 50px;
+            height: 50px;
+          }
+        }
+
+        label {
+          flex: 0 0 35px
+        }
+
+        #details {
+          width : 192px;
+          height: 62px;
+        }
+      }
+    }
+  }
+
+  @include tablet {
+    & {
+      .row {
+        .avatar {
+          &__upload {
+            label {
+              padding  : 12px;
+              font-size: $fs-small;
+            }
+          }
+
+          .avatar-img {
+            width : 95px;
+            height: 95px;
+          }
+        }
+
+        label {
+          flex: 0 0 73px
+        }
+
+        #details {
+          width : 312px;
+          height: 108px;
+        }
       }
     }
   }
